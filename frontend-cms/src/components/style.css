@@ -1,0 +1,70 @@
+.login-card {
+  margin: auto;
+  width: 35%;
+  padding: 4rem 2rem;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.login-card img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bg-msfl-logo-orange {
+  height: 100vh;
+  background-color: #f47921;
+  padding-top: 10vh;
+}
+
+.login-card form img {
+  margin-bottom: 5vh;
+}
+
+.login-card form button {
+  width: 100%;
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #f47921;
+  overflow-x: hidden;
+  transition: 0.25s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 16px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #bbb;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+  .sidenav a {
+    font-size: 18px;
+  }
+}
