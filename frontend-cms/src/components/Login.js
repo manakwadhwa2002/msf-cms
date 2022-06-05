@@ -9,22 +9,11 @@ function login() {
           <img src={logo} alt="" />
           <div className="form-group">
             <label htmlFor="exampleInputEmail1">Email address</label>
-            <input
-              type="email"
-              className="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              placeholder="Enter your email"
-            />
+            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email" />
           </div>
           <div className="form-group mt-3">
             <label htmlFor="exampleInputPassword1">Password</label>
-            <input
-              type="password"
-              className="form-control"
-              id="exampleInputPassword1"
-              placeholder="Enter Password"
-            />
+            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Enter Password" />
           </div>
           <button type="submit" className="btn btn-success mt-4">
             Submit

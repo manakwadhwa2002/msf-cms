@@ -60,6 +60,40 @@
   margin-left: 50px;
 }
 
+.qrr {
+  width: 35%;
+  margin: auto;
+  text-align: center;
+}
+
+.ticketContainer {
+  /* border: 1px solid red; */
+  padding: 20px;
+}
+
+.ticket {
+  margin: auto;
+  margin-bottom: 20px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  padding: 20px 60px;
+}
+
+.ticket-icon,
+.ticket-icon-closed {
+  background-color: #28a745;
+  width: 80%;
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 20px;
+  border-radius: 4px;
+  color: white;
+}
+
+.ticket-icon-closed {
+  background-color: #dc3545;
+}
+
 @media screen and (max-height: 450px) {
   .sidenav {
     padding-top: 15px;
@@ -67,4 +101,10 @@
   .sidenav a {
     font-size: 18px;
   }
+}
+
+/* Extra */
+
+.brdr {
+  /* border: 1px solid blue; */
 }

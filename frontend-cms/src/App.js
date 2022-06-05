@@ -1,29 +1,18 @@
-import './App.css';
+import "./App.css";
 import "./components/style.css";
-import Login from './components/Login';
-import Dashboard from './components/Dashboard';
+import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
   return (
     <Router>
-      <Switch>
-        <Route path="/login">
-          <Login/>
-        </Route>
-        <Route path="/dashboard">
-          <Dashboard />
-        </Route>
-        <Route path="/">
-          <Redirect to="/login" />
-        </Route>
-      </Switch>   
+      <Routes>
+        <Route path="dashboard/*" element={<Dashboard />} />
+        <Route exact path="login" element={<Login />} />
+        <Route exact path="/" element={<Navigate to="/login" />} />
+      </Routes>
     </Router>
   );
 }
