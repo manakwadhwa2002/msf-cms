@@ -10,6 +10,8 @@ import Opentickets from "./dashboardComponents/Opentickets";
 import TrackDeviceHistory from "./dashboardComponents/Trackdevicehistory";
 import Adddevice from "./dashboardComponents/Adddevice";
 import Managedevices from "./dashboardComponents/Managedevices";
+import Assigndevice from "../components/dashboardComponents/Assigndevice";
+import Editdevice from "./dashboardComponents/Editdevice";
 
 import { Link, Routes, Route } from "react-router-dom";
 
@@ -49,9 +51,6 @@ function Dashboard() {
           <Link to="open-tickets">
             <i className="fas fa-copy"></i> Open Tickets
           </Link>
-          <Link to="monthly-tracking">
-            <i className="fas fa-calendar"></i> Monthly Tracking
-          </Link>
           <Link to="create-ticket">
             <i className="fas fa-file"></i> Create Ticket
           </Link>
@@ -66,6 +65,9 @@ function Dashboard() {
           </Link>
           <Link to="manage-devices">
             <i className="fas fa-cogs"></i> Manage Devices
+          </Link>
+          <Link to="monthly-tracking">
+            <i className="fas fa-calendar"></i> Monthly Tracking
           </Link>
           <Link to="track-device-history">
             <i className="fas fa-history"></i> Track Device History
@@ -85,6 +87,8 @@ function Dashboard() {
           <Route path="track-device-history" element={<TrackDeviceHistory />} />
           <Route path="add-new-device" element={<Adddevice />} />
           <Route path="manage-devices" element={<Managedevices />} />
+          <Route path="assign-device/:deviceId" element={<Assigndevice />} />
+          <Route path="edit-device/:deviceId" element={<Editdevice />} />
         </Routes>
       </div>
     </>

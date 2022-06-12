@@ -6,6 +6,10 @@ const NewTicketSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  deviceid: {
+    type: String,
+    required: true,
+  },
   comments: {
     type: String,
   },
@@ -20,6 +24,12 @@ const NewTicketSchema = mongoose.Schema({
   createdon: {
     type: Date,
     default: Date.now,
+  },
+  issuecategory: {
+    type: String,
+  },
+  issuesubcategory: {
+    type: String,
   },
   closedon: {
     type: Date,

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import QRCode from "qrcode";
 import axios from "axios";
 
 const api = axios.create({
@@ -6,6 +7,8 @@ const api = axios.create({
 });
 
 function Adddevice() {
+  const [qrtext, setQrtext] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [devicetype, setDeviceType] = useState("");
   const [make, setMake] = useState("");
   const [modalyear, setModalYear] = useState("");
@@ -14,7 +17,21 @@ function Adddevice() {
   const [vnc, setVnc] = useState("");
   const [warrantyupto, setWarrantyUpto] = useState("");
   const [os, setOs] = useState("");
+  const ref = useRef(null);
 
+  const generateQrCode = async (qrtext) => {
+    try {
+      const response = await QRCode.toDataURL(qrtext);
+      setImageUrl(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const printqr = () => {
+    const qrcode = document.getElementById("modalbody").innerHTML;
+    document.getElementById("root").innerHTML = qrcode;
+    window.print();
+  };
   function submit(e) {
     e.preventDefault();
     api
@@ -29,12 +46,41 @@ function Adddevice() {
         os: os,
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
+        generateQrCode(res.data._id);
+        ref.current.click();
       });
   }
 
   return (
     <>
+      <button ref={ref} type="button" className="btn btn-primary d-none" data-toggle="modal" data-target="#exampleModal"></button>
+
+      <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Device Added Successfully
+              </h5>
+              <button type="button" className="close btn btn-primary" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body text-center" id="modalbody">
+              <img src={imageUrl} alt="" />
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-warning" data-dismiss="modal" onClick={printqr}>
+                Print
+              </button>
+              <button type="button" className="btn btn-danger" data-dismiss="modal">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="container">
         <h2>Add Device</h2>
         <form onSubmit={submit}>

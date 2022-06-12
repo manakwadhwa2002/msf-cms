@@ -1,6 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import QrReader from "react-qr-reader";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
+const api = axios.create({
+  baseURL: `http://localhost:4000`,
+});
 
 function Scanqr() {
   const [scanResultWebCam, setScanResultWebCam] = useState("");
@@ -14,6 +19,25 @@ function Scanqr() {
       qrRef.current.stopCamera();
     }
   };
+  const deviceid = scanResultWebCam;
+  const [ticketstatus, setTicketStatus] = useState();
+  const fetchData = () => {
+    api.get("/checkstatus/" + deviceid).then((res) => {
+      setTicketStatus(res.data);
+      // console.log(ticketstatus);
+      // if (ticketstatus > 0) {
+      //   console.log("Ticket Found");
+      // } else {
+      //   console.log("Ticket Not Found");
+      // }
+    });
+  };
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+  // console.log("Tickets: " + ticketstatus);
+  const assigndevicetonew = (e) => {};
+
   return (
     <>
       <div className="qrr">
@@ -22,7 +46,7 @@ function Scanqr() {
         <h3>Asset ID: {scanResultWebCam}</h3>
         <div className="row">
           <div className="col-sm">
-            <button className="btn btn-primary">
+            <button className="btn btn-primary" onClick={fetchData}>
               <i className="fas fa-spinner"></i> Check Status
             </button>
           </div>
@@ -43,12 +67,16 @@ function Scanqr() {
           </div>
         </div>
         <br />
-        <div class="alert alert-danger" role="alert">
-          Found a ticket ! <Link to="/open-tickets">Click Here</Link> to open !!
-        </div>
-        <div class="alert alert-success" role="alert">
-          No ticket found !
-        </div>
+        {ticketstatus ? (
+          <div className="alert alert-danger" role="alert">
+            Found a ticket ! <Link to="/open-tickets">Click Here</Link> to open !!
+          </div>
+        ) : null}
+        {ticketstatus == 0 ? (
+          <div className="alert alert-success" role="alert">
+            No ticket found !
+          </div>
+        ) : null}
       </div>
     </>
   );

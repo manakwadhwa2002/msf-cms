@@ -9,6 +9,13 @@ const issuesubcategory = require("./modals/Issuesubcategory");
 const assigndevice = require("./modals/Assigndevice");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+var cookieParser = require("cookie-parser");
+var passport = require("passport");
+var session = require("express-session");
+var MongoStore = require("connect-mongo");
+require("./passportConfig");
+// const deviceRoutes = require("./routes/devices");
+
 app.use(
   cors({
     origin: "http://localhost:3000", // <-- location of the react app were connecting to
@@ -27,6 +34,63 @@ mongoose.connect(
     console.log("Mongoose Is Connected");
   }
 );
+
+// Login System
+
+app.use(
+  session({
+    name: "msfl.uid",
+    resave: false,
+    saveUninitialized: false,
+    secret: "msfl",
+    cookie: {
+      maxAge: 36000000, //10 Hours
+      httpOnly: false,
+      secure: false,
+    },
+    store: MongoStore.create({
+      mongoUrl: "mongodb://localhost:27017/msft",
+      autoRemove: "native",
+    }),
+  })
+);
+
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.post("/login", function (req, res, next) {
+  passport.authenticate("local", function (err, user, info) {
+    if (err) {
+      return res.status(501).json(err);
+    }
+    if (!user) {
+      return res.status(501).json(info);
+    }
+    req.logIn(user, function (err) {
+      if (err) {
+        return res.status(501).json(err);
+      }
+      return res.status(200).json({ message: "Login Success" });
+    });
+  })(req, res, next);
+});
+
+app.get("/user", isValidUser, function (req, res, next) {
+  return res.status(200).json(req.user);
+});
+
+app.get("/logout", isValidUser, function (req, res, next) {
+  req.logout();
+  return res.status(200).json({ message: "Logout Success" });
+});
+
+function isValidUser(req, res, next) {
+  if (req.isAuthenticated()) next();
+  else return res.status(401).json({ message: "Unauthorized Request" });
+}
+
+// API'S
 
 app.get("/devices", async (req, res) => {
   try {
@@ -77,13 +141,22 @@ app.patch("/devices/:deviceId", async (req, res) => {
   }
 });
 
+app.get("/member", async (req, res) => {
+  try {
+    const allMembers = await member.find();
+    res.json(allMembers);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
 app.post("/addmember", async (req, res) => {
   const newmember = new member({
     name: req.body.name,
     email: req.body.email,
     phonenumber: req.body.phonenumber,
     department: req.body.department,
-    password: req.body.password,
+    password: member.hashPassword(req.body.password),
   });
   try {
     const savedMember = await newmember.save();
@@ -103,17 +176,36 @@ app.patch("/member/:memberId", async (req, res) => {
   }
 });
 
-app.post("/assigndevice/:deviceId", async (req, res) => {
-  const newassigndevice = new assigndevice({
-    deviceid: req.params.deviceId,
-    assignedtomember: req.body.assignedtomember, // Required Input as ID of Member
-    deviceip: req.body.deviceip, //Required input
-  });
+app.get("/assignstatus/:deviceId", async (req, res) => {
   try {
-    const savedAssignDevice = await newassigndevice.save();
-    res.json(savedAssignDevice);
+    const assignstat = await assigndevice.find({ deviceid: req.params.deviceId, assignstatus: "YES" });
+    // res.json(assignstat);
+    if (assignstat.length > 0) {
+      res.json({ assignstatus: "YES" });
+    } else {
+      res.json({ assignstat: "NO" });
+    }
   } catch (err) {
-    res.json({ message: err });
+    res.json(err);
+  }
+});
+
+app.post("/assigndevice/:deviceId", async (req, res) => {
+  const assignmentstatus = await assigndevice.find({ deviceid: req.params.deviceId, assignstatus: "YES" });
+  if (assignmentstatus.length > 0) {
+    res.json({ message: "Device Already Assigned" });
+  } else {
+    const newassigndevice = new assigndevice({
+      deviceid: req.params.deviceId,
+      assignedtomember: req.body.assignedtomember, // Required Input as ID of Member
+      deviceip: req.body.deviceip, //Required input
+    });
+    try {
+      const savedAssignDevice = await newassigndevice.save();
+      res.json(savedAssignDevice);
+    } catch (err) {
+      res.json({ message: err });
+    }
   }
 });
 
@@ -141,6 +233,7 @@ app.post("/createticket", async (req, res) => {
   if (devicecount > 0) {
     const newticket = new ticket({
       createdby: req.body.memberId, // Get from Login Cookie only
+      deviceid: assigneddevicedetails[0].deviceid,
       assigntoperson: req.body.assigntoperson,
       comments: req.body.comments,
     });
@@ -176,12 +269,32 @@ app.get("/opentickets", async (req, res) => {
         assignedon: assigneddevicedetails.assignedon,
         antivirus: devicedetails.antivirus,
         vnc: devicedetails.vnc,
+        ticketstatus: ticketdetails[i].ticketstatus,
         comments: ticketdetails[i].comments,
       });
     }
     res.json(responsetickets);
   } else {
     res.json({ message: "No Open Tickets Found !" });
+  }
+});
+
+app.patch("/openticket/closeaticket/:deviceId", async (req, res) => {
+  try {
+    const updateOpenTicket = await ticket.updateOne(
+      { deviceid: req.params.deviceId },
+      {
+        $set: {
+          issuecategory: req.body.issuecategory, // Required Input as ID of Member
+          issuesubcategory: req.body.isssubcategory,
+          ticketstatus: "CLOSED",
+          closedon: new Date(),
+        },
+      }
+    );
+    res.json(updateOpenTicket);
+  } catch (err) {
+    res.json({ message: err });
   }
 });
 
@@ -204,6 +317,7 @@ app.get("/closedtickets", async (req, res) => {
         assignedon: assigneddevicedetails.assignedon,
         antivirus: devicedetails.antivirus,
         vnc: devicedetails.vnc,
+        ticketstatus: ticketdetails[i].ticketstatus,
         comments: ticketdetails[i].comments,
         closedon: ticketdetails[i].closedon,
       });
@@ -235,10 +349,30 @@ app.post("/issuecategory", async (req, res) => {
   }
 });
 
+app.patch("/issuecategory/:catid", async (req, res) => {
+  try {
+    const updateIssueCategory = await issuecategory.updateOne({ _id: req.params.catid }, { $set: { name: req.body.catname } });
+    // const nameParentCategory = await issuecategory.findOne({ _id: req.params.catid });
+    // const updateIssueSubIsCategory = await issuesubcategory.updateMany({ parentcategory: nameParentCategory.name }, { $set: { parentcategory: `${req.body.catname}` } });
+    res.json(updateIssueCategory);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
 app.get("/issuesubcategory", async (req, res) => {
   try {
     const allSubIssues = await issuesubcategory.find();
     res.json(allSubIssues);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
+app.get("/issuesubcategory/:issparentcat", async (req, res) => {
+  try {
+    const filterSubIssues = await issuesubcategory.find({ parentcategory: req.params.issparentcat });
+    res.json(filterSubIssues);
   } catch (err) {
     res.json({ message: err });
   }
@@ -255,6 +389,25 @@ app.post("/issuesubcategory", async (req, res) => {
     // res.json(savedMember);
   } catch (err) {
     res.json({ message: err });
+  }
+});
+
+app.patch("/issuesubcategory/:subcatid", async (req, res) => {
+  try {
+    const updateIssueSubCategory = await issuesubcategory.updateOne({ _id: req.params.subcatid }, { $set: { parentcategory: req.body.parentcategory, name: req.body.subcatname } });
+    res.json(updateIssueSubCategory);
+  } catch (err) {
+    res.json({ message: err });
+  }
+});
+
+app.get("/checkstatus/:deviceId", async (req, res) => {
+  try {
+    const checkticketstatus = await ticket.find({ deviceid: req.params.deviceId, ticketstatus: "OPEN" });
+    const nooftickets = Object.keys(checkticketstatus).length;
+    res.json(nooftickets);
+  } catch (err) {
+    res.json(err);
   }
 });
 
