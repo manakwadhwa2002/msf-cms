@@ -7,11 +7,13 @@ const api = axios.create({
 
 function Opentickets() {
   const [ticket, setTicket] = useState([]);
+  const [supportdata, setSupportData] = useState([]);
   const [isscategory, setIsscategory] = useState([]);
   const [isssubcategory, setIsssubcategory] = useState([]);
   const [csiscat, setCsIsCat] = useState("");
   const [csissubcat, setCsIsSubCat] = useState("");
   const [tempdevid, setDevid] = useState("");
+  const [assignto, setAssignToPerson] = useState("");
 
   const ref = useRef(null);
 
@@ -22,6 +24,14 @@ function Opentickets() {
   };
   useEffect(() => {
     fetchData();
+  }, []);
+  const fetchSupportData = () => {
+    api.get("/getsupportdata").then((res) => {
+      setSupportData(res.data);
+    });
+  };
+  useEffect(() => {
+    fetchSupportData();
   }, []);
   function closeaticket() {
     console.log("Call received");
@@ -58,6 +68,16 @@ function Opentickets() {
   function reloadsubcat(e) {
     setCsIsCat(e.target.value);
     fetchIssueSubData(e.target.value);
+  }
+  function assigntickettoperson(ticketid) {
+    api
+      .patch("/openticket/assign/" + ticketid, {
+        assigntoperson: assignto,
+      })
+      .then((res) => {
+        console.log(res.data);
+        fetchData();
+      });
   }
   return (
     <>
@@ -107,11 +127,11 @@ function Opentickets() {
         <input className="form-control" type="search" placeholder="Search Ticket" />
         <br />
         {ticket.map((data) => (
-          <div className="ticket">
+          <div className="ticket" key={data._id}>
             <div className="row">
               <div className="col-sm-2 brdr">
                 <div className="ticket-icon">
-                  <i className="fas fa-calendar"></i> 31 May
+                  <i className="fas fa-calendar"></i> {data.createdondate[8] + data.createdondate[9]}-{data.createdondate[5] + data.createdondate[6]}-{data.createdondate[2] + data.createdondate[3]}
                 </div>
               </div>
               <div className="col-sm-8 brdr">
@@ -134,21 +154,25 @@ function Opentickets() {
                 </div>
                 <br />
                 <div className="row">
-                  <div className="col-sm-12">Comments: {data.comments}</div>
+                  <div className="col-sm-8">Comments: {data.comments}</div>
+                  <div className="col-sm-4">Assigned To: {data.assigntoperson}</div>
                 </div>
               </div>
               <div className="col-sm-2 brdr">
                 <div className="row">
-                  <form action="">
+                  <form onSubmit={(e) => e.preventDefault()}>
                     <div className="form-group">
-                      <select className="form-control">
+                      <select className="form-control" onChange={(e) => setAssignToPerson(e.target.value)}>
                         <option value="">-- Assign To --</option>
-                        <option value="">Manak</option>
-                        <option value="">Abhi</option>
-                        <option value="">Sarv</option>
+                        {/* <option value={supportdata[0]._id}>{supportdata[0].name}</option> */}
+                        {supportdata.map((sdata) => (
+                          <option value={sdata._id} key={sdata._id}>
+                            {sdata.name}
+                          </option>
+                        ))}
                       </select>
                       <br />
-                      <button className="btn btn-success">
+                      <button className="btn btn-success" onClick={() => assigntickettoperson(`${data._id}`)}>
                         <i className="fas fa-save"></i> Save
                       </button>
                       <br />

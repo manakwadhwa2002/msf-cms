@@ -15,15 +15,12 @@ const NewDeviceSchema = mongoose.Schema({
   },
   macaddress: {
     type: String,
-    required: true,
   },
   antivirus: {
     type: String,
-    required: true,
   },
   vnc: {
     type: String,
-    required: true,
   },
   warrantyupto: {
     type: Number,
@@ -31,7 +28,41 @@ const NewDeviceSchema = mongoose.Schema({
   },
   os: {
     type: String,
+  },
+  usb: {
+    type: String,
+    default: "Disabled",
+  },
+  vpn: {
+    type: String,
+    default: "Enabled",
+  },
+  ssdhdd: {
+    type: String,
+  },
+  ssdhddsize: {
+    type: Number,
+  },
+  serialno: {
+    type: String,
+  },
+  onedrive: {
+    type: String,
+    default: "Enabled",
+  },
+  dlov: {
+    type: String,
+  },
+  ram: {
+    type: Number,
+  },
+  cpuv: {
+    type: String,
+  },
+  multiuser: {
+    type: String,
     required: true,
+    default: "No",
   },
   addedon: {
     type: Date,

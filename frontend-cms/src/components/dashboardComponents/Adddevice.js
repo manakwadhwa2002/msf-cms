@@ -17,6 +17,17 @@ function Adddevice() {
   const [vnc, setVnc] = useState("");
   const [warrantyupto, setWarrantyUpto] = useState("");
   const [os, setOs] = useState("");
+  const [usb, setUsb] = useState("");
+  const [vpn, setVpn] = useState("");
+  const [ssdhdd, setSsdHdd] = useState("");
+  const [ssdhddsize, setSsdHddSize] = useState("");
+  const [serialno, setSerialNo] = useState("");
+  const [onedrive, setOnedrive] = useState("");
+  const [dlov, setDloV] = useState("");
+  const [ram, setRam] = useState("");
+  const [cpuv, setCpuV] = useState("");
+  const [multiuser, setMultiUser] = useState("");
+
   const ref = useRef(null);
 
   const generateQrCode = async (qrtext) => {
@@ -44,9 +55,18 @@ function Adddevice() {
         vnc: vnc,
         warrantyupto: warrantyupto,
         os: os,
+        usb: usb,
+        vpn: vpn,
+        ssdhdd: ssdhdd,
+        ssdhddsize: ssdhddsize,
+        serialno: serialno,
+        onedrive: onedrive,
+        dlov: dlov,
+        ram: ram,
+        cpuv: cpuv,
       })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         generateQrCode(res.data._id);
         ref.current.click();
       });
@@ -85,132 +105,401 @@ function Adddevice() {
         <h2>Add Device</h2>
         <form onSubmit={submit}>
           <div className="form-group">
-            <div className="row">
-              <div className="col-md-4">
-                <label htmlFor="deviceType">Device Type</label>
-                <select id="deviceType" className="form-control" value={devicetype} onChange={(e) => setDeviceType(e.target.value)}>
-                  <option value="">-- Select Device Type --</option>
-                  <option value="Laptop">Laptop</option>
-                  <option value="Desktop">Desktop</option>
-                </select>
-                <br />
-                <label htmlFor="deviceMake">Make</label>
-                <select id="deviceMake" className="form-control" value={make} onChange={(e) => setMake(e.target.value)}>
-                  <option value="">-- Select Make --</option>
-                  <option value="HP">HP</option>
-                  <option value="DELL">DELL</option>
-                </select>
-                <br />
-                <label htmlFor="modelyear">Model Year</label>
-                <select id="modelyear" className="form-control" value={modalyear} onChange={(e) => setModalYear(e.target.value)}>
-                  <option value="">-- Model Year --</option>
-                  <option value="2030">2030</option>
-                  <option value="2029">2029</option>
-                  <option value="2028">2028</option>
-                  <option value="2027">2027</option>
-                  <option value="2026">2026</option>
-                  <option value="2025">2025</option>
-                  <option value="2024">2024</option>
-                  <option value="2023">2023</option>
-                  <option value="2022">2022</option>
-                  <option value="2021">2021</option>
-                  <option value="2020">2020</option>
-                  <option value="2019">2019</option>
-                  <option value="2018">2018</option>
-                  <option value="2017">2017</option>
-                  <option value="2016">2016</option>
-                  <option value="2015">2015</option>
-                  <option value="2014">2014</option>
-                  <option value="2013">2013</option>
-                  <option value="2012">2012</option>
-                  <option value="2011">2011</option>
-                  <option value="2010">2010</option>
-                </select>
-                <br />
-                <label htmlFor="macadd">MAC Address</label>
-                <input type="text" id="macadd" className="form-control" placeholder="Enter MAC Address" value={macaddress} onChange={(e) => setMacAddress(e.target.value)} />
-              </div>
-              <div className="col-md-4">
-                <label htmlFor="antivirus">AntiVirus</label>
-                <select id="antivirus" className="form-control" value={antivirus} onChange={(e) => setAntivirus(e.target.value)}>
-                  <option value="">-- AntiVirus Installed --</option>
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </select>
-                <br />
-                <label htmlFor="vnci">VNC</label>
-                <select id="vnci" className="form-control" value={vnc} onChange={(e) => setVnc(e.target.value)}>
-                  <option value="">-- VNC Installed --</option>
-                  <option value="Yes">Yes</option>
-                  <option value="No">No</option>
-                </select>
-                <br />
-                <label htmlFor="warranty">Warranty Upto</label>
-                <select id="warranty" className="form-control" value={warrantyupto} onChange={(e) => setWarrantyUpto(e.target.value)}>
-                  <option value="">-- Warranty Upto --</option>
-                  <option value="2030">2030</option>
-                  <option value="2029">2029</option>
-                  <option value="2028">2028</option>
-                  <option value="2027">2027</option>
-                  <option value="2026">2026</option>
-                  <option value="2025">2025</option>
-                  <option value="2024">2024</option>
-                  <option value="2023">2023</option>
-                  <option value="2022">2022</option>
-                  <option value="2021">2021</option>
-                  <option value="2020">2020</option>
-                  <option value="2019">2019</option>
-                  <option value="2018">2018</option>
-                  <option value="2017">2017</option>
-                  <option value="2016">2016</option>
-                  <option value="2015">2015</option>
-                  <option value="2014">2014</option>
-                  <option value="2013">2013</option>
-                  <option value="2012">2012</option>
-                  <option value="2011">2011</option>
-                  <option value="2010">2010</option>
-                </select>
-                <br />
-                <label htmlFor="os">Operating System</label>
-                <select id="os" className="form-control" value={os} onChange={(e) => setOs(e.target.value)}>
-                  <option value="">-- Select OS --</option>
-                  <option value="Windows">Windows</option>
-                  <option value="Linux">Linux</option>
-                  <option value="MAC OS">MAC OS</option>
-                  <option value="Others">Others</option>
-                </select>
-                {/* 
-                <br />
-                <label htmlFor="passwd">Password</label>
-                <input type="password" id="passwd" className="form-control" placeholder="Enter Password" /> */}
-              </div>
-              {/* <div className="col-md-4">
-                <label htmlFor="fullName">Full Name</label>
-                <input type="text" id="fullName" className="form-control" placeholder="Enter Full Name" />
-                <br />
-                <label htmlFor="emailId">Email</label>
-                <input type="text" id="emailId" className="form-control" placeholder="Enter Email" />
-                <br />
-                <label htmlFor="phoneNum">Phone Number</label>
-                <input type="number" id="phoneNum" className="form-control" placeholder="Enter Phone Number" />
-                <br />
-                <label htmlFor="department">Department</label>
-                <select id="department" className="form-control">
-                  <option value="">-- Select Department --</option>
-                  <option value="">QA</option>
-                  <option value="">IT</option>
-                  <option value="">Prodution</option>
-                </select>
-                <br />
-                <label htmlFor="passwd">Password</label>
-                <input type="password" id="passwd" className="form-control" placeholder="Enter Password" />
-              </div> */}
-            </div>
+            <label htmlFor="deviceType">Select Device Type</label>
+            <select id="deviceType" className="form-control" value={devicetype} onChange={(e) => setDeviceType(e.target.value)}>
+              <option value="">-- Select Device Type --</option>
+              <option value="Laptop">Laptop</option>
+              <option value="Desktop">Desktop</option>
+              <option value="Printer">Printer</option>
+              <option value="Access Point">Access Point</option>
+              <option value="QA Desktop">QA Desktop</option>
+              <option value="Scada Desktop">Scada Desktop</option>
+            </select>
             <br />
-            <br />
-            <button className="btn btn-success">
-              <i className="fas fa-laptop"></i> Add Device
-            </button>
+            {devicetype === "Laptop" ? (
+              <>
+                <div className="row">
+                  <div className="col-md-4">
+                    <label htmlFor="deviceMake">Make</label>
+                    <select id="deviceMake" className="form-control" value={make} onChange={(e) => setMake(e.target.value)}>
+                      <option value="">-- Select Make --</option>
+                      <option value="HP">HP</option>
+                      <option value="DELL">DELL</option>
+                    </select>
+                    <br />
+                    <label htmlFor="modelyear">Model Year</label>
+                    <select id="modelyear" className="form-control" value={modalyear} onChange={(e) => setModalYear(e.target.value)}>
+                      <option value="">-- Model Year --</option>
+                      <option value="2030">2030</option>
+                      <option value="2029">2029</option>
+                      <option value="2028">2028</option>
+                      <option value="2027">2027</option>
+                      <option value="2026">2026</option>
+                      <option value="2025">2025</option>
+                      <option value="2024">2024</option>
+                      <option value="2023">2023</option>
+                      <option value="2022">2022</option>
+                      <option value="2021">2021</option>
+                      <option value="2020">2020</option>
+                      <option value="2019">2019</option>
+                      <option value="2018">2018</option>
+                      <option value="2017">2017</option>
+                      <option value="2016">2016</option>
+                      <option value="2015">2015</option>
+                      <option value="2014">2014</option>
+                      <option value="2013">2013</option>
+                      <option value="2012">2012</option>
+                      <option value="2011">2011</option>
+                      <option value="2010">2010</option>
+                    </select>
+                    <br />
+                    <label htmlFor="sub">USB</label>
+                    <select id="usb" className="form-control" value={usb} onChange={(e) => setUsb(e.target.value)}>
+                      <option value="">-- Select USB Status --</option>
+                      <option value="Enabled">Enabled</option>
+                      <option value="Disabled">Disabled</option>
+                    </select>
+                    <br />
+                    <label htmlFor="vpn">VPN</label>
+                    <select id="vpn" className="form-control" value={vpn} onChange={(e) => setVpn(e.target.value)}>
+                      <option value="">-- Select VPN Status --</option>
+                      <option value="Enabled">Enabled</option>
+                      <option value="Disabled">Disabled</option>
+                    </select>
+                    <br />
+                    <label htmlFor="ram">
+                      RAM <sub>(in GB)</sub>
+                    </label>
+                    <select id="ram" className="form-control" value={ram} onChange={(e) => setRam(e.target.value)}>
+                      <option value="">-- Select RAM --</option>
+                      <option value="2">2</option>
+                      <option value="4">4</option>
+                      <option value="6">6</option>
+                      <option value="8">8</option>
+                      <option value="10">10</option>
+                      <option value="12">12</option>
+                      <option value="14">14</option>
+                      <option value="16">16</option>
+                      <option value="18">18</option>
+                      <option value="20">20</option>
+                      <option value="24">24</option>
+                      <option value="28">28</option>
+                      <option value="32">32</option>
+                      <option value="64">64</option>
+                      <option value="128">128</option>
+                    </select>
+                  </div>
+                  <div className="col-md-4">
+                    <label htmlFor="antivirus">AntiVirus</label>
+                    <select id="antivirus" className="form-control" value={antivirus} onChange={(e) => setAntivirus(e.target.value)}>
+                      <option value="">-- AntiVirus Installed --</option>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                    <br />
+                    <label htmlFor="vnci">VNC</label>
+                    <select id="vnci" className="form-control" value={vnc} onChange={(e) => setVnc(e.target.value)}>
+                      <option value="">-- VNC Installed --</option>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                    <br />
+                    <label htmlFor="warranty">Warranty Upto</label>
+                    <select id="warranty" className="form-control" value={warrantyupto} onChange={(e) => setWarrantyUpto(e.target.value)}>
+                      <option value="">-- Warranty Upto --</option>
+                      <option value="2030">2030</option>
+                      <option value="2029">2029</option>
+                      <option value="2028">2028</option>
+                      <option value="2027">2027</option>
+                      <option value="2026">2026</option>
+                      <option value="2025">2025</option>
+                      <option value="2024">2024</option>
+                      <option value="2023">2023</option>
+                      <option value="2022">2022</option>
+                      <option value="2021">2021</option>
+                      <option value="2020">2020</option>
+                      <option value="2019">2019</option>
+                      <option value="2018">2018</option>
+                      <option value="2017">2017</option>
+                      <option value="2016">2016</option>
+                      <option value="2015">2015</option>
+                      <option value="2014">2014</option>
+                      <option value="2013">2013</option>
+                      <option value="2012">2012</option>
+                      <option value="2011">2011</option>
+                      <option value="2010">2010</option>
+                    </select>
+                    <br />
+                    <label htmlFor="os">Operating System</label>
+                    <select id="os" className="form-control" value={os} onChange={(e) => setOs(e.target.value)}>
+                      <option value="">-- Select OS --</option>
+                      <option value="Windows">Windows</option>
+                      <option value="Linux">Linux</option>
+                      <option value="MAC OS">MAC OS</option>
+                      <option value="Others">Others</option>
+                    </select>
+                    <br />
+                    <label htmlFor="ssdhdd">SSD/HDD</label>
+                    <select id="ssdhdd" className="form-control" value={ssdhdd} onChange={(e) => setSsdHdd(e.target.value)}>
+                      <option value="">-- Select SSD/HDD --</option>
+                      <option value="SSD">SSD</option>
+                      <option value="HDD">HDD</option>
+                    </select>
+                    <br />
+                    <label htmlFor="ssdhdd">
+                      SSD/HDD Size <sub>(in GB)</sub>
+                    </label>
+                    <select id="ssdhdd" className="form-control" value={ssdhddsize} onChange={(e) => setSsdHddSize(e.target.value)}>
+                      <option value="">-- Select SSD/HDD Size --</option>
+                      <option value="128">128</option>
+                      <option value="256">256</option>
+                      <option value="512">512</option>
+                      <option value="1024">1024</option>
+                    </select>
+                  </div>
+                  <div className="col-md-4">
+                    <label htmlFor="cpu">CPU</label>
+                    <input type="text" id="cpu" className="form-control" placeholder="Enter CPU" value={cpuv} onChange={(e) => setCpuV(e.target.value)} />
+                    <br />
+                    <label htmlFor="dlo">DLO Version</label>
+                    <input type="text" id="dlo" className="form-control" placeholder="Enter DLO Version" value={dlov} onChange={(e) => setDloV(e.target.value)} />
+                    <br />
+                    <label htmlFor="macadd">MAC Address</label>
+                    <input type="text" id="macadd" className="form-control" placeholder="Enter MAC Address" value={macaddress} onChange={(e) => setMacAddress(e.target.value)} />
+                    <br />
+                    <label htmlFor="macadd">Serial No</label>
+                    <input type="text" id="macadd" className="form-control" placeholder="Enter Serial Number" value={serialno} onChange={(e) => setSerialNo(e.target.value)} />
+                    <br />
+                    <label htmlFor="onedrive">Onedrive</label>
+                    <select id="onedrive" className="form-control" value={onedrive} onChange={(e) => setOnedrive(e.target.value)}>
+                      <option value="">-- Select Onedrive Status --</option>
+                      <option value="Enabled">Enabled</option>
+                      <option value="Disabled">Disabled</option>
+                    </select>
+                  </div>
+                </div>
+                <br />
+                <br />
+                <button className="btn btn-success">
+                  <i className="fas fa-laptop"></i> Add {devicetype}
+                </button>
+              </>
+            ) : null}
+            {devicetype === "Desktop" ? (
+              <>
+                <div className="row">
+                  <div className="col-md-4">
+                    <label htmlFor="deviceMake">Make</label>
+                    <select id="deviceMake" className="form-control" value={make} onChange={(e) => setMake(e.target.value)}>
+                      <option value="">-- Select Make --</option>
+                      <option value="HP">HP</option>
+                      <option value="DELL">DELL</option>
+                    </select>
+                    <br />
+                    <label htmlFor="modelyear">Model Year</label>
+                    <select id="modelyear" className="form-control" value={modalyear} onChange={(e) => setModalYear(e.target.value)}>
+                      <option value="">-- Model Year --</option>
+                      <option value="2030">2030</option>
+                      <option value="2029">2029</option>
+                      <option value="2028">2028</option>
+                      <option value="2027">2027</option>
+                      <option value="2026">2026</option>
+                      <option value="2025">2025</option>
+                      <option value="2024">2024</option>
+                      <option value="2023">2023</option>
+                      <option value="2022">2022</option>
+                      <option value="2021">2021</option>
+                      <option value="2020">2020</option>
+                      <option value="2019">2019</option>
+                      <option value="2018">2018</option>
+                      <option value="2017">2017</option>
+                      <option value="2016">2016</option>
+                      <option value="2015">2015</option>
+                      <option value="2014">2014</option>
+                      <option value="2013">2013</option>
+                      <option value="2012">2012</option>
+                      <option value="2011">2011</option>
+                      <option value="2010">2010</option>
+                    </select>
+                    <br />
+                    <label htmlFor="ram">
+                      RAM <sub>(in GB)</sub>
+                    </label>
+                    <select id="ram" className="form-control" value={ram} onChange={(e) => setRam(e.target.value)}>
+                      <option value="">-- Select RAM --</option>
+                      <option value="2">2</option>
+                      <option value="4">4</option>
+                      <option value="6">6</option>
+                      <option value="8">8</option>
+                      <option value="10">10</option>
+                      <option value="12">12</option>
+                      <option value="14">14</option>
+                      <option value="16">16</option>
+                      <option value="18">18</option>
+                      <option value="20">20</option>
+                      <option value="24">24</option>
+                      <option value="28">28</option>
+                      <option value="32">32</option>
+                      <option value="64">64</option>
+                      <option value="128">128</option>
+                    </select>
+                    <br />
+                    <label htmlFor="warranty">Warranty Upto</label>
+                    <select id="warranty" className="form-control" value={warrantyupto} onChange={(e) => setWarrantyUpto(e.target.value)}>
+                      <option value="">-- Warranty Upto --</option>
+                      <option value="2030">2030</option>
+                      <option value="2029">2029</option>
+                      <option value="2028">2028</option>
+                      <option value="2027">2027</option>
+                      <option value="2026">2026</option>
+                      <option value="2025">2025</option>
+                      <option value="2024">2024</option>
+                      <option value="2023">2023</option>
+                      <option value="2022">2022</option>
+                      <option value="2021">2021</option>
+                      <option value="2020">2020</option>
+                      <option value="2019">2019</option>
+                      <option value="2018">2018</option>
+                      <option value="2017">2017</option>
+                      <option value="2016">2016</option>
+                      <option value="2015">2015</option>
+                      <option value="2014">2014</option>
+                      <option value="2013">2013</option>
+                      <option value="2012">2012</option>
+                      <option value="2011">2011</option>
+                      <option value="2010">2010</option>
+                    </select>
+                    <br />
+                    <label htmlFor="multiuser">Multi User</label>
+                    <select id="multiuser" className="form-control" value={multiuser} onChange={(e) => setMultiUser(e.target.value)}>
+                      <option value="">-- Multi User --</option>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                  </div>
+                  <div className="col-md-4">
+                    <label htmlFor="os">Operating System</label>
+                    <select id="os" className="form-control" value={os} onChange={(e) => setOs(e.target.value)}>
+                      <option value="">-- Select OS --</option>
+                      <option value="Windows">Windows</option>
+                      <option value="Linux">Linux</option>
+                      <option value="MAC OS">MAC OS</option>
+                      <option value="Others">Others</option>
+                    </select>
+                    <br />
+                    <label htmlFor="ssdhdd">SSD/HDD</label>
+                    <select id="ssdhdd" className="form-control" value={ssdhdd} onChange={(e) => setSsdHdd(e.target.value)}>
+                      <option value="">-- Select SSD/HDD --</option>
+                      <option value="SSD">SSD</option>
+                      <option value="HDD">HDD</option>
+                    </select>
+                    <br />
+                    <label htmlFor="sub">USB</label>
+                    <select id="usb" className="form-control" value={usb} onChange={(e) => setUsb(e.target.value)}>
+                      <option value="">-- Select USB Status --</option>
+                      <option value="Enabled">Enabled</option>
+                      <option value="Disabled">Disabled</option>
+                    </select>
+                    <br />
+                    <label htmlFor="cpu">CPU</label>
+                    <input type="text" id="cpu" className="form-control" placeholder="Enter CPU" value={cpuv} onChange={(e) => setCpuV(e.target.value)} />
+                    <br />
+                    <label htmlFor="serialno">Serial No</label>
+                    <input type="text" id="serialno" className="form-control" placeholder="Enter Serial No" value={serialno} onChange={(e) => setSerialNo(e.target.value)} />
+                  </div>
+                  <div className="col-md-4">
+                    <label htmlFor="antivirus">AntiVirus</label>
+                    <select id="antivirus" className="form-control" value={antivirus} onChange={(e) => setAntivirus(e.target.value)}>
+                      <option value="">-- AntiVirus Installed --</option>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                    <br />
+                    <label htmlFor="vnci">VNC</label>
+                    <select id="vnci" className="form-control" value={vnc} onChange={(e) => setVnc(e.target.value)}>
+                      <option value="">-- VNC Installed --</option>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                    <br />
+                    <label htmlFor="vpn">VPN</label>
+                    <select id="vpn" className="form-control" value={vpn} onChange={(e) => setVpn(e.target.value)}>
+                      <option value="">-- Select VPN Status --</option>
+                      <option value="Enabled">Enabled</option>
+                      <option value="Disabled">Disabled</option>
+                    </select>
+                    <br />
+                    <label htmlFor="dlo">DLO Version</label>
+                    <input type="text" id="dlo" className="form-control" placeholder="Enter DLO Version" value={dlov} onChange={(e) => setDloV(e.target.value)} />
+                  </div>
+                </div>
+                <br />
+                <br />
+                <button className="btn btn-success">
+                  <i className="fas fa-laptop"></i> Add {devicetype}
+                </button>
+              </>
+            ) : null}
+            {devicetype === "Printers" ? (
+              <>
+                <div className="row">
+                  <div className="col-md-4">
+                    <label htmlFor="printerType">Printer Type</label>
+                    <select id="printerType" className="form-control" value={make} onChange={(e) => setMake(e.target.value)}>
+                      <option value="">-- Select Printer Type --</option>
+                      <option value="Laser">Laser</option>
+                      <option value="Inkjet">Inkjet</option>
+                    </select>
+                    <br />
+                    <label htmlFor="deviceMake">Make</label>
+                    <select id="deviceMake" className="form-control" value={make} onChange={(e) => setMake(e.target.value)}>
+                      <option value="">-- Select Make --</option>
+                      <option value="HP">HP</option>
+                      <option value="DELL">DELL</option>
+                    </select>
+                    <br />
+                    <label htmlFor="modelyear">Model Year</label>
+                    <select id="modelyear" className="form-control" value={modalyear} onChange={(e) => setModalYear(e.target.value)}>
+                      <option value="">-- Model Year --</option>
+                      <option value="2030">2030</option>
+                      <option value="2029">2029</option>
+                      <option value="2028">2028</option>
+                      <option value="2027">2027</option>
+                      <option value="2026">2026</option>
+                      <option value="2025">2025</option>
+                      <option value="2024">2024</option>
+                      <option value="2023">2023</option>
+                      <option value="2022">2022</option>
+                      <option value="2021">2021</option>
+                      <option value="2020">2020</option>
+                      <option value="2019">2019</option>
+                      <option value="2018">2018</option>
+                      <option value="2017">2017</option>
+                      <option value="2016">2016</option>
+                      <option value="2015">2015</option>
+                      <option value="2014">2014</option>
+                      <option value="2013">2013</option>
+                      <option value="2012">2012</option>
+                      <option value="2011">2011</option>
+                      <option value="2010">2010</option>
+                    </select>
+                    <br />
+                    <label htmlFor="printerType">Network / USB / Shared</label>
+                    <select id="printerType" className="form-control" value={make} onChange={(e) => setMake(e.target.value)}>
+                      <option value="">-- Select Network / USB / Shared --</option>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                  </div>
+                  <div className="col-md-4"></div>
+                </div>
+                <br />
+                <br />
+                <button className="btn btn-success">
+                  <i className="fas fa-laptop"></i> Add {devicetype}
+                </button>
+              </>
+            ) : null}
           </div>
         </form>
       </div>

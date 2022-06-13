@@ -9,11 +9,13 @@ function Closedtickets() {
         <div className="row">
           <div className="col-sm-2 brdr">
             <div className="ticket-icon">
-              <i className="fas fa-calendar"></i> 31 May
+              <i className="fas fa-calendar"></i> 06-06-22
+              {/* {data.createdondate[8] + data.createdondate[9]}-{data.createdondate[5] + data.createdondate[6]}-{data.createdondate[2] + data.createdondate[3]} */}
             </div>
             <br />
             <div className="ticket-icon-closed">
-              <i className="fas fa-calendar"></i> 01 June
+              <i className="fas fa-calendar"></i> 07-06-22
+              {/* {data.createdondate[8] + data.createdondate[9]}-{data.createdondate[5] + data.createdondate[6]}-{data.createdondate[2] + data.createdondate[3]} */}
             </div>
           </div>
           <div className="col-sm-10 brdr">

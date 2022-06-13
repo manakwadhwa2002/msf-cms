@@ -112,7 +112,7 @@ function Managedevices() {
                   <td>{data.macaddress}</td>
                   <td>{data.warrantyupto}</td>
                   <td>
-                    <Link to="/dashboard/edit-device/">
+                    <Link to={`/dashboard/edit-device/${data._id}`}>
                       <button className="btn btn-primary">
                         <i className="fas fa-pen"></i>
                       </button>

@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import QrReader from "react-qr-reader";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const api = axios.create({
   baseURL: `http://localhost:4000`,
@@ -21,9 +22,25 @@ function Scanqr() {
   };
   const deviceid = scanResultWebCam;
   const [ticketstatus, setTicketStatus] = useState();
+  const [deviceinfo, setDeviceInfo] = useState({
+    deviceid: "",
+    macaddress: "",
+    assignstatus: "",
+    ipaddress: "",
+    assignedto: "",
+  });
+  const nav = useNavigate();
   const fetchData = () => {
     api.get("/checkstatus/" + deviceid).then((res) => {
-      setTicketStatus(res.data);
+      console.log(res.data);
+      setTicketStatus(res.data.nooftickets);
+      setDeviceInfo({
+        deviceid: res.data.deviceid,
+        macaddress: res.data.macaddress,
+        assignstatus: res.data.assignstatus,
+        ipaddress: res.data.ipaddress,
+        assignedto: res.data.assignedto,
+      });
       // console.log(ticketstatus);
       // if (ticketstatus > 0) {
       //   console.log("Ticket Found");
@@ -36,7 +53,9 @@ function Scanqr() {
   //   fetchData();
   // }, []);
   // console.log("Tickets: " + ticketstatus);
-  const assigndevicetonew = (e) => {};
+  const assigndevicetonew = () => {
+    nav("/dashboard/assign-device/" + deviceid);
+  };
 
   return (
     <>
@@ -56,7 +75,7 @@ function Scanqr() {
             </button>
           </div>
           <div className="col-sm">
-            <button className="btn btn-success">
+            <button className="btn btn-success" onClick={assigndevicetonew}>
               <i className="fas fa-user"></i> Assign New
             </button>
           </div>
@@ -69,11 +88,61 @@ function Scanqr() {
         <br />
         {ticketstatus ? (
           <div className="alert alert-danger" role="alert">
+            <table className="table">
+              <thead></thead>
+              <tbody>
+                <tr>
+                  <td>Device ID: </td>
+                  <td>{deviceinfo.deviceid}</td>
+                </tr>
+                <tr>
+                  <td>MAC Address: </td>
+                  <td>{deviceinfo.macaddress}</td>
+                </tr>
+                <tr>
+                  <td>Assign Status: </td>
+                  <td>{deviceinfo.assignstatus}</td>
+                </tr>
+                <tr>
+                  <td>IP Address: </td>
+                  <td>{deviceinfo.ipaddress}</td>
+                </tr>
+                <tr>
+                  <td>Assigned To: </td>
+                  <td>{deviceinfo.assignedto}</td>
+                </tr>
+              </tbody>
+            </table>
             Found a ticket ! <Link to="/open-tickets">Click Here</Link> to open !!
           </div>
         ) : null}
         {ticketstatus == 0 ? (
           <div className="alert alert-success" role="alert">
+            <table className="table">
+              <thead></thead>
+              <tbody>
+                <tr>
+                  <td>Device ID: </td>
+                  <td>{deviceinfo.deviceid}</td>
+                </tr>
+                <tr>
+                  <td>MAC Address: </td>
+                  <td>{deviceinfo.macaddress}</td>
+                </tr>
+                <tr>
+                  <td>Assign Status: </td>
+                  <td>{deviceinfo.assignstatus}</td>
+                </tr>
+                <tr>
+                  <td>IP Address: </td>
+                  <td>{deviceinfo.ipaddress}</td>
+                </tr>
+                <tr>
+                  <td>Assigned To: </td>
+                  <td>{deviceinfo.assignedto}</td>
+                </tr>
+              </tbody>
+            </table>
             No ticket found !
           </div>
         ) : null}
