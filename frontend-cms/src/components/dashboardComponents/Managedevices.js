@@ -88,7 +88,7 @@ function Managedevices() {
               <th scope="col">Device ID</th>
               <th scope="col">Make</th>
               <th scope="col">Model Year</th>
-              <th scope="col">MAC</th>
+              <th scope="col">Serial No.</th>
               <th scope="col">Warranty Upto</th>
               <th scope="col">Edit</th>
               <th scope="col">Delete</th>
@@ -109,7 +109,7 @@ function Managedevices() {
                   <td>{data._id}</td>
                   <td>{data.make}</td>
                   <td>{data.modalyear}</td>
-                  <td>{data.macaddress}</td>
+                  <td>{data.serialno}</td>
                   <td>{data.warrantyupto}</td>
                   <td>
                     <Link to={`/dashboard/edit-device/${data._id}`}>

@@ -56,6 +56,9 @@ function Scanqr() {
   const assigndevicetonew = () => {
     nav("/dashboard/assign-device/" + deviceid);
   };
+  const trackhistorydevice = () => {
+    nav("/dashboard/track-device-history/" + deviceid);
+  };
 
   return (
     <>
@@ -70,7 +73,7 @@ function Scanqr() {
             </button>
           </div>
           <div className="col-sm">
-            <button className="btn btn-warning">
+            <button className="btn btn-warning" onClick={trackhistorydevice}>
               <i className="fas fa-history"></i> Track History
             </button>
           </div>
@@ -79,11 +82,11 @@ function Scanqr() {
               <i className="fas fa-user"></i> Assign New
             </button>
           </div>
-          <div className="col-sm">
+          {/* <div className="col-sm">
             <button className="btn btn-info">
               <i className="fas fa-exclamation-circle"></i> Create Ticket
             </button>
-          </div>
+          </div> */}
         </div>
         <br />
         {ticketstatus ? (

@@ -33,10 +33,12 @@ const api = axios.create({
 
 function Dashboard() {
   const [usrrole, setUserRole] = useState("");
+  const [usrid, setUserId] = useState("");
   function isLoggedIn() {
     api.get("/user").then((res) => {
       if (res.data._id !== "") {
         setUserRole(res.data.userrole);
+        setUserId(res.data._id);
       }
     });
   }
@@ -108,7 +110,7 @@ function Dashboard() {
       </nav>
       <div id="main">
         <Routes>
-          <Route path="create-ticket" element={<Createticket />} />
+          <Route path="create-ticket" element={<Createticket userId={usrid} />} />
           <Route
             path="scan-qr"
             element={
@@ -167,6 +169,14 @@ function Dashboard() {
           />
           <Route
             path="track-device-history"
+            element={
+              <DashPrivateRoutes>
+                <TrackDeviceHistory />
+              </DashPrivateRoutes>
+            }
+          />
+          <Route
+            path="track-device-history/:deviceId"
             element={
               <DashPrivateRoutes>
                 <TrackDeviceHistory />

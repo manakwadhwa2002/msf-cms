@@ -34,7 +34,7 @@ function Opentickets() {
     fetchSupportData();
   }, []);
   function closeaticket() {
-    console.log("Call received");
+    // console.log("Call received");
     api
       .patch("/openticket/closeaticket/" + tempdevid, {
         issuecategory: csiscat,

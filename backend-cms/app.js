@@ -13,9 +13,7 @@ var cookieParser = require("cookie-parser");
 var passport = require("passport");
 var session = require("express-session");
 var MongoStore = require("connect-mongo");
-const { application } = require("express");
 require("./passportConfig");
-// const deviceRoutes = require("./routes/devices");
 
 app.use(
   cors({
@@ -23,6 +21,7 @@ app.use(
     credentials: true,
   })
 );
+//
 app.use(bodyParser.json());
 
 mongoose.connect(
@@ -223,25 +222,43 @@ app.get("/assignstatus/:deviceId", async (req, res) => {
   }
 });
 
+app.get("/assigndevicehistory/:deviceId", async (req, res) => {
+  try {
+    const assignhistory = await assigndevice.find({ deviceid: req.params.deviceId });
+    res.json(assignhistory);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
 app.post("/assigndevice/:deviceId", async (req, res) => {
-  const assignmentstatus = await assigndevice.find({ deviceid: req.params.deviceId, assignstatus: "YES" });
+  const devicedetails = await device.findOne({ _id: req.params.deviceId });
   const newassigndevice = new assigndevice({
     deviceid: req.params.deviceId,
     assignedtomember: req.body.assignedtomember, // Required Input as ID of Member
     deviceip: req.body.deviceip, //Required input
   });
-  try {
-    const updateassignstatus = await assigndevice.updateMany({ deviceid: req.params.deviceId, assignstatus: "YES" }, { $set: { assignstatus: "NO" } });
-    if (updateassignstatus) {
-      try {
-        const savedAssignDevice = await newassigndevice.save();
-        res.json(savedAssignDevice);
-      } catch (err) {
-        res.json({ message: err });
+  if (devicedetails.multiuser.toLowerCase() == "no") {
+    try {
+      const updateassignstatus = await assigndevice.updateMany({ deviceid: req.params.deviceId, assignstatus: "YES" }, { $set: { assignstatus: "NO" } });
+      if (updateassignstatus) {
+        try {
+          const savedAssignDevice = await newassigndevice.save();
+          res.json(savedAssignDevice);
+        } catch (err) {
+          res.json({ message: err });
+        }
       }
+    } catch (err) {
+      res.json(err);
     }
-  } catch (err) {
-    res.json(err);
+  } else {
+    try {
+      const savedAssignDevice = await newassigndevice.save();
+      res.json(savedAssignDevice);
+    } catch (err) {
+      res.json({ message: err });
+    }
   }
 });
 
@@ -270,7 +287,7 @@ app.post("/createticket", async (req, res) => {
     const newticket = new ticket({
       createdby: req.body.memberId, // Get from Login Cookie only
       deviceid: assigneddevicedetails[0].deviceid,
-      assigntoperson: req.body.assigntoperson,
+      // assigntoperson: req.body.assigntoperson,
       comments: req.body.comments,
     });
     try {
@@ -318,7 +335,40 @@ app.get("/opentickets", async (req, res) => {
   }
 });
 
-//assigntoperson: req.body.assigntoperson,
+app.get("/tickethistory/:deviceId", async (req, res) => {
+  const ticketdetails = await ticket.find({ deviceid: req.params.deviceId });
+  const nooftickets = Object.keys(ticketdetails).length;
+  const responsetickets = [];
+  if (nooftickets > 0) {
+    for (var i = 0; i < nooftickets; i++) {
+      const assigneddevicedetails = await assigndevice.findOne({ assignedtomember: ticketdetails[i].createdby, assignstatus: "YES" });
+      const assigneddeviceid = assigneddevicedetails.deviceid;
+      const devicedetails = await device.findOne({ _id: assigneddeviceid });
+      const memberdetails = await member.findOne({ _id: ticketdetails[i].createdby });
+      const supportmemberdetails = await member.findOne({ _id: ticketdetails[i].assigntoperson });
+      responsetickets.push({
+        _id: ticketdetails[i]._id,
+        createdby: ticketdetails[i].createdby,
+        createdbyname: memberdetails.name,
+        createdondate: ticketdetails[i].createdon,
+        department: memberdetails.department,
+        deviceid: assigneddeviceid,
+        os: devicedetails.os,
+        deviceip: assigneddevicedetails.deviceip,
+        assignedon: assigneddevicedetails.assignedon,
+        antivirus: devicedetails.antivirus,
+        vnc: devicedetails.vnc,
+        ticketstatus: ticketdetails[i].ticketstatus,
+        comments: ticketdetails[i].comments,
+        assigntoperson: supportmemberdetails.name,
+      });
+    }
+    res.json(responsetickets);
+  } else {
+    res.json({ message: "No Open Tickets Found !" });
+  }
+});
+
 app.patch("/openticket/assign/:ticketId", async (req, res) => {
   try {
     const updateOPenTicketAssign = await ticket.updateOne({ _id: req.params.ticketId }, { $set: { assigntoperson: req.body.assigntoperson } });
@@ -400,9 +450,9 @@ app.post("/issuecategory", async (req, res) => {
 
 app.patch("/issuecategory/:catid", async (req, res) => {
   try {
+    const nameParentCategory = await issuecategory.findOne({ _id: req.params.catid });
     const updateIssueCategory = await issuecategory.updateOne({ _id: req.params.catid }, { $set: { name: req.body.catname } });
-    // const nameParentCategory = await issuecategory.findOne({ _id: req.params.catid });
-    // const updateIssueSubIsCategory = await issuesubcategory.updateMany({ parentcategory: nameParentCategory.name }, { $set: { parentcategory: `${req.body.catname}` } });
+    const updateIssueSubIsCategory = await issuesubcategory.updateMany({ parentcategory: nameParentCategory.name }, { $set: { parentcategory: req.body.catname } });
     res.json(updateIssueCategory);
   } catch (err) {
     res.json(err);
@@ -490,6 +540,17 @@ app.get("/getsupportdata", async (req, res) => {
   try {
     const supportdata = await member.find({ userrole: "ADMIN" });
     res.json(supportdata);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
+app.get("/checkmultiusr/:memberId", async (req, res) => {
+  try {
+    const assigndata = await assigndevice.find({ assignedtomember: req.params.memberId, assignstatus: "YES" });
+    const deviceiddata = assigndata[0].deviceid;
+    const singleDevice = await device.findById(deviceiddata);
+    res.json(singleDevice.multiuser);
   } catch (err) {
     res.json(err);
   }

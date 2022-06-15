@@ -90,17 +90,8 @@ function Editdevice() {
       ) : null}
       <form onSubmit={submit}>
         <div className="form-group">
-          <label htmlFor="deviceType">Select Device Type</label>
-          <select id="deviceType" className="form-control" value={devicetype} onChange={(e) => setDeviceType(e.target.value)}>
-            <option value="">-- Select Device Type --</option>
-            <option value="Laptop">Laptop</option>
-            <option value="Desktop">Desktop</option>
-            <option value="Printer">Printer</option>
-            <option value="Access Point">Access Point</option>
-            <option value="QA Desktop">QA Desktop</option>
-            <option value="Scada Desktop">Scada Desktop</option>
-          </select>
           <br />
+          <h4>Device Type: {devicetype}</h4>
           {devicetype === "Laptop" ? (
             <>
               <div className="row">
