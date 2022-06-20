@@ -10,7 +10,7 @@ const NewDeviceSchema = mongoose.Schema({
     required: true,
   },
   modalyear: {
-    type: Number,
+    type: String,
     required: true,
   },
   macaddress: {
