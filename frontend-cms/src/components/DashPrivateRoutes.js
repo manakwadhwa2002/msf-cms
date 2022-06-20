@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
-const api = axios.create({
-  baseURL: `http://localhost:4000`,
-  withCredentials: true,
-});
+import api from "../apiConfig";
 
 function DashPrivateRoutes(props) {
   const [adminusr, setAdminUser] = useState(false);

@@ -1,10 +1,6 @@
 import React, { useRef, useState } from "react";
 import QRCode from "qrcode";
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: `http://localhost:4000`,
-});
+import api from "../../apiConfig";
 
 function Adddevice() {
   const [qrtext, setQrtext] = useState("");

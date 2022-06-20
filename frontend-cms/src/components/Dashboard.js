@@ -12,9 +12,10 @@ import Adddevice from "./dashboardComponents/Adddevice";
 import Managedevices from "./dashboardComponents/Managedevices";
 import Assigndevice from "../components/dashboardComponents/Assigndevice";
 import Editdevice from "./dashboardComponents/Editdevice";
-import axios from "axios";
 import { Link, Routes, Route } from "react-router-dom";
 import DashPrivateRoutes from "./DashPrivateRoutes";
+
+import api from "../apiConfig";
 
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
@@ -25,11 +26,6 @@ function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
   document.getElementById("main").style.marginLeft = "0";
 }
-
-const api = axios.create({
-  baseURL: `http://localhost:4000`,
-  withCredentials: true,
-});
 
 function Dashboard() {
   const [usrrole, setUserRole] = useState("");

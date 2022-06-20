@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import logo from "../msfl-logo.png";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-const api = axios.create({
-  baseURL: `http://localhost:4000`,
-  withCredentials: true,
-});
+import api from "../apiConfig";
 
 function Login(props) {
   const nav = useNavigate();

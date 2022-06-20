@@ -1,12 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import QrReader from "react-qr-reader";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-const api = axios.create({
-  baseURL: `http://localhost:4000`,
-});
+import api from "../../apiConfig";
 
 function Scanqr() {
   const [scanResultWebCam, setScanResultWebCam] = useState("");

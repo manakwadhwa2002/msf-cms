@@ -1,11 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
-
-const api = axios.create({
-  baseURL: `http://localhost:4000`,
-  withCredentials: true,
-});
+import api from "./apiConfig";
 
 function Privateroute(props) {
   const [islog, setIsLogIn] = useState(false);

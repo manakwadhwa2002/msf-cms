@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: `http://localhost:4000`,
-});
+import api from "../../apiConfig";
 
 function IssueSubCategory() {
   const [nameSubCategory, setIssueSubCategory] = useState("");

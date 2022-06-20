@@ -1,11 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
 import QRCode from "qrcode";
 import { Link } from "react-router-dom";
-
-const api = axios.create({
-  baseURL: `http://localhost:4000`,
-});
+import api from "../../apiConfig";
 
 function Managedevices() {
   const [device, setDevice] = useState([]);

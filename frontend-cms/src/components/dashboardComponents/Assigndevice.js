@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
-const api = axios.create({
-  baseURL: `http://localhost:4000`,
-});
+import api from "../../apiConfig";
 
 function Assigndevice() {
   const [memberdata, setMemberData] = useState([]);
