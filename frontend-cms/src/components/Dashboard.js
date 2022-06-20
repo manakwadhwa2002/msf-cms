@@ -53,12 +53,6 @@ function Dashboard() {
           <a className="closebtn" onClick={closeNav}>
             &times;
           </a>
-          {/* {usrrole === "ADMIN" ? (
-            <Link to="">
-              <i className="fas fa-chart-line"></i> Admin Dashboard
-            </Link>
-          ) : (
-          )} */}
           {usrrole === "MEMBER" || usrrole === "ADMIN" ? (
             <>
               <Link to="">
@@ -82,9 +76,6 @@ function Dashboard() {
               </Link>
               <Link to="open-tickets">
                 <i className="fas fa-copy"></i> Open Tickets
-              </Link>
-              <Link to="create-ticket">
-                <i className="fas fa-file"></i> Create Ticket
               </Link>
               <Link to="closed-tickets">
                 <i className="fas fa-check"></i> Closed Tickets

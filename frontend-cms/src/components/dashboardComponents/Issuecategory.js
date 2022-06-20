@@ -53,6 +53,11 @@ function Issuecategory() {
         window.location.reload();
       });
   }
+  function deleteIssueCategory(issueid) {
+    api.delete("/issuecategory/" + issueid).then((res) => {
+      console.log(res.data);
+    });
+  }
   return (
     <div className="container">
       <div className="row">
@@ -107,7 +112,7 @@ function Issuecategory() {
                       </button>
                     </td>
                     <td>
-                      <button className="btn btn-danger">
+                      <button className="btn btn-danger" onClick={() => deleteIssueCategory(`${data._id}`)}>
                         <i className="fas fa-trash"></i>
                       </button>
                     </td>

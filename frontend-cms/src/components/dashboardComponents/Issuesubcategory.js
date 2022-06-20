@@ -66,6 +66,11 @@ function IssueSubCategory() {
         window.location.reload();
       });
   }
+  function deleteIssueSubCategory(subissueid) {
+    api.delete("/issuesubcategory/" + subissueid).then((res) => {
+      console.log(res.data);
+    });
+  }
   return (
     <div className="container">
       <div className="row">
@@ -131,7 +136,7 @@ function IssueSubCategory() {
                       </button>
                     </td>
                     <td>
-                      <button className="btn btn-danger">
+                      <button className="btn btn-danger" onClick={() => deleteIssueSubCategory(`${data._id}`)}>
                         <i className="fas fa-trash"></i>
                       </button>
                     </td>

@@ -40,6 +40,13 @@ function Managedevices() {
     ref.current.click();
     generateQrCode(devid);
   }
+
+  function deleteDevice(devid) {
+    api.delete("/devices/" + devid).then((res) => {
+      console.log(res.data);
+      fetchDeviceData();
+    });
+  }
   return (
     <>
       <button ref={ref} type="button" className="btn btn-primary d-none" data-toggle="modal" data-target="#exampleModal"></button>
@@ -119,7 +126,7 @@ function Managedevices() {
                     </Link>
                   </td>
                   <td>
-                    <button className="btn btn-danger">
+                    <button className="btn btn-danger" onClick={() => deleteDevice(`${data._id}`)}>
                       <i className="fas fa-trash"></i>
                     </button>
                   </td>

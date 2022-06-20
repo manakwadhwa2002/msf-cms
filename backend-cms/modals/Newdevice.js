@@ -59,6 +59,9 @@ const NewDeviceSchema = mongoose.Schema({
   cpuv: {
     type: String,
   },
+  printertype: {
+    type: String,
+  },
   multiuser: {
     type: String,
     required: true,

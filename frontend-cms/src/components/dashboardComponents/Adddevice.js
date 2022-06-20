@@ -27,6 +27,7 @@ function Adddevice() {
   const [ram, setRam] = useState("");
   const [cpuv, setCpuV] = useState("");
   const [multiuser, setMultiUser] = useState("");
+  const [printertype, setPrinterType] = useState("");
 
   const ref = useRef(null);
 
@@ -64,6 +65,7 @@ function Adddevice() {
         dlov: dlov,
         ram: ram,
         cpuv: cpuv,
+        printertype: printertype,
       })
       .then((res) => {
         console.log(res.data);
@@ -285,7 +287,7 @@ function Adddevice() {
                 </button>
               </>
             ) : null}
-            {devicetype === "Desktop" ? (
+            {devicetype === "Desktop" || devicetype === "QA Desktop" || devicetype === "Scada Desktop" ? (
               <>
                 <div className="row">
                   <div className="col-md-4">
@@ -440,12 +442,12 @@ function Adddevice() {
                 </button>
               </>
             ) : null}
-            {devicetype === "Printers" ? (
+            {devicetype === "Printer" ? (
               <>
                 <div className="row">
                   <div className="col-md-4">
                     <label htmlFor="printerType">Printer Type</label>
-                    <select id="printerType" className="form-control" value={make} onChange={(e) => setMake(e.target.value)}>
+                    <select id="printerType" className="form-control" value={printertype} onChange={(e) => setPrinterType(e.target.value)}>
                       <option value="">-- Select Printer Type --</option>
                       <option value="Laser">Laser</option>
                       <option value="Inkjet">Inkjet</option>
@@ -491,7 +493,14 @@ function Adddevice() {
                       <option value="No">No</option>
                     </select>
                   </div>
-                  <div className="col-md-4"></div>
+                  <div className="col-md-4">
+                    <label htmlFor="multiuser">Multi User</label>
+                    <select id="multiuser" className="form-control" value={multiuser} onChange={(e) => setMultiUser(e.target.value)}>
+                      <option value="">-- Multi User --</option>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                  </div>
                 </div>
                 <br />
                 <br />
