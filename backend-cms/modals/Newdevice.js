@@ -62,6 +62,9 @@ const NewDeviceSchema = mongoose.Schema({
   printertype: {
     type: String,
   },
+  networkusbshared: {
+    type: String,
+  },
   multiuser: {
     type: String,
     required: true,

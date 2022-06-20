@@ -30,6 +30,8 @@ router.post("/adddevice", async (req, res) => {
     dlov: req.body.dlov,
     ram: req.body.ram,
     cpuv: req.body.cpuv,
+    printertype: req.body.printertype,
+    networkusbshared: req.body.networkusbshared,
   });
   try {
     const savedDevice = await newdevice.save();
@@ -70,6 +72,8 @@ router.patch("/devices/:deviceId", async (req, res) => {
           dlov: req.body.dlov,
           ram: req.body.ram,
           cpuv: req.body.cpuv,
+          printertype: req.body.printertype,
+          networkusbshared: req.body.networkusbshared,
         },
       }
     );

@@ -21,11 +21,14 @@ function Editdevice() {
   const [ram, setRam] = useState("");
   const [cpuv, setCpuV] = useState("");
   const [multiuser, setMultiUser] = useState("");
+  const [networkusbshared, setNetworkUsbShared] = useState("");
+  const [printertype, setPrinterType] = useState("");
   const [successstatus, setSuccessStatus] = useState("");
   const deviceidparam = useParams();
 
   function submit(e) {
     e.preventDefault();
+    console.log(printertype, networkusbshared);
     api
       .patch("/devices/" + deviceidparam.deviceId, {
         devicetype: devicetype,
@@ -45,6 +48,8 @@ function Editdevice() {
         dlov: dlov,
         ram: ram,
         cpuv: cpuv,
+        printertype: printertype,
+        networkusbshared: networkusbshared,
       })
       .then((res) => {
         console.log(res.data);
@@ -71,6 +76,8 @@ function Editdevice() {
       setRam(res.data.ram);
       setCpuV(res.data.cpuv);
       setMultiUser(res.data.multiuser);
+      setNetworkUsbShared(res.data.networkusbshared);
+      setPrinterType(res.data.printertype);
     });
   };
   useEffect(() => {
@@ -413,12 +420,12 @@ function Editdevice() {
               </button>
             </>
           ) : null}
-          {devicetype === "Printers" ? (
+          {devicetype === "Printer" ? (
             <>
               <div className="row">
                 <div className="col-md-4">
                   <label htmlFor="printerType">Printer Type</label>
-                  <select id="printerType" className="form-control" value={make} onChange={(e) => setMake(e.target.value)}>
+                  <select id="printerType" className="form-control" value={printertype} onChange={(e) => setPrinterType(e.target.value)}>
                     <option value="">-- Select Printer Type --</option>
                     <option value="Laser">Laser</option>
                     <option value="Inkjet">Inkjet</option>
@@ -431,9 +438,30 @@ function Editdevice() {
                     <option value="DELL">DELL</option>
                   </select>
                   <br />
-                  <label htmlFor="modelyear">Model Year</label>
-                  <select id="modelyear" className="form-control" value={modalyear} onChange={(e) => setModalYear(e.target.value)}>
-                    <option value="">-- Model Year --</option>
+                  <label htmlFor="modelyear">Model Type</label>
+                  <input type="text" placeholder="Enter Modal Type" className="form-control" value={modalyear} onChange={(e) => setModalYear(e.target.value)} />
+                  <br />
+                  <label htmlFor="networkUsbShared">Network / USB / Shared</label>
+                  <select id="networkUsbShared" className="form-control" value={networkusbshared} onChange={(e) => setNetworkUsbShared(e.target.value)}>
+                    <option value="">-- Select Network / USB / Shared --</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+                <div className="col-md-4">
+                  <label htmlFor="multiuser">Multi User</label>
+                  <select id="multiuser" className="form-control" value={multiuser} onChange={(e) => setMultiUser(e.target.value)}>
+                    <option value="">-- Multi User --</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                  <br />
+                  <label htmlFor="serialno">Serial No</label>
+                  <input type="text" id="serialno" className="form-control" placeholder="Enter Serial No" value={serialno} onChange={(e) => setSerialNo(e.target.value)} />
+                  <br />
+                  <label htmlFor="warranty">Warranty Upto</label>
+                  <select id="warranty" className="form-control" value={warrantyupto} onChange={(e) => setWarrantyUpto(e.target.value)}>
+                    <option value="">-- Warranty Upto --</option>
                     <option value="2030">2030</option>
                     <option value="2029">2029</option>
                     <option value="2028">2028</option>
@@ -456,15 +484,7 @@ function Editdevice() {
                     <option value="2011">2011</option>
                     <option value="2010">2010</option>
                   </select>
-                  <br />
-                  <label htmlFor="printerType">Network / USB / Shared</label>
-                  <select id="printerType" className="form-control" value={make} onChange={(e) => setMake(e.target.value)}>
-                    <option value="">-- Select Network / USB / Shared --</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                  </select>
                 </div>
-                <div className="col-md-4"></div>
               </div>
               <br />
               <br />

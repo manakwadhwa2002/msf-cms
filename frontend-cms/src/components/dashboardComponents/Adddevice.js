@@ -23,6 +23,7 @@ function Adddevice() {
   const [ram, setRam] = useState("");
   const [cpuv, setCpuV] = useState("");
   const [multiuser, setMultiUser] = useState("");
+  const [networkusbshared, setNetworkUsbShared] = useState("");
   const [printertype, setPrinterType] = useState("");
 
   const ref = useRef(null);
@@ -62,6 +63,7 @@ function Adddevice() {
         ram: ram,
         cpuv: cpuv,
         printertype: printertype,
+        networkusbshared: networkusbshared,
       })
       .then((res) => {
         console.log(res.data);
@@ -424,8 +426,8 @@ function Adddevice() {
                     <label htmlFor="modelyear">Model Type</label>
                     <input type="text" placeholder="Enter Modal Type" className="form-control" value={modalyear} onChange={(e) => setModalYear(e.target.value)} />
                     <br />
-                    <label htmlFor="printerType">Network / USB / Shared</label>
-                    <select id="printerType" className="form-control" value={make} onChange={(e) => setMake(e.target.value)}>
+                    <label htmlFor="networkUsbShared">Network / USB / Shared</label>
+                    <select id="networkUsbShared" className="form-control" value={networkusbshared} onChange={(e) => setNetworkUsbShared(e.target.value)}>
                       <option value="">-- Select Network / USB / Shared --</option>
                       <option value="Yes">Yes</option>
                       <option value="No">No</option>
@@ -441,6 +443,32 @@ function Adddevice() {
                     <br />
                     <label htmlFor="serialno">Serial No</label>
                     <input type="text" id="serialno" className="form-control" placeholder="Enter Serial No" value={serialno} onChange={(e) => setSerialNo(e.target.value)} />
+                    <br />
+                    <label htmlFor="warranty">Warranty Upto</label>
+                    <select id="warranty" className="form-control" value={warrantyupto} onChange={(e) => setWarrantyUpto(e.target.value)}>
+                      <option value="">-- Warranty Upto --</option>
+                      <option value="2030">2030</option>
+                      <option value="2029">2029</option>
+                      <option value="2028">2028</option>
+                      <option value="2027">2027</option>
+                      <option value="2026">2026</option>
+                      <option value="2025">2025</option>
+                      <option value="2024">2024</option>
+                      <option value="2023">2023</option>
+                      <option value="2022">2022</option>
+                      <option value="2021">2021</option>
+                      <option value="2020">2020</option>
+                      <option value="2019">2019</option>
+                      <option value="2018">2018</option>
+                      <option value="2017">2017</option>
+                      <option value="2016">2016</option>
+                      <option value="2015">2015</option>
+                      <option value="2014">2014</option>
+                      <option value="2013">2013</option>
+                      <option value="2012">2012</option>
+                      <option value="2011">2011</option>
+                      <option value="2010">2010</option>
+                    </select>
                   </div>
                 </div>
                 <br />
