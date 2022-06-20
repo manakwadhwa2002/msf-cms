@@ -238,7 +238,7 @@ function Editdevice() {
               <br />
               <br />
               <button className="btn btn-success">
-                <i className="fas fa-laptop"></i> Add {devicetype}
+                <i className="fas fa-laptop"></i> Update {devicetype}
               </button>
             </>
           ) : null}
@@ -381,7 +381,7 @@ function Editdevice() {
               <br />
               <br />
               <button className="btn btn-success">
-                <i className="fas fa-laptop"></i> Add {devicetype}
+                <i className="fas fa-laptop"></i> Update {devicetype}
               </button>
             </>
           ) : null}
