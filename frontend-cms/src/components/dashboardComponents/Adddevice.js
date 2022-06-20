@@ -125,31 +125,8 @@ function Adddevice() {
                       <option value="DELL">DELL</option>
                     </select>
                     <br />
-                    <label htmlFor="modelyear">Model Year</label>
-                    <select id="modelyear" className="form-control" value={modalyear} onChange={(e) => setModalYear(e.target.value)}>
-                      <option value="">-- Model Year --</option>
-                      <option value="2030">2030</option>
-                      <option value="2029">2029</option>
-                      <option value="2028">2028</option>
-                      <option value="2027">2027</option>
-                      <option value="2026">2026</option>
-                      <option value="2025">2025</option>
-                      <option value="2024">2024</option>
-                      <option value="2023">2023</option>
-                      <option value="2022">2022</option>
-                      <option value="2021">2021</option>
-                      <option value="2020">2020</option>
-                      <option value="2019">2019</option>
-                      <option value="2018">2018</option>
-                      <option value="2017">2017</option>
-                      <option value="2016">2016</option>
-                      <option value="2015">2015</option>
-                      <option value="2014">2014</option>
-                      <option value="2013">2013</option>
-                      <option value="2012">2012</option>
-                      <option value="2011">2011</option>
-                      <option value="2010">2010</option>
-                    </select>
+                    <label htmlFor="modelyear">Model Type</label>
+                    <input type="text" placeholder="Enter Modal Type" className="form-control" value={modalyear} onChange={(e) => setModalYear(e.target.value)} />
                     <br />
                     <label htmlFor="sub">USB</label>
                     <select id="usb" className="form-control" value={usb} onChange={(e) => setUsb(e.target.value)}>
@@ -244,10 +221,10 @@ function Adddevice() {
                       <option value="HDD">HDD</option>
                     </select>
                     <br />
-                    <label htmlFor="ssdhdd">
+                    <label htmlFor="ssdhddsize">
                       SSD/HDD Size <sub>(in GB)</sub>
                     </label>
-                    <select id="ssdhdd" className="form-control" value={ssdhddsize} onChange={(e) => setSsdHddSize(e.target.value)}>
+                    <select id="ssdhddsize" className="form-control" value={ssdhddsize} onChange={(e) => setSsdHddSize(e.target.value)}>
                       <option value="">-- Select SSD/HDD Size --</option>
                       <option value="128">128</option>
                       <option value="256">256</option>
@@ -294,31 +271,8 @@ function Adddevice() {
                       <option value="DELL">DELL</option>
                     </select>
                     <br />
-                    <label htmlFor="modelyear">Model Year</label>
-                    <select id="modelyear" className="form-control" value={modalyear} onChange={(e) => setModalYear(e.target.value)}>
-                      <option value="">-- Model Year --</option>
-                      <option value="2030">2030</option>
-                      <option value="2029">2029</option>
-                      <option value="2028">2028</option>
-                      <option value="2027">2027</option>
-                      <option value="2026">2026</option>
-                      <option value="2025">2025</option>
-                      <option value="2024">2024</option>
-                      <option value="2023">2023</option>
-                      <option value="2022">2022</option>
-                      <option value="2021">2021</option>
-                      <option value="2020">2020</option>
-                      <option value="2019">2019</option>
-                      <option value="2018">2018</option>
-                      <option value="2017">2017</option>
-                      <option value="2016">2016</option>
-                      <option value="2015">2015</option>
-                      <option value="2014">2014</option>
-                      <option value="2013">2013</option>
-                      <option value="2012">2012</option>
-                      <option value="2011">2011</option>
-                      <option value="2010">2010</option>
-                    </select>
+                    <label htmlFor="modelyear">Model Type</label>
+                    <input type="text" placeholder="Enter Modal Type" className="form-control" value={modalyear} onChange={(e) => setModalYear(e.target.value)} />
                     <br />
                     <label htmlFor="ram">
                       RAM <sub>(in GB)</sub>
@@ -392,6 +346,17 @@ function Adddevice() {
                       <option value="HDD">HDD</option>
                     </select>
                     <br />
+                    <label htmlFor="ssdhddsize">
+                      SSD/HDD Size <sub>(in GB)</sub>
+                    </label>
+                    <select id="ssdhddsize" className="form-control" value={ssdhddsize} onChange={(e) => setSsdHddSize(e.target.value)}>
+                      <option value="">-- Select SSD/HDD Size --</option>
+                      <option value="128">128</option>
+                      <option value="256">256</option>
+                      <option value="512">512</option>
+                      <option value="1024">1024</option>
+                    </select>
+                    <br />
                     <label htmlFor="sub">USB</label>
                     <select id="usb" className="form-control" value={usb} onChange={(e) => setUsb(e.target.value)}>
                       <option value="">-- Select USB Status --</option>
@@ -401,9 +366,6 @@ function Adddevice() {
                     <br />
                     <label htmlFor="cpu">CPU</label>
                     <input type="text" id="cpu" className="form-control" placeholder="Enter CPU" value={cpuv} onChange={(e) => setCpuV(e.target.value)} />
-                    <br />
-                    <label htmlFor="serialno">Serial No</label>
-                    <input type="text" id="serialno" className="form-control" placeholder="Enter Serial No" value={serialno} onChange={(e) => setSerialNo(e.target.value)} />
                   </div>
                   <div className="col-md-4">
                     <label htmlFor="antivirus">AntiVirus</label>
@@ -426,6 +388,9 @@ function Adddevice() {
                       <option value="Enabled">Enabled</option>
                       <option value="Disabled">Disabled</option>
                     </select>
+                    <br />
+                    <label htmlFor="serialno">Serial No</label>
+                    <input type="text" id="serialno" className="form-control" placeholder="Enter Serial No" value={serialno} onChange={(e) => setSerialNo(e.target.value)} />
                     <br />
                     <label htmlFor="dlo">DLO Version</label>
                     <input type="text" id="dlo" className="form-control" placeholder="Enter DLO Version" value={dlov} onChange={(e) => setDloV(e.target.value)} />
@@ -456,31 +421,8 @@ function Adddevice() {
                       <option value="DELL">DELL</option>
                     </select>
                     <br />
-                    <label htmlFor="modelyear">Model Year</label>
-                    <select id="modelyear" className="form-control" value={modalyear} onChange={(e) => setModalYear(e.target.value)}>
-                      <option value="">-- Model Year --</option>
-                      <option value="2030">2030</option>
-                      <option value="2029">2029</option>
-                      <option value="2028">2028</option>
-                      <option value="2027">2027</option>
-                      <option value="2026">2026</option>
-                      <option value="2025">2025</option>
-                      <option value="2024">2024</option>
-                      <option value="2023">2023</option>
-                      <option value="2022">2022</option>
-                      <option value="2021">2021</option>
-                      <option value="2020">2020</option>
-                      <option value="2019">2019</option>
-                      <option value="2018">2018</option>
-                      <option value="2017">2017</option>
-                      <option value="2016">2016</option>
-                      <option value="2015">2015</option>
-                      <option value="2014">2014</option>
-                      <option value="2013">2013</option>
-                      <option value="2012">2012</option>
-                      <option value="2011">2011</option>
-                      <option value="2010">2010</option>
-                    </select>
+                    <label htmlFor="modelyear">Model Type</label>
+                    <input type="text" placeholder="Enter Modal Type" className="form-control" value={modalyear} onChange={(e) => setModalYear(e.target.value)} />
                     <br />
                     <label htmlFor="printerType">Network / USB / Shared</label>
                     <select id="printerType" className="form-control" value={make} onChange={(e) => setMake(e.target.value)}>
@@ -496,6 +438,9 @@ function Adddevice() {
                       <option value="Yes">Yes</option>
                       <option value="No">No</option>
                     </select>
+                    <br />
+                    <label htmlFor="serialno">Serial No</label>
+                    <input type="text" id="serialno" className="form-control" placeholder="Enter Serial No" value={serialno} onChange={(e) => setSerialNo(e.target.value)} />
                   </div>
                 </div>
                 <br />
