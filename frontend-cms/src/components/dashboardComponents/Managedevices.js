@@ -103,7 +103,14 @@ function Managedevices() {
               .filter((value) => {
                 if (devicesearch == "") {
                   return value;
-                } else if (value._id.toLowerCase().includes(devicesearch.toLowerCase()) || value.make.toLowerCase().includes(devicesearch.toLowerCase()) || value.modalyear.toString().includes(devicesearch.toLowerCase())) {
+                } else if (
+                  value._id.toLowerCase().includes(devicesearch.toLowerCase()) ||
+                  value.make.toLowerCase().includes(devicesearch.toLowerCase()) ||
+                  value.modalyear.toLowerCase().includes(devicesearch.toLowerCase()) ||
+                  value.serialno.toLowerCase().includes(devicesearch.toLowerCase()) ||
+                  value.warrantyupto.toString().includes(devicesearch.toLowerCase())
+                ) {
+                  // } else if (value._id.toLowerCase().includes(devicesearch.toLowerCase()) || value.make.toLowerCase().includes(devicesearch.toLowerCase()) || value.modalyear.toString().includes(devicesearch.toLowerCase())) {
                   return value;
                 }
               })
