@@ -85,7 +85,13 @@ app.get("/user", isValidUser, function (req, res, next) {
 });
 
 app.get("/logout", isValidUser, function (req, res, next) {
-  req.logout();
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+    res.clearCookie("msfl.uid").send();
+  });
   return res.status(200).json({ message: "Logout Success" });
 });
 

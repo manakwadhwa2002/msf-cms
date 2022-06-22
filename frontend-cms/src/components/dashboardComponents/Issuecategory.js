@@ -7,6 +7,7 @@ function Issuecategory() {
   const [isscategory, setIsscategory] = useState([]);
   const [updatestatus, setUpdateStatus] = useState(false);
   const [updatecatid, setUpdateCatId] = useState("");
+  const [isscatlen, setIssCatLength] = useState(Number);
 
   function submit() {
     api
@@ -21,7 +22,7 @@ function Issuecategory() {
   const fetchIssueData = () => {
     api.get("/issuecategory").then((res) => {
       setIsscategory(res.data);
-      // console.log(res.data);
+      setIssCatLength(res.data.length);
     });
   };
   useEffect(() => {
@@ -90,30 +91,36 @@ function Issuecategory() {
               </tr>
             </thead>
             <tbody>
-              {isscategory
-                .filter((value) => {
-                  if (searchissue == "") {
-                    return value;
-                  } else if (value._id.toLowerCase().includes(searchissue.toLowerCase()) || value.name.toLowerCase().includes(searchissue.toLowerCase())) {
-                    return value;
-                  }
-                })
-                .map((data) => (
-                  <tr>
-                    <td>{data._id}</td>
-                    <td>{data.name}</td>
-                    <td>
-                      <button className="btn btn-primary" onClick={() => enableIssueEdit(`${data._id}`)}>
-                        <i className="fas fa-pen"></i>
-                      </button>
-                    </td>
-                    <td>
-                      <button className="btn btn-danger" onClick={() => deleteIssueCategory(`${data._id}`)}>
-                        <i className="fas fa-trash"></i>
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+              {isscatlen > 0 ? (
+                isscategory
+                  .filter((value) => {
+                    if (searchissue == "") {
+                      return value;
+                    } else if (value._id.toLowerCase().includes(searchissue.toLowerCase()) || value.name.toLowerCase().includes(searchissue.toLowerCase())) {
+                      return value;
+                    }
+                  })
+                  .map((data) => (
+                    <tr key={data._id}>
+                      <td>{data._id}</td>
+                      <td>{data.name}</td>
+                      <td>
+                        <button className="btn btn-primary" onClick={() => enableIssueEdit(`${data._id}`)}>
+                          <i className="fas fa-pen"></i>
+                        </button>
+                      </td>
+                      <td>
+                        <button className="btn btn-danger" onClick={() => deleteIssueCategory(`${data._id}`)}>
+                          <i className="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+              ) : (
+                <tr>
+                  <td>No Issue Category Found !!!</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

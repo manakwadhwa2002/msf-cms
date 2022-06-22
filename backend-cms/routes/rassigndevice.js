@@ -16,6 +16,15 @@ router.get("/assignstatus/:deviceId", async (req, res) => {
   }
 });
 
+router.get("/assignstatus/member/:memberId", async (req, res) => {
+  try {
+    const assignstat = await assigndevice.find({ assignedtomember: req.params.memberId, assignstatus: "YES" });
+    res.json(assignstat);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
 router.get("/assigndevicehistory/:deviceId", async (req, res) => {
   try {
     const assignhistory = await assigndevice.find({ deviceid: req.params.deviceId });

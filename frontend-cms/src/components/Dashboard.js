@@ -12,7 +12,7 @@ import Adddevice from "./dashboardComponents/Adddevice";
 import Managedevices from "./dashboardComponents/Managedevices";
 import Assigndevice from "../components/dashboardComponents/Assigndevice";
 import Editdevice from "./dashboardComponents/Editdevice";
-import { Link, Routes, Route } from "react-router-dom";
+import { Link, Routes, Route, useNavigate } from "react-router-dom";
 import DashPrivateRoutes from "./DashPrivateRoutes";
 
 import api from "../apiConfig";
@@ -28,6 +28,7 @@ function closeNav() {
 }
 
 function Dashboard() {
+  const nav = useNavigate();
   const [usrrole, setUserRole] = useState("");
   const [usrid, setUserId] = useState("");
   function isLoggedIn() {
@@ -39,6 +40,14 @@ function Dashboard() {
     });
   }
   isLoggedIn();
+
+  function logoutfn() {
+    api.get("/logout").then((res) => {
+      if (res.data.message === "Logout Success") {
+        nav("/login");
+      }
+    });
+  }
   return (
     <>
       <nav>
@@ -90,6 +99,9 @@ function Dashboard() {
               </Link>
               <Link to="track-device-history">
                 <i className="fas fa-history"></i> Track Device History
+              </Link>
+              <Link to="" onClick={() => logoutfn()}>
+                <i className="fa fa-sign-out"></i> Logout
               </Link>
             </>
           ) : null}

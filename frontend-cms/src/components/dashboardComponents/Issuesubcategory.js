@@ -9,6 +9,7 @@ function IssueSubCategory() {
   const [parentcategory, setParentCategory] = useState([]);
   const [updatestatus, setUpdateStatus] = useState(false);
   const [updatesubcatid, setUpdateSubCatId] = useState("");
+  const [isssubcatlen, setIssSubCatLength] = useState(Number);
 
   function submit() {
     api
@@ -32,6 +33,7 @@ function IssueSubCategory() {
   const fetchIssueSubData = () => {
     api.get("/issuesubcategory").then((res) => {
       setIsssubcategory(res.data);
+      setIssSubCatLength(res.data.length);
     });
   };
   useEffect(() => {
@@ -113,31 +115,37 @@ function IssueSubCategory() {
               </tr>
             </thead>
             <tbody>
-              {isssubcategory
-                .filter((value) => {
-                  if (searchsubissue === "") {
-                    return value;
-                  } else if (value._id.toLowerCase().includes(searchsubissue.toLowerCase()) || value.name.toLowerCase().includes(searchsubissue.toLowerCase()) || value.parentcategory.toLowerCase().includes(searchsubissue.toLowerCase())) {
-                    return value;
-                  }
-                })
-                .map((data) => (
-                  <tr key={data._id}>
-                    <td>{data._id}</td>
-                    <td>{data.name}</td>
-                    <td>{data.parentcategory}</td>
-                    <td>
-                      <button className="btn btn-primary" onClick={() => enableIssueSubEdit(`${data._id}`)}>
-                        <i className="fas fa-pen"></i>
-                      </button>
-                    </td>
-                    <td>
-                      <button className="btn btn-danger" onClick={() => deleteIssueSubCategory(`${data._id}`)}>
-                        <i className="fas fa-trash"></i>
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+              {isssubcatlen > 0 ? (
+                isssubcategory
+                  .filter((value) => {
+                    if (searchsubissue === "") {
+                      return value;
+                    } else if (value._id.toLowerCase().includes(searchsubissue.toLowerCase()) || value.name.toLowerCase().includes(searchsubissue.toLowerCase()) || value.parentcategory.toLowerCase().includes(searchsubissue.toLowerCase())) {
+                      return value;
+                    }
+                  })
+                  .map((data) => (
+                    <tr key={data._id}>
+                      <td>{data._id}</td>
+                      <td>{data.name}</td>
+                      <td>{data.parentcategory}</td>
+                      <td>
+                        <button className="btn btn-primary" onClick={() => enableIssueSubEdit(`${data._id}`)}>
+                          <i className="fas fa-pen"></i>
+                        </button>
+                      </td>
+                      <td>
+                        <button className="btn btn-danger" onClick={() => deleteIssueSubCategory(`${data._id}`)}>
+                          <i className="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+              ) : (
+                <tr>
+                  <td>No Issue Sub Category Found</td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

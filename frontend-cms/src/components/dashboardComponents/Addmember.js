@@ -13,6 +13,7 @@ function Addmember() {
   const [updatestatus, setUpdateStatus] = useState(false);
   const [updatememdetails, setUpdateMemberDetails] = useState([]);
   const [updatememid, setUpdateMemberId] = useState("");
+  const [memberlen, setMemberLength] = useState(Number);
 
   function submit() {
     api
@@ -32,7 +33,7 @@ function Addmember() {
   const fetchMemberData = () => {
     api.get("/member").then((res) => {
       setMemberData(res.data);
-      // console.log(res.data);
+      setMemberLength(res.data.length);
     });
   };
   useEffect(() => {
@@ -134,38 +135,44 @@ function Addmember() {
                     </tr>
                   </thead>
                   <tbody>
-                    {memberdata
-                      .filter((value) => {
-                        if (searchmember == "") {
-                          return value;
-                        } else if (
-                          value._id.toLowerCase().includes(searchmember.toLowerCase()) ||
-                          value.name.toLowerCase().includes(searchmember.toLowerCase()) ||
-                          value.email.toLowerCase().includes(searchmember.toLowerCase()) ||
-                          value.phonenumber.toString().includes(searchmember) ||
-                          value.department.toLowerCase().includes(searchmember.toLowerCase())
-                        ) {
-                          console.log(value.length);
-                          return value;
-                        }
-                      })
-                      .map((data) => (
-                        <tr key={data._id}>
-                          <td>{data._id}</td>
-                          <td>{data.name}</td>
-                          <td>{data.email}</td>
-                          <td>{data.department}</td>
-                          <td>{data.phonenumber}</td>
-                          <td>
-                            <button className="btn btn-primary" onClick={() => enableEditmember(`${data._id}`)}>
-                              Edit
-                            </button>
-                          </td>
-                          <td>
-                            <button className="btn btn-danger">Delete</button>
-                          </td>
-                        </tr>
-                      ))}
+                    {memberlen > 0 ? (
+                      memberdata
+                        .filter((value) => {
+                          if (searchmember == "") {
+                            return value;
+                          } else if (
+                            value._id.toLowerCase().includes(searchmember.toLowerCase()) ||
+                            value.name.toLowerCase().includes(searchmember.toLowerCase()) ||
+                            value.email.toLowerCase().includes(searchmember.toLowerCase()) ||
+                            value.phonenumber.toString().includes(searchmember) ||
+                            value.department.toLowerCase().includes(searchmember.toLowerCase())
+                          ) {
+                            console.log(value.length);
+                            return value;
+                          }
+                        })
+                        .map((data) => (
+                          <tr key={data._id}>
+                            <td>{data._id}</td>
+                            <td>{data.name}</td>
+                            <td>{data.email}</td>
+                            <td>{data.department}</td>
+                            <td>{data.phonenumber}</td>
+                            <td>
+                              <button className="btn btn-primary" onClick={() => enableEditmember(`${data._id}`)}>
+                                Edit
+                              </button>
+                            </td>
+                            <td>
+                              <button className="btn btn-danger">Delete</button>
+                            </td>
+                          </tr>
+                        ))
+                    ) : (
+                      <tr>
+                        <td>No Members Found !!!</td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
