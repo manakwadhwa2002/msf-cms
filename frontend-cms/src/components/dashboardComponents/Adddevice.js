@@ -87,7 +87,7 @@ function Adddevice() {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div className="modal-body text-center" id="modalbody">
+            <div className="modal-body text-center qr-border" id="modalbody">
               <img src={imageUrl} alt="" />
             </div>
             <div className="modal-footer">

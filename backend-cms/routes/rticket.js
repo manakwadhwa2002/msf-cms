@@ -6,23 +6,52 @@ const device = require("../modals/Newdevice");
 const member = require("../modals/Member");
 
 router.post("/createticket", async (req, res) => {
-  const assigneddevicedetails = await assigndevice.find({ assignedtomember: req.body.memberId, assignstatus: "YES" });
-  const devicecount = Object.keys(assigneddevicedetails).length;
-  if (devicecount > 0) {
-    const newticket = new ticket({
-      createdby: req.body.memberId, // Get from Login Cookie only
-      deviceid: assigneddevicedetails[0].deviceid,
-      // assigntoperson: req.body.assigntoperson,
-      comments: req.body.comments,
-    });
-    try {
-      const savedTicket = await newticket.save();
-      res.json(savedTicket);
-    } catch (err) {
-      res.json({ message: err });
+  if (req.body.deviceId === null) {
+    const assigneddevicedetails = await assigndevice.find({ assignedtomember: req.body.memberId, assignstatus: "YES" });
+    const devicecount = Object.keys(assigneddevicedetails).length;
+    if (devicecount > 0) {
+      const newticket = new ticket({
+        createdby: req.body.memberId,
+        deviceid: assigneddevicedetails[0].deviceid,
+        comments: req.body.comments,
+      });
+      try {
+        const savedTicket = await newticket.save();
+        res.json(savedTicket);
+      } catch (err) {
+        res.json({ message: err });
+      }
+    } else {
+      res.json({ message: "Please link a device first" });
     }
   } else {
-    res.json({ message: "Please link a device first" });
+    const assigneddevicedetails = await assigndevice.find({ deviceid: req.body.deviceId, assignstatus: "YES" });
+    const devicecount = Object.keys(assigneddevicedetails).length;
+    if (devicecount > 0) {
+      const newticket = new ticket({
+        createdby: assigneddevicedetails[0].assignedtomember,
+        deviceid: req.body.deviceId,
+        comments: req.body.comments,
+      });
+      try {
+        const savedTicket = await newticket.save();
+        res.json(savedTicket);
+      } catch (err) {
+        res.json({ message: err });
+      }
+    } else {
+      const newticket = new ticket({
+        createdby: req.body.memberId,
+        deviceid: req.body.deviceId,
+        comments: req.body.comments,
+      });
+      try {
+        const savedTicket = await newticket.save();
+        res.json(savedTicket);
+      } catch (err) {
+        res.json({ message: err });
+      }
+    }
   }
 });
 

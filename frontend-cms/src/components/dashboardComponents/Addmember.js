@@ -144,7 +144,7 @@ function Addmember() {
                             value._id.toLowerCase().includes(searchmember.toLowerCase()) ||
                             value.name.toLowerCase().includes(searchmember.toLowerCase()) ||
                             value.email.toLowerCase().includes(searchmember.toLowerCase()) ||
-                            value.phonenumber.toString().includes(searchmember) ||
+                            // value.phonenumber.toString().includes(searchmember) ||
                             value.department.toLowerCase().includes(searchmember.toLowerCase())
                           ) {
                             console.log(value.length);

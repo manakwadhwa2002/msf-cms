@@ -100,9 +100,11 @@ function Dashboard() {
               <Link to="track-device-history">
                 <i className="fas fa-history"></i> Track Device History
               </Link>
-              <Link to="" onClick={() => logoutfn()}>
-                <i className="fa fa-sign-out"></i> Logout
-              </Link>
+              {usrrole === "MEMBER" || usrrole === "ADMIN" ? (
+                <Link to="" onClick={() => logoutfn()}>
+                  <i className="fa fa-sign-out"></i> Logout
+                </Link>
+              ) : null}
             </>
           ) : null}
         </div>
@@ -114,7 +116,7 @@ function Dashboard() {
             path="scan-qr"
             element={
               <DashPrivateRoutes>
-                <Scanqr />
+                <Scanqr userId={usrid} />
               </DashPrivateRoutes>
             }
           />
@@ -194,7 +196,7 @@ function Dashboard() {
             path="manage-devices"
             element={
               <DashPrivateRoutes>
-                <Managedevices />
+                <Managedevices userId={usrid} />
               </DashPrivateRoutes>
             }
           />

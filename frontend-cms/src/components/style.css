@@ -94,6 +94,11 @@
   background-color: #dc3545;
 }
 
+.qr-border img {
+  padding: 10px 25px;
+  border: 2px dotted black;
+}
+
 @media screen and (max-height: 450px) {
   .sidenav {
     padding-top: 15px;
@@ -104,6 +109,10 @@
 }
 
 /* Extra */
+
+@page {
+  margin: 0;
+}
 
 .brdr {
   /* border: 1px solid blue; */

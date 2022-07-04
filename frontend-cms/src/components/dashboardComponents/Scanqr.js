@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import api from "../../apiConfig";
 
-function Scanqr() {
+function Scanqr(props) {
   const [scanResultWebCam, setScanResultWebCam] = useState("");
   const qrRef = useRef(null);
+  const ctref = useRef(null);
+  const [comments, setComments] = useState("");
   const handleErrorWebCam = (error) => {
     console.log(error);
   };
@@ -37,18 +39,8 @@ function Scanqr() {
         ipaddress: res.data.ipaddress,
         assignedto: res.data.assignedto,
       });
-      // console.log(ticketstatus);
-      // if (ticketstatus > 0) {
-      //   console.log("Ticket Found");
-      // } else {
-      //   console.log("Ticket Not Found");
-      // }
     });
   };
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-  // console.log("Tickets: " + ticketstatus);
   const assigndevicetonew = () => {
     nav("/dashboard/assign-device/" + deviceid);
   };
@@ -56,8 +48,53 @@ function Scanqr() {
     nav("/dashboard/track-device-history/" + deviceid);
   };
 
+  function genticket() {
+    ctref.current.click();
+  }
+
+  function createtic() {
+    api
+      .post("/createticket", {
+        deviceId: deviceid,
+        memberId: props.userId,
+        comments: comments,
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+  }
+
   return (
     <>
+      <button ref={ctref} type="button" className="btn btn-primary d-none" data-toggle="modal" data-target="#ticketModal"></button>
+
+      <div className="modal fade" id="ticketModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Create Ticket
+              </h5>
+              <button type="button" className="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body" id="modalbody">
+              <label htmlFor="adminTicketComments">Comments (Optional)</label>
+              <textarea id="adminTicketComments" className="form-control" placeholder="Please Share Your Comments Here ..." rows={5} value={comments} onChange={(e) => setComments(e.target.value)}></textarea>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-success" data-dismiss="modal" onClick={() => createtic()}>
+                Submit
+              </button>
+              <button type="button" className="btn btn-danger" data-dismiss="modal">
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="qrr">
         <h3>Scan QR Below</h3>
         <QrReader delay={300} style={{ width: "100%" }} onError={handleErrorWebCam} onScan={handleScanWebCam} />
@@ -78,11 +115,13 @@ function Scanqr() {
               <i className="fas fa-user"></i> Assign New
             </button>
           </div>
-          {/* <div className="col-sm">
-            <button className="btn btn-info">
+          <br />
+          <br />
+          <div className="col-sm">
+            <button className="btn btn-info" onClick={genticket}>
               <i className="fas fa-exclamation-circle"></i> Create Ticket
             </button>
-          </div> */}
+          </div>
         </div>
         <br />
         {ticketstatus ? (

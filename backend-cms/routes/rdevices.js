@@ -3,8 +3,13 @@ const router = express.Router();
 const device = require("../modals/Newdevice");
 
 router.get("/devices", async (req, res) => {
+  let limit = Number(req.query.limit);
+  let page = Number(req.query.page);
   try {
-    const alldevices = await device.find();
+    const alldevices = await device
+      .find()
+      .skip((page - 1) * limit)
+      .limit(limit);
     res.json(alldevices);
   } catch (err) {
     res.json({ message: err });
