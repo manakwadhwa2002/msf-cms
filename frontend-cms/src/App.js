@@ -6,6 +6,8 @@ import Privateroute from "./Privateroutes";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import axios from "axios";
 import LoginPrivate from "./LoginPrivate";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../node_modules/bootstrap/dist/js/bootstrap.min.js";
 
 const api = axios.create({
   baseURL: `http://localhost:4000`,
