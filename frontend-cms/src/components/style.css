@@ -1,3 +1,7 @@
+#main {
+  margin-left: 270px;
+}
+
 .login-card {
   margin: auto;
   width: 35%;
@@ -28,7 +32,7 @@
 
 .sidenav {
   height: 100%;
-  width: 0;
+  width: 250px;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -46,6 +50,28 @@
   color: white;
   display: block;
   transition: 0.3s;
+}
+
+.sidenav h4 {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 5px;
+  color: white;
+  text-align: center;
+}
+
+.logo-circular-image {
+  width: 50%;
+  margin: auto;
+  padding: 30px 5px;
+  background-color: #efa876;
+  border-radius: 50%;
+}
+
+.logo-circular-image img {
+  width: 100%;
+  margin: auto;
+  text-align: center;
 }
 
 .sidenav a:hover {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import QRCode from "qrcode";
 import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
@@ -14,6 +15,7 @@ function Managedevices(props) {
   const [tempdevid, setTempDevId] = useState("");
   const ref = useRef(null);
   const ctref = useRef(null);
+  const nav = useNavigate();
 
   const fetchDeviceData = () => {
     api.get(`/devices`).then((res) => {
@@ -198,6 +200,7 @@ function Managedevices(props) {
               <th scope="col">Delete</th>
               <th scope="col">QR</th>
               <th scope="col">Create Ticket</th>
+              <th scope="col">Assign Device</th>
             </tr>
           </thead>
           <tbody>
@@ -242,6 +245,11 @@ function Managedevices(props) {
                   <td>
                     <button className="btn btn-info" onClick={() => genticket(`${data._id}`)}>
                       <i className="fas fa-file"></i>
+                    </button>
+                  </td>
+                  <td>
+                    <button className="btn btn-success" onClick={() => nav(`/dashboard/assign-device/${data._id}`)}>
+                      <i className="fas fa-laptop"></i>
                     </button>
                   </td>
                 </tr>

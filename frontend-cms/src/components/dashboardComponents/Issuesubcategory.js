@@ -10,6 +10,7 @@ function IssueSubCategory() {
   const [updatestatus, setUpdateStatus] = useState(false);
   const [updatesubcatid, setUpdateSubCatId] = useState("");
   const [isssubcatlen, setIssSubCatLength] = useState(Number);
+  const [displayerrors, setDisplayErrors] = useState("");
 
   function submit() {
     api
@@ -18,8 +19,11 @@ function IssueSubCategory() {
         name: nameSubCategory,
       })
       .then((res) => {
-        console.log(res.data);
-        fetchIssueData();
+        console.log(res.data._id);
+        if (res.data._id !== null) {
+          setDisplayErrors("Hurray 🤩 ! Issue Sub Category Created Successfully !!!");
+        }
+        fetchIssueSubData();
       });
   }
   const fetchIssueData = () => {
@@ -60,13 +64,16 @@ function IssueSubCategory() {
         subcatname: nameSubCategory,
       })
       .then((res) => {
-        console.log(res.data);
-        window.location.reload();
+        if (res.data.modifiedCount > 0) {
+          setDisplayErrors("Hurray 🤩 ! Issue Sub Category Updated Successfully !!!");
+        }
+        fetchIssueSubData();
       });
   }
   function deleteIssueSubCategory(subissueid) {
     api.delete("/issuesubcategory/" + subissueid).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
+      fetchIssueSubData();
     });
   }
   return (
@@ -74,6 +81,11 @@ function IssueSubCategory() {
       <div className="row">
         <div className="col-md-4">
           <h2>Add / Edit Issue Sub Categories</h2>
+          {displayerrors ? (
+            <div className="alert alert-success" role="alert">
+              {displayerrors}
+            </div>
+          ) : null}
           <form onSubmit={(e) => e.preventDefault()}>
             <div className="form-group">
               <select className="form-control" value={parentcategory} onChange={(e) => setParentCategory(e.target.value)}>

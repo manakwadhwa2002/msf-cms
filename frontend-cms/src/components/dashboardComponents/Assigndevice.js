@@ -42,7 +42,10 @@ function Assigndevice() {
         deviceip: ipaddress,
       })
       .then((res) => {
-        console.log(res.data);
+        if (res.data._id !== "") {
+          console.log("Device Assigned");
+        }
+        // console.log(res.data);
         // findassignstatus(deviceidparam.deviceId);
       });
   }
@@ -101,8 +104,8 @@ function Assigndevice() {
                   } else if (
                     value._id.toLowerCase().includes(searchmember.toLowerCase()) ||
                     value.name.toLowerCase().includes(searchmember.toLowerCase()) ||
-                    value.email.toLowerCase().includes(searchmember.toLowerCase()) ||
-                    value.phonenumber.toString().includes(searchmember) ||
+                    // value.email.toLowerCase().includes(searchmember.toLowerCase()) ||
+                    // value.phonenumber.toString().includes(searchmember) ||
                     value.department.toLowerCase().includes(searchmember.toLowerCase())
                   ) {
                     return value;

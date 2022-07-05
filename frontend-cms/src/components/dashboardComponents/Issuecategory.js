@@ -8,6 +8,7 @@ function Issuecategory() {
   const [updatestatus, setUpdateStatus] = useState(false);
   const [updatecatid, setUpdateCatId] = useState("");
   const [isscatlen, setIssCatLength] = useState(Number);
+  const [displayerrors, setDisplayErrors] = useState("");
 
   function submit() {
     api
@@ -15,7 +16,9 @@ function Issuecategory() {
         name: issueCategory,
       })
       .then((res) => {
-        console.log(res.data);
+        if (res.data._id !== null) {
+          setDisplayErrors("Hurray 🤩 ! Issue Category Created Successfully !!!");
+        }
         fetchIssueData();
       });
   }
@@ -46,20 +49,26 @@ function Issuecategory() {
         catname: issueCategory,
       })
       .then((res) => {
-        console.log(res.data);
-        window.location.reload();
+        // console.log(res.data);
+        fetchIssueData();
       });
   }
   function deleteIssueCategory(issueid) {
     api.delete("/issuecategory/" + issueid).then((res) => {
       console.log(res.data);
     });
+    fetchIssueData();
   }
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-4">
           <h2>Add / Edit Issue Categories</h2>
+          {displayerrors ? (
+            <div className="alert alert-success" role="alert">
+              {displayerrors}
+            </div>
+          ) : null}
           <form onSubmit={(e) => e.preventDefault()}>
             <div className="form-group">
               <input type="text" className="form-control" placeholder="Enter Category Here ..." value={issueCategory} onChange={(e) => setIssueCategory(e.target.value)} />

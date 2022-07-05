@@ -14,7 +14,10 @@ function Createticket(props) {
         comments: comments,
       })
       .then((res) => {
-        console.log(res.data);
+        if (res.data._id) {
+          console.log("Ticket Created Successfully");
+        }
+        // console.log(res.data);
       });
   }
 

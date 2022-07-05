@@ -6,7 +6,7 @@ const device = require("../modals/Newdevice");
 const member = require("../modals/Member");
 
 router.post("/createticket", async (req, res) => {
-  if (req.body.deviceId === null) {
+  if (!req.body.deviceId) {
     const assigneddevicedetails = await assigndevice.find({ assignedtomember: req.body.memberId, assignstatus: "YES" });
     const devicecount = Object.keys(assigneddevicedetails).length;
     if (devicecount > 0) {

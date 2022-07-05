@@ -7,6 +7,7 @@ function Login(props) {
   const nav = useNavigate();
   const [uemail, setEmail] = useState("");
   const [upassword, setPassword] = useState("");
+  const [displayerrors, setDisplayErrors] = useState("");
 
   function loginuser() {
     api
@@ -17,8 +18,13 @@ function Login(props) {
       .then((res) => {
         if (res.data.message === "Login Success") {
           nav("/dashboard");
-        } else {
-          console.log(res.data);
+        }
+      })
+      .catch((err) => {
+        if (err.response.status === 404) {
+          setDisplayErrors("Username OR Password Incorrect");
+        } else if (err.response.status === 501) {
+          setDisplayErrors(err.res.message);
         }
       });
   }
@@ -28,6 +34,11 @@ function Login(props) {
         <form onSubmit={(e) => e.preventDefault()}>
           <img src={logo} alt="" />
           <div className="form-group">
+            {displayerrors ? (
+              <div className="alert alert-danger" role="alert">
+                {displayerrors}
+              </div>
+            ) : null}
             <label htmlFor="exampleInputEmail1">Email address</label>
             <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email" onChange={(e) => setEmail(e.target.value)} />
           </div>

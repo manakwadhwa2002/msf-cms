@@ -14,6 +14,7 @@ import Assigndevice from "../components/dashboardComponents/Assigndevice";
 import Editdevice from "./dashboardComponents/Editdevice";
 import { Link, Routes, Route, useNavigate } from "react-router-dom";
 import DashPrivateRoutes from "./DashPrivateRoutes";
+import logo from "../msfl-logo.png";
 
 import api from "../apiConfig";
 
@@ -31,11 +32,13 @@ function Dashboard() {
   const nav = useNavigate();
   const [usrrole, setUserRole] = useState("");
   const [usrid, setUserId] = useState("");
+  const [usrname, setUserName] = useState("");
   function isLoggedIn() {
     api.get("/user").then((res) => {
       if (res.data._id !== "") {
         setUserRole(res.data.userrole);
         setUserId(res.data._id);
+        setUserName(res.data.name);
       }
     });
   }
@@ -58,6 +61,10 @@ function Dashboard() {
           <a className="closebtn" onClick={closeNav}>
             &times;
           </a>
+          <div className="logo-circular-image">
+            <img src={logo} alt="MSFL Logo" />
+          </div>
+          <h4>Hi, {usrname}</h4>
           {usrrole === "MEMBER" || usrrole === "ADMIN" ? (
             <>
               <Link to="">
@@ -100,12 +107,12 @@ function Dashboard() {
               <Link to="track-device-history">
                 <i className="fas fa-history"></i> Track Device History
               </Link>
-              {usrrole === "MEMBER" || usrrole === "ADMIN" ? (
-                <Link to="" onClick={() => logoutfn()}>
-                  <i className="fa fa-sign-out"></i> Logout
-                </Link>
-              ) : null}
             </>
+          ) : null}
+          {usrrole === "MEMBER" || usrrole === "ADMIN" ? (
+            <Link to="" onClick={() => logoutfn()}>
+              <i className="fa fa-sign-out"></i> Logout
+            </Link>
           ) : null}
         </div>
       </nav>
@@ -216,8 +223,17 @@ function Dashboard() {
               </DashPrivateRoutes>
             }
           />
+          <Route exact path="/" element={<Guidelines />} />
         </Routes>
       </div>
+    </>
+  );
+}
+
+function Guidelines() {
+  return (
+    <>
+      <h2>Hey, We have got some guidelines for you !!!</h2>
     </>
   );
 }

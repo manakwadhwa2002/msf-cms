@@ -69,7 +69,7 @@ app.post("/login", function (req, res, next) {
       return res.status(501).json(err);
     }
     if (!user) {
-      return res.status(501).json(info);
+      return res.status(404).json({ message: "Username OR Password Incorrect" });
     }
     req.logIn(user, function (err) {
       if (err) {

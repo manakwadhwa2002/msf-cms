@@ -25,7 +25,7 @@ function Addmember() {
         password: password,
       })
       .then((res) => {
-        setAlertMessage(res.data.message);
+        setAlertMessage("Hurray 🤩 ! " + res.data.message + "!!!");
         fetchMemberData();
       });
   }
@@ -68,7 +68,9 @@ function Addmember() {
         password: password,
       })
       .then((res) => {
-        console.log(res.data);
+        if (res.data.modifiedCount > 0) {
+          setAlertMessage("Hurray 🤩 ! Member Updated Successfully !!!");
+        }
         fetchMemberData();
       });
   }
@@ -78,11 +80,13 @@ function Addmember() {
         <h2>Add Member</h2>
         <form onSubmit={(e) => e.preventDefault()}>
           <div className="form-group">
-            {/* <div class="alert alert-success" role="alert">
-              {alertmessage}
-            </div> */}
             <div className="row">
               <div className="col-md-3">
+                {alertmessage ? (
+                  <div class="alert alert-success" role="alert">
+                    {alertmessage}
+                  </div>
+                ) : null}
                 <label htmlFor="fullName">Full Name</label>
                 <input type="text" id="fullName" className="form-control" placeholder="Enter Full Name" value={name} onChange={(e) => setName(e.target.value)} />
                 <br />

@@ -66,7 +66,6 @@ function Adddevice() {
         networkusbshared: networkusbshared,
       })
       .then((res) => {
-        console.log(res.data);
         generateQrCode(res.data._id);
         ref.current.click();
       });

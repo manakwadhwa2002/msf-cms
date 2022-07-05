@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const assigndevice = require("../modals/Assigndevice");
+const device = require("../modals/Newdevice");
 
 router.get("/assignstatus/:deviceId", async (req, res) => {
   try {

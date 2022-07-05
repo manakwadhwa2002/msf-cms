@@ -27,8 +27,8 @@ router.post("/issuesubcategory", async (req, res) => {
   });
   try {
     const savedIssueSubCategory = await newissuesubcategory.save();
-    res.json({ message: "Issue Sub Category created successfully !" });
-    // res.json(savedMember);
+    // res.json({ message: "Issue Sub Category created successfully !" });
+    res.json(savedIssueSubCategory);
   } catch (err) {
     res.json({ message: err });
   }
