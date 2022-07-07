@@ -79,6 +79,9 @@ const NewDeviceSchema = mongoose.Schema({
     type: String,
     default: "MS Office  2013 Std",
   },
+  accnumbers: {
+    type: Number,
+  },
   addedon: {
     type: Date,
     default: Date.now,
