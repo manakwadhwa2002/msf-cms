@@ -37,6 +37,7 @@ router.post("/adddevice", async (req, res) => {
     cpuv: req.body.cpuv,
     printertype: req.body.printertype,
     networkusbshared: req.body.networkusbshared,
+    msoffice: req.body.msoffice,
   });
   try {
     const savedDevice = await newdevice.save();

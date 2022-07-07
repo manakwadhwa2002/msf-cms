@@ -24,6 +24,7 @@ function Adddevice() {
   const [cpuv, setCpuV] = useState("");
   const [multiuser, setMultiUser] = useState("");
   const [networkusbshared, setNetworkUsbShared] = useState("");
+  const [msoffice, setMsOffice] = useState("");
   const [printertype, setPrinterType] = useState("");
 
   const ref = useRef(null);
@@ -64,6 +65,7 @@ function Adddevice() {
         cpuv: cpuv,
         printertype: printertype,
         networkusbshared: networkusbshared,
+        msoffice: msoffice,
       })
       .then((res) => {
         generateQrCode(res.data._id);
@@ -163,6 +165,15 @@ function Adddevice() {
                       <option value="32">32</option>
                       <option value="64">64</option>
                       <option value="128">128</option>
+                    </select>
+                    <br />
+                    <label htmlFor="msoffice">MS Office</label>
+                    <select id="msoffice" className="form-control" value={msoffice} onChange={(e) => setMsOffice(e.target.value)}>
+                      <option value="">-- Select MS Office --</option>
+                      <option value="MS Office  2007 Std">MS Office 2007 Std</option>
+                      <option value="MS Office  2013 Std">MS Office 2013 Std</option>
+                      <option value="MS Office  2016 Std">MS Office 2016 Std</option>
+                      <option value="MS Office  2017 Std">MS Office 2017 Std</option>
                     </select>
                   </div>
                   <div className="col-md-4">
@@ -334,7 +345,10 @@ function Adddevice() {
                     <label htmlFor="os">Operating System</label>
                     <select id="os" className="form-control" value={os} onChange={(e) => setOs(e.target.value)}>
                       <option value="">-- Select OS --</option>
-                      <option value="Windows">Windows</option>
+                      <option value="Windows 7 Pro">Windows 7 Pro</option>
+                      <option value="Windows 8.1 Pro">Windows 8.1 Pro</option>
+                      <option value="Windows 10 Home">Windows 10 Home</option>
+                      <option value="Windows 10 Pro">indows 10 Pro</option>
                       <option value="Linux">Linux</option>
                       <option value="MAC OS">MAC OS</option>
                       <option value="Others">Others</option>
@@ -367,6 +381,15 @@ function Adddevice() {
                     <br />
                     <label htmlFor="cpu">CPU</label>
                     <input type="text" id="cpu" className="form-control" placeholder="Enter CPU" value={cpuv} onChange={(e) => setCpuV(e.target.value)} />
+                    <br />
+                    <label htmlFor="msoffice">MS Office</label>
+                    <select id="msoffice" className="form-control" value={msoffice} onChange={(e) => setMsOffice(e.target.value)}>
+                      <option value="">-- Select MS Office --</option>
+                      <option value="MS Office  2007 Std">MS Office 2007 Std</option>
+                      <option value="MS Office  2013 Std">MS Office 2013 Std</option>
+                      <option value="MS Office  2016 Std">MS Office 2016 Std</option>
+                      <option value="MS Office  2017 Std">MS Office 2017 Std</option>
+                    </select>
                   </div>
                   <div className="col-md-4">
                     <label htmlFor="antivirus">AntiVirus</label>

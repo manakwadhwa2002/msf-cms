@@ -188,7 +188,7 @@ function Managedevices(props) {
           </div>
         </div>
         <br />
-        <table className="table">
+        <table className="table table-bordered">
           <thead className="thead-dark">
             <tr>
               <th scope="col">Device ID</th>

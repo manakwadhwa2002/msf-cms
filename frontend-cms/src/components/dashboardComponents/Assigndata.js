@@ -69,7 +69,7 @@ function Assigndata() {
           </div>
         </div>
         <br />
-        <table className="table">
+        <table className="table table-bordered">
           <thead className="thead-dark">
             <tr>
               <th scope="col">Device ID</th>
@@ -84,6 +84,7 @@ function Assigndata() {
               <th scope="col">Department</th>
               <th scope="col">Device IP</th>
               <th scope="col">HDD/SSD</th>
+              <th scope="col">MS Office</th>
               <th scope="col">Assigned On</th>
               <th scope="col">
                 Storage <sub>(in GB)</sub>
@@ -95,6 +96,7 @@ function Assigndata() {
               <th>VNC</th>
               <th>AntiVirus</th>
               <th>USB</th>
+              <th>Others (Acc Number)</th>
             </tr>
           </thead>
           <tbody>
@@ -106,7 +108,8 @@ function Assigndata() {
                   value.deviceid.toLowerCase().includes(devicesearch.toLowerCase()) ||
                   value.make.toLowerCase().includes(devicesearch.toLowerCase()) ||
                   value.modalyear.toLowerCase().includes(devicesearch.toLowerCase()) ||
-                  value.devicetype.toLowerCase().includes(devicesearch.toLowerCase())
+                  value.devicetype.toLowerCase().includes(devicesearch.toLowerCase()) ||
+                  value.assignedtomembername.toLowerCase().includes(devicesearch.toLowerCase())
                 ) {
                   return value;
                 }
@@ -125,13 +128,17 @@ function Assigndata() {
                   <td>{data.assignedtomemberdepartment}</td>
                   <td>{data.deviceip}</td>
                   <td>{data.hddssd}</td>
-                  <td>{data.assignedon}</td>
+                  <td>{data.msoffice}</td>
+                  <td>
+                    {data.assignedon[8] + data.assignedon[9]}-{data.assignedon[5] + data.assignedon[6]}-{data.assignedon[2] + data.assignedon[3]}
+                  </td>
                   <td>{data.ssdhddsize}</td>
                   <td>{data.ram}</td>
                   <td>{data.os}</td>
                   <td>{data.vnc}</td>
                   <td>{data.antivirus}</td>
                   <td>{data.usb}</td>
+                  <td>{data.accnumbers}</td>
                 </tr>
               ))}
           </tbody>

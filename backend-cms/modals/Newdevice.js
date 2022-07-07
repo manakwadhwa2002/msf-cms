@@ -30,6 +30,7 @@ const NewDeviceSchema = mongoose.Schema({
   },
   os: {
     type: String,
+    default: "Windows 8.1 Pro",
   },
   usb: {
     type: String,
@@ -54,6 +55,7 @@ const NewDeviceSchema = mongoose.Schema({
   },
   dlov: {
     type: String,
+    default: "N/A",
   },
   ram: {
     type: Number,
@@ -66,11 +68,16 @@ const NewDeviceSchema = mongoose.Schema({
   },
   networkusbshared: {
     type: String,
+    default: "No",
   },
   multiuser: {
     type: String,
     required: true,
     default: "No",
+  },
+  msoffice: {
+    type: String,
+    default: "MS Office  2013 Std",
   },
   addedon: {
     type: Date,
