@@ -12,6 +12,7 @@ import Adddevice from "./dashboardComponents/Adddevice";
 import Managedevices from "./dashboardComponents/Managedevices";
 import Assigndevice from "../components/dashboardComponents/Assigndevice";
 import Editdevice from "./dashboardComponents/Editdevice";
+import Assigndata from "./dashboardComponents/Assigndata";
 import { Link, Routes, Route, useNavigate } from "react-router-dom";
 import DashPrivateRoutes from "./DashPrivateRoutes";
 import logo from "../msfl-logo.png";
@@ -100,6 +101,9 @@ function Dashboard() {
               </Link>
               <Link to="manage-devices">
                 <i className="fas fa-cogs"></i> Manage Devices
+              </Link>
+              <Link to="assign-device-data">
+                <i className="fas fa-database"></i> Assign Data
               </Link>
               <Link to="monthly-tracking">
                 <i className="fas fa-calendar"></i> Monthly Tracking
@@ -196,6 +200,14 @@ function Dashboard() {
             element={
               <DashPrivateRoutes>
                 <Adddevice />
+              </DashPrivateRoutes>
+            }
+          />
+          <Route
+            path="assign-device-data"
+            element={
+              <DashPrivateRoutes>
+                <Assigndata />
               </DashPrivateRoutes>
             }
           />

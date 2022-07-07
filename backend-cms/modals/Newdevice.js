@@ -18,9 +18,11 @@ const NewDeviceSchema = mongoose.Schema({
   },
   antivirus: {
     type: String,
+    default: "Yes",
   },
   vnc: {
     type: String,
+    default: "Yes",
   },
   warrantyupto: {
     type: Number,

@@ -154,7 +154,7 @@ router.patch("/openticket/assign/:ticketId", async (req, res) => {
 router.patch("/openticket/closeaticket/:deviceId", async (req, res) => {
   try {
     const updateOpenTicket = await ticket.updateOne(
-      { deviceid: req.params.deviceId },
+      { deviceid: req.params.deviceId, ticketstatus: "OPEN" },
       {
         $set: {
           issuecategory: req.body.issuecategory, // Required Input as ID of Member

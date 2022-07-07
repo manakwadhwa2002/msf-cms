@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import api from "../../apiConfig";
 
 function Createticket(props) {
@@ -6,18 +6,20 @@ function Createticket(props) {
   const [multiuser, setMultiUser] = useState(false);
   const [multiusrphone, setMultiUserPhone] = useState("");
   const [assigndevbool, setAssignDevBool] = useState(false);
+  const [selecteddevice, setSelectedDevice] = useState("");
+  const [assigneddevlist, setAssignedDevList] = useState([]);
   function submit(e) {
     e.preventDefault();
     api
       .post("/createticket", {
         memberId: props.userId,
+        deviceId: selecteddevice,
         comments: comments,
       })
       .then((res) => {
         if (res.data._id) {
           console.log("Ticket Created Successfully");
         }
-        // console.log(res.data);
       });
   }
 
@@ -25,6 +27,7 @@ function Createticket(props) {
     api.get("/assignstatus/member/" + props.userId).then((res) => {
       if (res.data.length > 0) {
         setAssignDevBool(true);
+        setAssignedDevList(res.data);
       }
     });
   }
@@ -36,14 +39,25 @@ function Createticket(props) {
       }
     });
   }
+
   checkMultiUsr();
-  checkIfDeviceAssigned();
+  useEffect(() => {
+    checkIfDeviceAssigned();
+  });
 
   return (
     <div className="container">
       {assigndevbool === true ? (
         <form onSubmit={submit}>
           <div className="form-group">
+            <label htmlFor="selectdevice">Select Your Device</label>
+            <select name="selectdevice" className="form-control" onChange={(e) => setSelectedDevice(e.target.value)}>
+              <option value="">--Select A Device --</option>
+              {assigneddevlist.map((data) => (
+                <option value={data.deviceid}>{data.devicetype + " - " + data.make + " " + data.modalyear}</option>
+              ))}
+            </select>
+            <br />
             <label htmlFor="commentissue">Comment on Issue (Optional)</label>
             <textarea id="commentissue" cols="30" rows="10" placeholder="Comment your Issue in one line !" className="form-control" value={comments} onChange={(e) => setComments(e.target.value)}></textarea>
           </div>

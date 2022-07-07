@@ -2,6 +2,46 @@ const express = require("express");
 const router = express.Router();
 const assigndevice = require("../modals/Assigndevice");
 const device = require("../modals/Newdevice");
+const member = require("../modals/Member");
+
+router.get("/assigndevices", async (req, res) => {
+  try {
+    const assignstat = await assigndevice.find({ assignstatus: "YES" });
+    const noofdevices = Object.keys(assignstat).length;
+    const responsedevices = [];
+    if (noofdevices > 0) {
+      for (var i = 0; i < noofdevices; i++) {
+        const devicestat = await device.findOne({ _id: assignstat[i].deviceid });
+        const memberstat = await member.findOne({ _id: assignstat[i].assignedtomember });
+        responsedevices.push({
+          _id: assignstat[i]._id,
+          deviceid: assignstat[i].deviceid,
+          devicetype: devicestat.devicetype,
+          make: devicestat.make,
+          modalyear: devicestat.modalyear,
+          serialno: devicestat.serialno,
+          warrantyupto: devicestat.warrantyupto,
+          assignedtomember: assignstat[i].assignedtomember,
+          assignedtomembername: memberstat.name,
+          assignedtomemberemail: memberstat.email,
+          assignedtomemberdepartment: memberstat.department,
+          deviceip: assignstat[i].deviceip,
+          hddssd: devicestat.ssdhdd,
+          assignedon: assignstat[i].assignedon,
+          ssdhddsize: devicestat.ssdhddsize,
+          ram: devicestat.ram,
+          os: devicestat.os,
+          vnc: devicestat.vnc,
+          antivirus: devicestat.antivirus,
+          usb: devicestat.usb,
+        });
+      }
+    }
+    res.json(responsedevices);
+  } catch (err) {
+    res.json(err);
+  }
+});
 
 router.get("/assignstatus/:deviceId", async (req, res) => {
   try {
@@ -20,7 +60,25 @@ router.get("/assignstatus/:deviceId", async (req, res) => {
 router.get("/assignstatus/member/:memberId", async (req, res) => {
   try {
     const assignstat = await assigndevice.find({ assignedtomember: req.params.memberId, assignstatus: "YES" });
-    res.json(assignstat);
+    const noofdevices = Object.keys(assignstat).length;
+    const responsedevices = [];
+    if (noofdevices > 0) {
+      for (var i = 0; i < noofdevices; i++) {
+        const devicestat = await device.findOne({ _id: assignstat[i].deviceid });
+        responsedevices.push({
+          _id: assignstat[i]._id,
+          deviceid: assignstat[i].deviceid,
+          assignedtomember: assignstat[i].assignedtomember,
+          deviceip: assignstat[i].deviceip,
+          assignstatus: assignstat[i].assignstatus,
+          assignedon: assignstat[i].assignedon,
+          devicetype: devicestat.devicetype,
+          make: devicestat.make,
+          modalyear: devicestat.modalyear,
+        });
+      }
+    }
+    res.json(responsedevices);
   } catch (err) {
     res.json(err);
   }
