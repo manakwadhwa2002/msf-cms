@@ -245,7 +245,36 @@ function Dashboard() {
 function Guidelines() {
   return (
     <>
-      <h2>Hey, We have got some guidelines for you !!!</h2>
+      <h2>Hey ✋, We have got some guidelines for you !!!</h2>
+      <br />
+      <h3>🦺 Safety Guidelines:</h3>
+      <ol>
+        <li className="text-primary">Use a firewall</li>
+        <li className="text-secondary">Keep all software up to date</li>
+        <li className="text-success">Use antivirus software and keep it current</li>
+        <li className="text-danger">Make sure your passwords are well-chosen and protected</li>
+        <li className="text-warning">Don’t open suspicious attachments or click unusual links in messages.</li>
+        <li className="text-info">Browse the web safely</li>
+        <li>Stay away from pirated material</li>
+        <li className="text-primary">Don't use USBs or other external devices unless you own them</li>
+      </ol>
+      <h3>🧑‍💻 Sitting Guidelines:</h3>
+      <ol>
+        <li>Maintain good posture when working at the keyboard. Utilize a chair with back support.</li>
+        <li>Keep your feet supported on the floor or on a footrest when you work to reduce pressure on your lower back.</li>
+        <li>Avoid twisting or bending your trunk or neck. Frequently used items should be positioned directly in front of you and angled upward on a copyholder when working.</li>
+        <li>Keep your shoulders relaxed with your elbows close to your sides.</li>
+        <li>Avoid resting your elbows on the hard surface or edge of your table. Pads can be used to protect your elbows if necessary.</li>
+        <li>
+          Elbows should be positioned at 100 to 110 degrees when working in order to keep a relaxed position at the keyboard. This could require a slight negative tilt (front of keyboard higher than back) when working in upright positions. If reclined in your chair, the keyboard could be at a
+          positive angle to maintain this relaxed position.
+        </li>
+        <li>
+          Your wrists should be in a neutral or straight position when keying or using a pointing device or calculator. Wrist rests can assist you in maintaining a neutral position when used properly during pauses. Float your arms above the keyboard and wrist rest when keying. Avoid planting your
+          wrists on the table or wrist rest. This can result in bending the wrists either up and down or side to side.
+        </li>
+        <li>Take breaks. These breaks can be brief and should include stretches for optimal results. If possible, take a one or two-minute break every 15 to 20 minutes, or a five-minute break every hour. Every few hours, get up, move around, and do an alternative activity.</li>
+      </ol>
     </>
   );
 }

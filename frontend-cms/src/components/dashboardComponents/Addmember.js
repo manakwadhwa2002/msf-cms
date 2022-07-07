@@ -14,6 +14,7 @@ function Addmember() {
   const [updatememdetails, setUpdateMemberDetails] = useState([]);
   const [updatememid, setUpdateMemberId] = useState("");
   const [memberlen, setMemberLength] = useState(Number);
+  const [role, setRole] = useState("");
 
   function submit() {
     api
@@ -22,6 +23,7 @@ function Addmember() {
         email: email,
         phonenumber: phonenumber,
         department: department,
+        userrole: role,
         password: password,
       })
       .then((res) => {
@@ -87,16 +89,24 @@ function Addmember() {
                     {alertmessage}
                   </div>
                 ) : null}
-                <label htmlFor="fullName">Full Name</label>
+                <label htmlFor="fullName">
+                  Full Name<span className="text-danger">*</span>
+                </label>
                 <input type="text" id="fullName" className="form-control" placeholder="Enter Full Name" value={name} onChange={(e) => setName(e.target.value)} />
                 <br />
-                <label htmlFor="emailId">Email</label>
+                <label htmlFor="emailId">
+                  Email<span className="text-danger">*</span>
+                </label>
                 <input type="text" id="emailId" className="form-control" placeholder="Enter Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                 <br />
-                <label htmlFor="phoneNum">Phone Number</label>
+                <label htmlFor="phoneNum">
+                  Phone Number<span className="text-danger">*</span>
+                </label>
                 <input type="number" id="phoneNum" className="form-control" placeholder="Enter Phone Number" value={phonenumber} onChange={(e) => setPhoneNumber(e.target.value)} />
                 <br />
-                <label htmlFor="department">Department</label>
+                <label htmlFor="department">
+                  Department<span className="text-danger">*</span>
+                </label>
                 <select id="department" className="form-control" value={department} onChange={(e) => setDepartment(e.target.value)}>
                   <option value="">-- Select Department --</option>
                   <option value="Accounts">Accounts</option>
@@ -173,7 +183,16 @@ function Addmember() {
                   <option value="Thermal-2 -QA">Thermal-2 -QA</option>
                 </select>
                 <br />
-                <label htmlFor="passwd">Password</label>
+                <label htmlFor="usrrole">User Role</label>
+                <select name="usrrole" className="form-control" value={role} onChange={(e) => setRole(e.target.value)}>
+                  <option value="">-- Select User Role --</option>
+                  <option value="ADMIN">ADMIN</option>
+                  <option value="MEMBER">MEMBER</option>
+                </select>
+                <br />
+                <label htmlFor="passwd">
+                  Password<span className="text-danger">*</span>
+                </label>
                 <input type="password" id="passwd" className="form-control" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <br />
                 {updatestatus ? (

@@ -20,7 +20,7 @@ function Createticket(props) {
       .then((res) => {
         if (res.data._id) {
           // console.log("Ticket Created Successfully");
-          setDisplayErrors("Ticket Created Successfully");
+          setDisplayErrors("Ticket Created Successfully ! Your Ticket ID is " + res.data._id + ". Our Support will be getting back to you soon !!!");
         }
       });
   }

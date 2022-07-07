@@ -106,7 +106,9 @@ function Adddevice() {
         <h2>Add Device</h2>
         <form onSubmit={submit}>
           <div className="form-group">
-            <label htmlFor="deviceType">Select Device Type</label>
+            <label htmlFor="deviceType">
+              Select Device Type<span className="text-danger">*</span>
+            </label>
             <select id="deviceType" className="form-control" value={devicetype} onChange={(e) => setDeviceType(e.target.value)}>
               <option value="">-- Select Device Type --</option>
               <option value="Laptop">Laptop</option>
@@ -121,14 +123,18 @@ function Adddevice() {
               <>
                 <div className="row">
                   <div className="col-md-4">
-                    <label htmlFor="deviceMake">Make</label>
+                    <label htmlFor="deviceMake">
+                      Make<span className="text-danger">*</span>
+                    </label>
                     <select id="deviceMake" className="form-control" value={make} onChange={(e) => setMake(e.target.value)}>
                       <option value="">-- Select Make --</option>
                       <option value="HP">HP</option>
                       <option value="DELL">DELL</option>
                     </select>
                     <br />
-                    <label htmlFor="modelyear">Model Type</label>
+                    <label htmlFor="modelyear">
+                      Model Type<span className="text-danger">*</span>
+                    </label>
                     <input type="text" placeholder="Enter Modal Type" className="form-control" value={modalyear} onChange={(e) => setModalYear(e.target.value)} />
                     <br />
                     <label htmlFor="sub">USB</label>
@@ -147,6 +153,7 @@ function Adddevice() {
                     <br />
                     <label htmlFor="ram">
                       RAM <sub>(in GB)</sub>
+                      <span className="text-danger">*</span>
                     </label>
                     <select id="ram" className="form-control" value={ram} onChange={(e) => setRam(e.target.value)}>
                       <option value="">-- Select RAM --</option>
@@ -191,7 +198,9 @@ function Adddevice() {
                       <option value="No">No</option>
                     </select>
                     <br />
-                    <label htmlFor="warranty">Warranty Upto</label>
+                    <label htmlFor="warranty">
+                      Warranty Upto<span className="text-danger">*</span>
+                    </label>
                     <select id="warranty" className="form-control" value={warrantyupto} onChange={(e) => setWarrantyUpto(e.target.value)}>
                       <option value="">-- Warranty Upto --</option>
                       <option value="2030">2030</option>
@@ -226,7 +235,9 @@ function Adddevice() {
                       <option value="Others">Others</option>
                     </select>
                     <br />
-                    <label htmlFor="ssdhdd">SSD/HDD</label>
+                    <label htmlFor="ssdhdd">
+                      SSD/HDD<span className="text-danger">*</span>
+                    </label>
                     <select id="ssdhdd" className="form-control" value={ssdhdd} onChange={(e) => setSsdHdd(e.target.value)}>
                       <option value="">-- Select SSD/HDD --</option>
                       <option value="SSD">SSD</option>
@@ -235,6 +246,7 @@ function Adddevice() {
                     <br />
                     <label htmlFor="ssdhddsize">
                       SSD/HDD Size <sub>(in GB)</sub>
+                      <span className="text-danger">*</span>
                     </label>
                     <select id="ssdhddsize" className="form-control" value={ssdhddsize} onChange={(e) => setSsdHddSize(e.target.value)}>
                       <option value="">-- Select SSD/HDD Size --</option>
@@ -254,7 +266,9 @@ function Adddevice() {
                     <label htmlFor="macadd">MAC Address</label>
                     <input type="text" id="macadd" className="form-control" placeholder="Enter MAC Address" value={macaddress} onChange={(e) => setMacAddress(e.target.value)} />
                     <br />
-                    <label htmlFor="macadd">Serial No</label>
+                    <label htmlFor="macadd">
+                      Serial No<span className="text-danger">*</span>
+                    </label>
                     <input type="text" id="macadd" className="form-control" placeholder="Enter Serial Number" value={serialno} onChange={(e) => setSerialNo(e.target.value)} />
                     <br />
                     <label htmlFor="onedrive">Onedrive</label>
@@ -276,18 +290,23 @@ function Adddevice() {
               <>
                 <div className="row">
                   <div className="col-md-4">
-                    <label htmlFor="deviceMake">Make</label>
+                    <label htmlFor="deviceMake">
+                      Make<span className="text-danger">*</span>
+                    </label>
                     <select id="deviceMake" className="form-control" value={make} onChange={(e) => setMake(e.target.value)}>
                       <option value="">-- Select Make --</option>
                       <option value="HP">HP</option>
                       <option value="DELL">DELL</option>
                     </select>
                     <br />
-                    <label htmlFor="modelyear">Model Type</label>
+                    <label htmlFor="modelyear">
+                      Model Type<span className="text-danger">*</span>
+                    </label>
                     <input type="text" placeholder="Enter Modal Type" className="form-control" value={modalyear} onChange={(e) => setModalYear(e.target.value)} />
                     <br />
                     <label htmlFor="ram">
                       RAM <sub>(in GB)</sub>
+                      <span className="text-danger">*</span>
                     </label>
                     <select id="ram" className="form-control" value={ram} onChange={(e) => setRam(e.target.value)}>
                       <option value="">-- Select RAM --</option>
@@ -308,7 +327,9 @@ function Adddevice() {
                       <option value="128">128</option>
                     </select>
                     <br />
-                    <label htmlFor="warranty">Warranty Upto</label>
+                    <label htmlFor="warranty">
+                      Warranty Upto<span className="text-danger">*</span>
+                    </label>
                     <select id="warranty" className="form-control" value={warrantyupto} onChange={(e) => setWarrantyUpto(e.target.value)}>
                       <option value="">-- Warranty Upto --</option>
                       <option value="2030">2030</option>
@@ -334,7 +355,9 @@ function Adddevice() {
                       <option value="2010">2010</option>
                     </select>
                     <br />
-                    <label htmlFor="multiuser">Multi User</label>
+                    <label htmlFor="multiuser">
+                      Multi User<span className="text-danger">*</span>
+                    </label>
                     <select id="multiuser" className="form-control" value={multiuser} onChange={(e) => setMultiUser(e.target.value)}>
                       <option value="">-- Multi User --</option>
                       <option value="Yes">Yes</option>
@@ -354,7 +377,9 @@ function Adddevice() {
                       <option value="Others">Others</option>
                     </select>
                     <br />
-                    <label htmlFor="ssdhdd">SSD/HDD</label>
+                    <label htmlFor="ssdhdd">
+                      SSD/HDD<span className="text-danger">*</span>
+                    </label>
                     <select id="ssdhdd" className="form-control" value={ssdhdd} onChange={(e) => setSsdHdd(e.target.value)}>
                       <option value="">-- Select SSD/HDD --</option>
                       <option value="SSD">SSD</option>
@@ -363,6 +388,7 @@ function Adddevice() {
                     <br />
                     <label htmlFor="ssdhddsize">
                       SSD/HDD Size <sub>(in GB)</sub>
+                      <span className="text-danger">*</span>
                     </label>
                     <select id="ssdhddsize" className="form-control" value={ssdhddsize} onChange={(e) => setSsdHddSize(e.target.value)}>
                       <option value="">-- Select SSD/HDD Size --</option>
@@ -413,7 +439,9 @@ function Adddevice() {
                       <option value="Disabled">Disabled</option>
                     </select>
                     <br />
-                    <label htmlFor="serialno">Serial No</label>
+                    <label htmlFor="serialno">
+                      Serial No<span className="text-danger">*</span>
+                    </label>
                     <input type="text" id="serialno" className="form-control" placeholder="Enter Serial No" value={serialno} onChange={(e) => setSerialNo(e.target.value)} />
                     <br />
                     <label htmlFor="dlo">DLO Version</label>
@@ -431,21 +459,27 @@ function Adddevice() {
               <>
                 <div className="row">
                   <div className="col-md-4">
-                    <label htmlFor="printerType">Printer Type</label>
+                    <label htmlFor="printerType">
+                      Printer Type<span className="text-danger">*</span>
+                    </label>
                     <select id="printerType" className="form-control" value={printertype} onChange={(e) => setPrinterType(e.target.value)}>
                       <option value="">-- Select Printer Type --</option>
                       <option value="Laser">Laser</option>
                       <option value="Inkjet">Inkjet</option>
                     </select>
                     <br />
-                    <label htmlFor="deviceMake">Make</label>
+                    <label htmlFor="deviceMake">
+                      Make<span className="text-danger">*</span>
+                    </label>
                     <select id="deviceMake" className="form-control" value={make} onChange={(e) => setMake(e.target.value)}>
                       <option value="">-- Select Make --</option>
                       <option value="HP">HP</option>
                       <option value="DELL">DELL</option>
                     </select>
                     <br />
-                    <label htmlFor="modelyear">Model Type</label>
+                    <label htmlFor="modelyear">
+                      Model Type<span className="text-danger">*</span>
+                    </label>
                     <input type="text" placeholder="Enter Modal Type" className="form-control" value={modalyear} onChange={(e) => setModalYear(e.target.value)} />
                     <br />
                     <label htmlFor="networkUsbShared">Network / USB / Shared</label>
@@ -463,10 +497,14 @@ function Adddevice() {
                       <option value="No">No</option>
                     </select>
                     <br />
-                    <label htmlFor="serialno">Serial No</label>
+                    <label htmlFor="serialno">
+                      Serial No<span className="text-danger">*</span>
+                    </label>
                     <input type="text" id="serialno" className="form-control" placeholder="Enter Serial No" value={serialno} onChange={(e) => setSerialNo(e.target.value)} />
                     <br />
-                    <label htmlFor="warranty">Warranty Upto</label>
+                    <label htmlFor="warranty">
+                      Warranty Upto<span className="text-danger">*</span>
+                    </label>
                     <select id="warranty" className="form-control" value={warrantyupto} onChange={(e) => setWarrantyUpto(e.target.value)}>
                       <option value="">-- Warranty Upto --</option>
                       <option value="2030">2030</option>

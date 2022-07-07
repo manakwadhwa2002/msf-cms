@@ -17,6 +17,7 @@ router.post("/addmember", async (req, res) => {
     email: req.body.email,
     phonenumber: req.body.phonenumber,
     department: req.body.department,
+    userrole: req.body.userrole,
     password: member.hashPassword(req.body.password),
   });
   try {

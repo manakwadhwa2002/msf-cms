@@ -34,6 +34,7 @@ router.get("/assigndevices", async (req, res) => {
           vnc: devicestat.vnc,
           antivirus: devicestat.antivirus,
           usb: devicestat.usb,
+          msoffice: devicestat.msoffice,
           accnumbers: devicestat.accnumbers,
         });
       }
