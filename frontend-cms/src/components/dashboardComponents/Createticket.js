@@ -8,6 +8,7 @@ function Createticket(props) {
   const [assigndevbool, setAssignDevBool] = useState(false);
   const [selecteddevice, setSelectedDevice] = useState("");
   const [assigneddevlist, setAssignedDevList] = useState([]);
+  const [displayerrors, setDisplayErrors] = useState("");
   function submit(e) {
     e.preventDefault();
     api
@@ -18,7 +19,8 @@ function Createticket(props) {
       })
       .then((res) => {
         if (res.data._id) {
-          console.log("Ticket Created Successfully");
+          // console.log("Ticket Created Successfully");
+          setDisplayErrors("Ticket Created Successfully");
         }
       });
   }
@@ -47,6 +49,11 @@ function Createticket(props) {
 
   return (
     <div className="container">
+      {displayerrors ? (
+        <div className="alert alert-success" role="alert">
+          {displayerrors}
+        </div>
+      ) : null}
       {assigndevbool === true ? (
         <form onSubmit={submit}>
           <div className="form-group">
