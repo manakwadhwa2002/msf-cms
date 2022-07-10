@@ -100,24 +100,24 @@ function Scanqr(props) {
         <QrReader delay={300} style={{ width: "100%" }} onError={handleErrorWebCam} onScan={handleScanWebCam} />
         <h3>Asset ID: {scanResultWebCam}</h3>
         <div className="row">
-          <div className="col-sm">
+          <div className="col-sm-6 col-lg-6">
             <button className="btn btn-primary" onClick={fetchData}>
               <i className="fas fa-spinner"></i> Check Status
             </button>
           </div>
-          <div className="col-sm">
+          <div className="col-sm-6 col-lg-6">
             <button className="btn btn-warning" onClick={trackhistorydevice}>
               <i className="fas fa-history"></i> Track History
             </button>
           </div>
-          <div className="col-sm">
+          <div className="col-sm-6 col-lg-6">
             <button className="btn btn-success" onClick={assigndevicetonew}>
               <i className="fas fa-user"></i> Assign New
             </button>
           </div>
           <br />
           <br />
-          <div className="col-sm">
+          <div className="col-sm-6 col-lg-6">
             <button className="btn btn-info" onClick={genticket}>
               <i className="fas fa-exclamation-circle"></i> Create Ticket
             </button>

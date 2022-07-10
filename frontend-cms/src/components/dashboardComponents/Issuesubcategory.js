@@ -112,7 +112,7 @@ function IssueSubCategory() {
           </form>
         </div>
         <div className="col-md-1"></div>
-        <div className="col-md-6">
+        <div className="col-md-6 table-mobile">
           <h2>Manage Issue Categories</h2>
           <input type="search" placeholder="Search Issue" className="form-control" onChange={(e) => setSubSearchIssue(e.target.value)} />
           <br />

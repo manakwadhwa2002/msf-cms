@@ -69,80 +69,82 @@ function Assigndata() {
           </div>
         </div>
         <br />
-        <table className="table table-bordered">
-          <thead className="thead-dark">
-            <tr>
-              <th scope="col">Device ID</th>
-              <th scope="col">Device Type</th>
-              <th scope="col">Make</th>
-              <th scope="col">Model Type</th>
-              <th scope="col">Serial No.</th>
-              <th scope="col">Warranty Upto</th>
-              <th scope="col">Assigned To ID</th>
-              <th scope="col">Assigned To Name</th>
-              <th scope="col">Assigned To Email</th>
-              <th scope="col">Department</th>
-              <th scope="col">Device IP</th>
-              <th scope="col">HDD/SSD</th>
-              <th scope="col">MS Office</th>
-              <th scope="col">Assigned On</th>
-              <th scope="col">
-                Storage <sub>(in GB)</sub>
-              </th>
-              <th scope="col">
-                Ram <sub>(in GB)</sub>
-              </th>
-              <th>OS</th>
-              <th>VNC</th>
-              <th>AntiVirus</th>
-              <th>USB</th>
-              <th>Others (Acc Number)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {assigneddevices
-              .filter((value) => {
-                if (devicesearch == "") {
-                  return value;
-                } else if (
-                  value.deviceid.toLowerCase().includes(devicesearch.toLowerCase()) ||
-                  value.make.toLowerCase().includes(devicesearch.toLowerCase()) ||
-                  value.modalyear.toLowerCase().includes(devicesearch.toLowerCase()) ||
-                  value.devicetype.toLowerCase().includes(devicesearch.toLowerCase()) ||
-                  value.assignedtomembername.toLowerCase().includes(devicesearch.toLowerCase())
-                ) {
-                  return value;
-                }
-              })
-              .map((data) => (
-                <tr key={data._id}>
-                  <td>{data.deviceid}</td>
-                  <td>{data.devicetype}</td>
-                  <td>{data.make}</td>
-                  <td>{data.modalyear}</td>
-                  <td>{data.serialno}</td>
-                  <td>{data.warrantyupto}</td>
-                  <td>{data.assignedtomember}</td>
-                  <td>{data.assignedtomembername}</td>
-                  <td>{data.assignedtomemberemail}</td>
-                  <td>{data.assignedtomemberdepartment}</td>
-                  <td>{data.deviceip}</td>
-                  <td>{data.hddssd}</td>
-                  <td>{data.msoffice}</td>
-                  <td>
-                    {data.assignedon[8] + data.assignedon[9]}-{data.assignedon[5] + data.assignedon[6]}-{data.assignedon[2] + data.assignedon[3]}
-                  </td>
-                  <td>{data.ssdhddsize}</td>
-                  <td>{data.ram}</td>
-                  <td>{data.os}</td>
-                  <td>{data.vnc}</td>
-                  <td>{data.antivirus}</td>
-                  <td>{data.usb}</td>
-                  <td>{data.accnumbers}</td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+        <div className="table-mobile">
+          <table className="table table-bordered">
+            <thead className="thead-dark">
+              <tr>
+                <th scope="col">Device ID</th>
+                <th scope="col">Device Type</th>
+                <th scope="col">Make</th>
+                <th scope="col">Model Type</th>
+                <th scope="col">Serial No.</th>
+                <th scope="col">Warranty Upto</th>
+                <th scope="col">Assigned To ID</th>
+                <th scope="col">Assigned To Name</th>
+                <th scope="col">Assigned To Email</th>
+                <th scope="col">Department</th>
+                <th scope="col">Device IP</th>
+                <th scope="col">HDD/SSD</th>
+                <th scope="col">MS Office</th>
+                <th scope="col">Assigned On</th>
+                <th scope="col">
+                  Storage <sub>(in GB)</sub>
+                </th>
+                <th scope="col">
+                  Ram <sub>(in GB)</sub>
+                </th>
+                <th>OS</th>
+                <th>VNC</th>
+                <th>AntiVirus</th>
+                <th>USB</th>
+                <th>Others (Acc Number)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {assigneddevices
+                .filter((value) => {
+                  if (devicesearch == "") {
+                    return value;
+                  } else if (
+                    value.deviceid.toLowerCase().includes(devicesearch.toLowerCase()) ||
+                    value.make.toLowerCase().includes(devicesearch.toLowerCase()) ||
+                    value.modalyear.toLowerCase().includes(devicesearch.toLowerCase()) ||
+                    value.devicetype.toLowerCase().includes(devicesearch.toLowerCase()) ||
+                    value.assignedtomembername.toLowerCase().includes(devicesearch.toLowerCase())
+                  ) {
+                    return value;
+                  }
+                })
+                .map((data) => (
+                  <tr key={data._id}>
+                    <td>{data.deviceid}</td>
+                    <td>{data.devicetype}</td>
+                    <td>{data.make}</td>
+                    <td>{data.modalyear}</td>
+                    <td>{data.serialno}</td>
+                    <td>{data.warrantyupto}</td>
+                    <td>{data.assignedtomember}</td>
+                    <td>{data.assignedtomembername}</td>
+                    <td>{data.assignedtomemberemail}</td>
+                    <td>{data.assignedtomemberdepartment}</td>
+                    <td>{data.deviceip}</td>
+                    <td>{data.hddssd}</td>
+                    <td>{data.msoffice}</td>
+                    <td>
+                      {data.assignedon[8] + data.assignedon[9]}-{data.assignedon[5] + data.assignedon[6]}-{data.assignedon[2] + data.assignedon[3]}
+                    </td>
+                    <td>{data.ssdhddsize}</td>
+                    <td>{data.ram}</td>
+                    <td>{data.os}</td>
+                    <td>{data.vnc}</td>
+                    <td>{data.antivirus}</td>
+                    <td>{data.usb}</td>
+                    <td>{data.accnumbers}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );

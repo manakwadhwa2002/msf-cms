@@ -85,48 +85,50 @@ function Assigndevice() {
         <div className="container">
           <input type="search" placeholder="Search Member and Assign" className="form-control" onChange={(e) => setSearchMember(e.target.value)} />
           <br />
-          <table className="table">
-            <thead className="thead">
-              <tr>
-                <th scope="col">Member ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Department</th>
-                <th scope="col">Phone Number</th>
-                <th>Assign</th>
-              </tr>
-            </thead>
-            <tbody>
-              {memberdata
-                .filter((value) => {
-                  if (searchmember == "") {
-                    return value;
-                  } else if (
-                    value._id.toLowerCase().includes(searchmember.toLowerCase()) ||
-                    value.name.toLowerCase().includes(searchmember.toLowerCase()) ||
-                    // value.email.toLowerCase().includes(searchmember.toLowerCase()) ||
-                    // value.phonenumber.toString().includes(searchmember) ||
-                    value.department.toLowerCase().includes(searchmember.toLowerCase())
-                  ) {
-                    return value;
-                  }
-                })
-                .map((data) => (
-                  <tr key={data._id}>
-                    <td>{data._id}</td>
-                    <td>{data.name}</td>
-                    <td>{data.email}</td>
-                    <td>{data.department}</td>
-                    <td>{data.phonenumber}</td>
-                    <td>
-                      <button className="btn btn-success" onClick={() => getip(`${data._id}`)}>
-                        Assign
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
+          <div className="table-mobile">
+            <table className="table">
+              <thead className="thead">
+                <tr>
+                  <th scope="col">Member ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Department</th>
+                  <th scope="col">Phone Number</th>
+                  <th>Assign</th>
+                </tr>
+              </thead>
+              <tbody>
+                {memberdata
+                  .filter((value) => {
+                    if (searchmember == "") {
+                      return value;
+                    } else if (
+                      value._id.toLowerCase().includes(searchmember.toLowerCase()) ||
+                      value.name.toLowerCase().includes(searchmember.toLowerCase()) ||
+                      // value.email.toLowerCase().includes(searchmember.toLowerCase()) ||
+                      // value.phonenumber.toString().includes(searchmember) ||
+                      value.department.toLowerCase().includes(searchmember.toLowerCase())
+                    ) {
+                      return value;
+                    }
+                  })
+                  .map((data) => (
+                    <tr key={data._id}>
+                      <td>{data._id}</td>
+                      <td>{data.name}</td>
+                      <td>{data.email}</td>
+                      <td>{data.department}</td>
+                      <td>{data.phonenumber}</td>
+                      <td>
+                        <button className="btn btn-success" onClick={() => getip(`${data._id}`)}>
+                          Assign
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </>
       {/* )} */}

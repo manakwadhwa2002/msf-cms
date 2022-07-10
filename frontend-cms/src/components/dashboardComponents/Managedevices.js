@@ -188,74 +188,76 @@ function Managedevices(props) {
           </div>
         </div>
         <br />
-        <table className="table table-bordered">
-          <thead className="thead-dark">
-            <tr>
-              <th scope="col">Device ID</th>
-              <th scope="col">Make</th>
-              <th scope="col">Model Type</th>
-              <th scope="col">Serial No.</th>
-              <th scope="col">Warranty Upto</th>
-              <th scope="col">Edit</th>
-              <th scope="col">Delete</th>
-              <th scope="col">QR</th>
-              <th scope="col">Create Ticket</th>
-              <th scope="col">Assign Device</th>
-            </tr>
-          </thead>
-          <tbody>
-            {device
-              .filter((value) => {
-                if (devicesearch == "") {
-                  return value;
-                } else if (
-                  value._id.toLowerCase().includes(devicesearch.toLowerCase()) ||
-                  value.make.toLowerCase().includes(devicesearch.toLowerCase()) ||
-                  value.modalyear.toLowerCase().includes(devicesearch.toLowerCase())
-                  // value.serialno.toLowerCase().includes(devicesearch.toLowerCase()) ||
-                  // value.warrantyupto.toString().includes(devicesearch.toLowerCase())
-                ) {
-                  return value;
-                }
-              })
-              .map((data) => (
-                <tr key={data._id}>
-                  <td>{data._id}</td>
-                  <td>{data.make}</td>
-                  <td>{data.modalyear}</td>
-                  <td>{data.serialno}</td>
-                  <td>{data.warrantyupto}</td>
-                  <td>
-                    <Link to={`/dashboard/edit-device/${data._id}`}>
-                      <button className="btn btn-primary">
-                        <i className="fas fa-pen"></i>
+        <div className="table-mobile">
+          <table className="table table-bordered">
+            <thead className="thead-dark">
+              <tr>
+                <th scope="col">Device ID</th>
+                <th scope="col">Make</th>
+                <th scope="col">Model Type</th>
+                <th scope="col">Serial No.</th>
+                <th scope="col">Warranty Upto</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+                <th scope="col">QR</th>
+                <th scope="col">Create Ticket</th>
+                <th scope="col">Assign Device</th>
+              </tr>
+            </thead>
+            <tbody>
+              {device
+                .filter((value) => {
+                  if (devicesearch == "") {
+                    return value;
+                  } else if (
+                    value._id.toLowerCase().includes(devicesearch.toLowerCase()) ||
+                    value.make.toLowerCase().includes(devicesearch.toLowerCase()) ||
+                    value.modalyear.toLowerCase().includes(devicesearch.toLowerCase())
+                    // value.serialno.toLowerCase().includes(devicesearch.toLowerCase()) ||
+                    // value.warrantyupto.toString().includes(devicesearch.toLowerCase())
+                  ) {
+                    return value;
+                  }
+                })
+                .map((data) => (
+                  <tr key={data._id}>
+                    <td>{data._id}</td>
+                    <td>{data.make}</td>
+                    <td>{data.modalyear}</td>
+                    <td>{data.serialno}</td>
+                    <td>{data.warrantyupto}</td>
+                    <td>
+                      <Link to={`/dashboard/edit-device/${data._id}`}>
+                        <button className="btn btn-primary">
+                          <i className="fas fa-pen"></i>
+                        </button>
+                      </Link>
+                    </td>
+                    <td>
+                      <button className="btn btn-danger" onClick={() => deleteDevice(`${data._id}`)}>
+                        <i className="fas fa-trash"></i>
                       </button>
-                    </Link>
-                  </td>
-                  <td>
-                    <button className="btn btn-danger" onClick={() => deleteDevice(`${data._id}`)}>
-                      <i className="fas fa-trash"></i>
-                    </button>
-                  </td>
-                  <td>
-                    <button className="btn btn-warning" onClick={() => genqr(`${data._id}`)}>
-                      <i className="fas fa-qrcode"></i>
-                    </button>
-                  </td>
-                  <td>
-                    <button className="btn btn-info" onClick={() => genticket(`${data._id}`)}>
-                      <i className="fas fa-file"></i>
-                    </button>
-                  </td>
-                  <td>
-                    <button className="btn btn-success" onClick={() => nav(`/dashboard/assign-device/${data._id}`)}>
-                      <i className="fas fa-laptop"></i>
-                    </button>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+                    </td>
+                    <td>
+                      <button className="btn btn-warning" onClick={() => genqr(`${data._id}`)}>
+                        <i className="fas fa-qrcode"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <button className="btn btn-info" onClick={() => genticket(`${data._id}`)}>
+                        <i className="fas fa-file"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <button className="btn btn-success" onClick={() => nav(`/dashboard/assign-device/${data._id}`)}>
+                        <i className="fas fa-laptop"></i>
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
         <ReactPaginate
           previousLabel={"previous"}
           nextLabel={"next"}

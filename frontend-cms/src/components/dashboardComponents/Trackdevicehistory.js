@@ -67,52 +67,56 @@ function TrackDeviceHistory() {
         <br />
         <br />
         <h4>Ticket History</h4>
-        <table className="table">
-          <thead className="thead-dark">
-            <tr>
-              <th scope="col">Created By</th>
-              <th scope="col">Department</th>
-              <th scope="col">OS</th>
-              <th scope="col">Device IP</th>
-              <th scope="col">Ticket Status</th>
-              <th scope="col">Assigned To Person</th>
-            </tr>
-          </thead>
-          <tbody>
-            {tickethistorydata.map((data) => (
-              <tr key={data._id}>
-                <td>
-                  {data.createdbyname}-{data.createdby}
-                </td>
-                <td>{data.department}</td>
-                <td>{data.os}</td>
-                <td>{data.deviceip}</td>
-                <td>{data.ticketstatus}</td>
-                <td>{data.assigntoperson}</td>
+        <div className="table-mobile">
+          <table className="table">
+            <thead className="thead-dark">
+              <tr>
+                <th scope="col">Created By</th>
+                <th scope="col">Department</th>
+                <th scope="col">OS</th>
+                <th scope="col">Device IP</th>
+                <th scope="col">Ticket Status</th>
+                <th scope="col">Assigned To Person</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {tickethistorydata.map((data) => (
+                <tr key={data._id}>
+                  <td>
+                    {data.createdbyname}-{data.createdby}
+                  </td>
+                  <td>{data.department}</td>
+                  <td>{data.os}</td>
+                  <td>{data.deviceip}</td>
+                  <td>{data.ticketstatus}</td>
+                  <td>{data.assigntoperson}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
         <br />
         <h4>Assign History</h4>
-        <table className="table">
-          <thead className="thead-dark">
-            <tr>
-              <th scope="col">Assigned to</th>
-              <th scope="col">Assigned On</th>
-              <th scope="col">Current Assign Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {assignhistorydata.map((data) => (
-              <tr key={data._id}>
-                <td>{data.assignedtomember}</td>
-                <td>{data.assignedon}</td>
-                <td>{data.assignstatus}</td>
+        <div className="table-mobile">
+          <table className="table">
+            <thead className="thead-dark">
+              <tr>
+                <th scope="col">Assigned to</th>
+                <th scope="col">Assigned On</th>
+                <th scope="col">Current Assign Status</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {assignhistorydata.map((data) => (
+                <tr key={data._id}>
+                  <td>{data.assignedtomember}</td>
+                  <td>{data.assignedon}</td>
+                  <td>{data.assignstatus}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );

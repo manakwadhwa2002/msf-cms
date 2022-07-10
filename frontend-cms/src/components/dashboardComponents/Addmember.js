@@ -214,59 +214,61 @@ function Addmember() {
                   {/* <div className="col-md-3">Result Count: {resultcount}</div> */}
                 </div>
                 <br />
-                <table className="table table-bordered">
-                  <thead className="thead">
-                    <tr>
-                      <th scope="col">Member ID</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Department</th>
-                      <th scope="col">Phone Number</th>
-                      <th>Edit</th>
-                      <th>Delete</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {memberlen > 0 ? (
-                      memberdata
-                        .filter((value) => {
-                          if (searchmember == "") {
-                            return value;
-                          } else if (
-                            value._id.toLowerCase().includes(searchmember.toLowerCase()) ||
-                            value.name.toLowerCase().includes(searchmember.toLowerCase()) ||
-                            value.email.toLowerCase().includes(searchmember.toLowerCase()) ||
-                            // value.phonenumber.toString().includes(searchmember) ||
-                            value.department.toLowerCase().includes(searchmember.toLowerCase())
-                          ) {
-                            console.log(value.length);
-                            return value;
-                          }
-                        })
-                        .map((data) => (
-                          <tr key={data._id}>
-                            <td>{data._id}</td>
-                            <td>{data.name}</td>
-                            <td>{data.email}</td>
-                            <td>{data.department}</td>
-                            <td>{data.phonenumber}</td>
-                            <td>
-                              <button className="btn btn-primary" onClick={() => enableEditmember(`${data._id}`)}>
-                                Edit
-                              </button>
-                            </td>
-                            <td>
-                              <button className="btn btn-danger">Delete</button>
-                            </td>
-                          </tr>
-                        ))
-                    ) : (
+                <div className="table-mobile">
+                  <table className="table table-bordered">
+                    <thead className="thead">
                       <tr>
-                        <td>No Members Found !!!</td>
+                        <th scope="col">Member ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Department</th>
+                        <th scope="col">Phone Number</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                       </tr>
-                    )}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {memberlen > 0 ? (
+                        memberdata
+                          .filter((value) => {
+                            if (searchmember == "") {
+                              return value;
+                            } else if (
+                              value._id.toLowerCase().includes(searchmember.toLowerCase()) ||
+                              value.name.toLowerCase().includes(searchmember.toLowerCase()) ||
+                              value.email.toLowerCase().includes(searchmember.toLowerCase()) ||
+                              // value.phonenumber.toString().includes(searchmember) ||
+                              value.department.toLowerCase().includes(searchmember.toLowerCase())
+                            ) {
+                              console.log(value.length);
+                              return value;
+                            }
+                          })
+                          .map((data) => (
+                            <tr key={data._id}>
+                              <td>{data._id}</td>
+                              <td>{data.name}</td>
+                              <td>{data.email}</td>
+                              <td>{data.department}</td>
+                              <td>{data.phonenumber}</td>
+                              <td>
+                                <button className="btn btn-primary" onClick={() => enableEditmember(`${data._id}`)}>
+                                  Edit
+                                </button>
+                              </td>
+                              <td>
+                                <button className="btn btn-danger">Delete</button>
+                              </td>
+                            </tr>
+                          ))
+                      ) : (
+                        <tr>
+                          <td>No Members Found !!!</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           </div>

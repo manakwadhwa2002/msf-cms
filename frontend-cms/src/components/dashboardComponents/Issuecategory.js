@@ -62,7 +62,7 @@ function Issuecategory() {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-md-4">
+        <div className="col-lg-4 col-md-4 col-sm-4">
           <h2>Add / Edit Issue Categories</h2>
           {displayerrors ? (
             <div className="alert alert-success" role="alert">
@@ -86,7 +86,7 @@ function Issuecategory() {
           </form>
         </div>
         <div className="col-md-1"></div>
-        <div className="col-md-6">
+        <div className="col-md-6 table-mobile">
           <h2>Manage Issue Categories</h2>
           <input type="search" placeholder="Search Issue" className="form-control" onChange={(e) => setSearchIssue(e.target.value)} />
           <br />
