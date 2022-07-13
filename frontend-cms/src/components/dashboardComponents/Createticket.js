@@ -16,6 +16,9 @@ function Createticket(props) {
         memberId: props.userId,
         deviceId: selecteddevice,
         comments: comments,
+        //For Email Purpose
+        memberemail: props.userEmail,
+        membername: props.userName,
       })
       .then((res) => {
         if (res.data._id) {
@@ -61,7 +64,9 @@ function Createticket(props) {
             <select name="selectdevice" className="form-control" onChange={(e) => setSelectedDevice(e.target.value)}>
               <option value="">--Select A Device --</option>
               {assigneddevlist.map((data) => (
-                <option value={data.deviceid}>{data.devicetype + " - " + data.make + " " + data.modalyear}</option>
+                <option value={data.deviceid} key={data.deviceid}>
+                  {data.devicetype + " - " + data.make + " " + data.modalyear}
+                </option>
               ))}
             </select>
             <br />

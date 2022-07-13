@@ -43,7 +43,7 @@ function Assigndevice() {
       })
       .then((res) => {
         if (res.data._id !== "") {
-          console.log("Device Assigned");
+          alert("Device Assigned");
         }
         // console.log(res.data);
         // findassignstatus(deviceidparam.deviceId);

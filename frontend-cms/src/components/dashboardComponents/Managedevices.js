@@ -13,6 +13,7 @@ function Managedevices(props) {
   const [limit, setLimit] = useState();
   const [comments, setComments] = useState("");
   const [tempdevid, setTempDevId] = useState("");
+  // const [searchdevicetype, setSearchDeviceType] = useState("");
   const ref = useRef(null);
   const ctref = useRef(null);
   const nav = useNavigate();
@@ -156,8 +157,8 @@ function Managedevices(props) {
 
       <div className="container">
         <div className="row">
-          <div className="col-sm-4">
-            <input className="form-control" type="search" placeholder="Enter Device ID" onChange={(e) => setDeviceSearch(e.target.value)} />
+          <div className="col-sm-5">
+            <input className="form-control" type="search" placeholder="Search by Device ID or Type or Make or Model" onChange={(e) => setDeviceSearch(e.target.value)} />
           </div>
           <div className="col-sm-1">
             <button className="btn btn-secondary">
@@ -168,8 +169,24 @@ function Managedevices(props) {
         <br />
         <br />
         <div className="row">
-          <div className="col-sm-8"></div>
-          <div className="col-sm-2 form-control border-0">Results Per Page: </div>
+          {/* <div className="col-sm-8"></div>
+          <div className="col-sm-2 form-control border-0 text-center">Device Type:</div>
+          <div className="col-sm-2">
+            <select className="form-control" value={searchdevicetype} onChange={(e) => setSearchDeviceType(e.target.value)}>
+              <option value="">ALL</option>
+              <option value="Laptop">Laptop</option>
+              <option value="Desktop">Desktop</option>
+              <option value="Printer">Printer</option>
+              <option value="Access Point">Access Point</option>
+              <option value="QA Desktop">QA Desktop</option>
+              <option value="Scada Desktop">Scada Desktop</option>
+              <option value="Mouse">Mouse</option>
+              <option value="Pendrive">Pendrive</option>
+              <option value="Keyboard">Keyboard</option>
+              <option value="Laptop Stand">Laptop Stand</option>
+            </select>
+          </div> */}
+          {/* <div className="col-sm-2 form-control border-0 text-center">Results Per Page: </div>
           <div className="col-sm-2">
             <select className="form-control" onChange={(e) => newLimit(e.target.value)}>
               <option value="">ALL</option>
@@ -185,7 +202,7 @@ function Managedevices(props) {
               <option value="75">75</option>
               <option value="100">100</option>
             </select>
-          </div>
+          </div> */}
         </div>
         <br />
         <div className="table-mobile">
@@ -193,6 +210,7 @@ function Managedevices(props) {
             <thead className="thead-dark">
               <tr>
                 <th scope="col">Device ID</th>
+                <th scope="col">Device Type</th>
                 <th scope="col">Make</th>
                 <th scope="col">Model Type</th>
                 <th scope="col">Serial No.</th>
@@ -207,12 +225,13 @@ function Managedevices(props) {
             <tbody>
               {device
                 .filter((value) => {
-                  if (devicesearch == "") {
+                  if (devicesearch === "") {
                     return value;
                   } else if (
                     value._id.toLowerCase().includes(devicesearch.toLowerCase()) ||
                     value.make.toLowerCase().includes(devicesearch.toLowerCase()) ||
-                    value.modalyear.toLowerCase().includes(devicesearch.toLowerCase())
+                    value.modalyear.toLowerCase().includes(devicesearch.toLowerCase()) ||
+                    value.devicetype.toLowerCase().includes(devicesearch.toLowerCase())
                     // value.serialno.toLowerCase().includes(devicesearch.toLowerCase()) ||
                     // value.warrantyupto.toString().includes(devicesearch.toLowerCase())
                   ) {
@@ -222,6 +241,7 @@ function Managedevices(props) {
                 .map((data) => (
                   <tr key={data._id}>
                     <td>{data._id}</td>
+                    <td>{data.devicetype}</td>
                     <td>{data.make}</td>
                     <td>{data.modalyear}</td>
                     <td>{data.serialno}</td>

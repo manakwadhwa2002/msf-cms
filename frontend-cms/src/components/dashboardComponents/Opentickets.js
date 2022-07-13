@@ -8,15 +8,18 @@ function Opentickets() {
   const [isssubcategory, setIsssubcategory] = useState([]);
   const [csiscat, setCsIsCat] = useState("");
   const [csissubcat, setCsIsSubCat] = useState("");
-  const [tempdevid, setDevid] = useState("");
+  const [tempticketid, setTicketId] = useState("");
   const [assignto, setAssignToPerson] = useState("");
   const [ticketsearch, setTicketSearch] = useState("");
   const [ticketlen, setTicketLength] = useState(Number);
+  const [supportcomments, setSupportComments] = useState("");
+  const [fromdate, setFromDate] = useState("");
+  const [todate, setToDate] = useState("");
 
   const ref = useRef(null);
 
   const fetchData = () => {
-    api.get("/opentickets").then((res) => {
+    api.get(`/opentickets?from=${fromdate}&to=${todate}`).then((res) => {
       setTicket(res.data);
       setTicketLength(res.data.length);
     });
@@ -35,17 +38,20 @@ function Opentickets() {
   function closeaticket() {
     // console.log("Call received");
     api
-      .patch("/openticket/closeaticket/" + tempdevid, {
+      .patch("/openticket/closeaticket/" + tempticketid, {
         issuecategory: csiscat,
         isssubcategory: csissubcat,
+        supportcomments: supportcomments,
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
+        alert("Ticket Closed");
+        fetchData();
       });
   }
   function openclosebox(deveid) {
     ref.current.click();
-    setDevid(deveid);
+    setTicketId(deveid);
     // closeaticket(deveid);
   }
   const fetchIssueData = () => {
@@ -112,6 +118,8 @@ function Opentickets() {
                     </option>
                   ))}
                 </select>
+                <br />
+                <textarea cols="30" rows="5" placeholder="Please comment on what you have resolved !!!" className="form-control" value={supportcomments} onChange={(e) => setSupportComments(e.target.value)}></textarea>
               </form>
             </div>
             <div className="modal-footer">
@@ -125,12 +133,28 @@ function Opentickets() {
       <div className="ticketContainer container">
         <input className="form-control" type="search" placeholder="Search Ticket" onChange={(e) => setTicketSearch(e.target.value)} />
         <br />
+        <div className="row">
+          <div className="col-sm-1 form-control border-0 text-center">From:</div>
+          <div className="col-sm-2">
+            <input type="date" className="form-control" value={fromdate} onChange={(e) => setFromDate(e.target.value)} />
+          </div>
+          <div className="col-sm-1 form-control border-0 text-center">To:</div>
+          <div className="col-sm-2">
+            <input type="date" className="form-control" value={todate} onChange={(e) => setToDate(e.target.value)} />
+          </div>
+          <div className="col-sm-2 text-center">
+            <button className="btn btn-warning" onClick={() => fetchData()}>
+              <i className="fas fa-search"></i> Search
+            </button>
+          </div>
+        </div>
+        <br />
         {ticketlen > 0 ? (
           ticket
             .filter((value) => {
               if (ticketsearch == "") {
                 return value;
-              } else if (value.createdby.toLowerCase().includes(ticketsearch.toLowerCase()) || value.deviceid.toLowerCase().includes(ticketsearch.toLowerCase())) {
+              } else if (value.createdby.toLowerCase().includes(ticketsearch.toLowerCase()) || value.deviceid.toLowerCase().includes(ticketsearch.toLowerCase()) || value.assigntoperson.toLowerCase().includes(ticketsearch.toLowerCase())) {
                 return value;
               }
             })
@@ -179,7 +203,7 @@ function Opentickets() {
                           </button>
                           <br />
                           <br />
-                          <button className="btn btn-danger" type="button" onClick={() => openclosebox(`${data.deviceid}`)}>
+                          <button className="btn btn-danger" type="button" onClick={() => openclosebox(`${data._id}`)}>
                             <i className="fas fa-times-circle"></i> Close Ticket
                           </button>
                         </div>

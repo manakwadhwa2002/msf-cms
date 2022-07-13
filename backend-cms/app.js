@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const nodemailer = require("nodemailer");
 const member = require("./modals/Member");
 const device = require("./modals/Newdevice");
 const assigndevice = require("./modals/Assigndevice");
@@ -11,6 +12,7 @@ const assigndeviceRoute = require("./routes/rassigndevice");
 const ticketRoute = require("./routes/rticket");
 const issueCatRoute = require("./routes/rissuecatroute");
 const issueSubCatRoute = require("./routes/rissuesubcatroute");
+const specialNotification = require("./routes/rspecialnotif");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 var cookieParser = require("cookie-parser");
@@ -108,6 +110,7 @@ app.use("/", assigndeviceRoute);
 app.use("/", ticketRoute);
 app.use("/", issueCatRoute);
 app.use("/", issueSubCatRoute);
+app.use("/", specialNotification);
 
 app.get("/checkstatus/:deviceId", async (req, res) => {
   try {

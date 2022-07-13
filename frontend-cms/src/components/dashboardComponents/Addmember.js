@@ -115,12 +115,12 @@ function Addmember() {
                   <option value="CEO Office">CEO Office</option>
                   <option value="CS">CS</option>
                   <option value="Despatch">Despatch</option>
-                  <option value="Engineering">Engineering</option>
+                  <option value="ENGINEERING">Engineering</option>
                   <option value="Exports">Exports</option>
-                  <option value="Guest House">Guest House</option>
+                  <option value="GUEST House">Guest House</option>
                   <option value="HR">HR</option>
                   <option value="IT">IT</option>
-                  <option value="Marketing">Marketing</option>
+                  <option value="MARKETING">Marketing</option>
                   <option value="Maintenance (engg)">Maintenance (engg)</option>
                   <option value="Maintenance (Projects)">Maintenance (Projects)</option>
                   <option value="Maintenance 132 KV">Maintenance 132 KV</option>
@@ -187,6 +187,7 @@ function Addmember() {
                 <select name="usrrole" className="form-control" value={role} onChange={(e) => setRole(e.target.value)}>
                   <option value="">-- Select User Role --</option>
                   <option value="ADMIN">ADMIN</option>
+                  <option value="DEPARTMENTHEAD">DEPARTMENT HEAD</option>
                   <option value="MEMBER">MEMBER</option>
                 </select>
                 <br />

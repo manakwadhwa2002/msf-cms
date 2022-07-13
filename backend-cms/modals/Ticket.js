@@ -31,8 +31,12 @@ const NewTicketSchema = mongoose.Schema({
   issuesubcategory: {
     type: String,
   },
+  supportcomments: {
+    type: String,
+  },
   closedon: {
     type: Date,
+    // default: Date.now,
   },
 });
 

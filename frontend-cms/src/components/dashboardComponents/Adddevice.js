@@ -117,6 +117,10 @@ function Adddevice() {
               <option value="Access Point">Access Point</option>
               <option value="QA Desktop">QA Desktop</option>
               <option value="Scada Desktop">Scada Desktop</option>
+              <option value="Mouse">Mouse</option>
+              <option value="Pendrive">Pendrive</option>
+              <option value="Keyboard">Keyboard</option>
+              <option value="Laptop Stand">Laptop Stand</option>
             </select>
             <br />
             {devicetype === "Laptop" ? (
@@ -130,6 +134,7 @@ function Adddevice() {
                       <option value="">-- Select Make --</option>
                       <option value="HP">HP</option>
                       <option value="DELL">DELL</option>
+                      <option value="LENOVO">LENOVO</option>
                     </select>
                     <br />
                     <label htmlFor="modelyear">
@@ -531,6 +536,53 @@ function Adddevice() {
                     </select>
                   </div>
                 </div>
+                <br />
+                <br />
+                <button className="btn btn-success">
+                  <i className="fas fa-laptop"></i> Add {devicetype}
+                </button>
+              </>
+            ) : null}
+            {devicetype === "Mouse" || devicetype === "Keyboard" || devicetype === "Laptop Stand" ? (
+              <>
+                <label htmlFor="modelyear">
+                  Model Type<span className="text-danger">*</span>
+                </label>
+                <input type="text" placeholder="Enter Modal Type" className="form-control" value={modalyear} onChange={(e) => setModalYear(e.target.value)} required />
+                <br />
+                <br />
+                <button className="btn btn-success">
+                  <i className="fas fa-laptop"></i> Add {devicetype}
+                </button>
+              </>
+            ) : null}
+            {devicetype === "Pendrive" ? (
+              <>
+                <label htmlFor="ssdhdd">
+                  SSD/HDD<span className="text-danger">*</span>
+                </label>
+                <select id="ssdhdd" className="form-control" value={ssdhdd} onChange={(e) => setSsdHdd(e.target.value)}>
+                  <option value="">-- Select SSD/HDD --</option>
+                  <option value="SSD">SSD</option>
+                  <option value="HDD">HDD</option>
+                </select>
+                <br />
+                <label htmlFor="ssdhddsize">
+                  SSD/HDD Size <sub>(in GB)</sub>
+                  <span className="text-danger">*</span>
+                </label>
+                <select id="ssdhddsize" className="form-control" value={ssdhddsize} onChange={(e) => setSsdHddSize(e.target.value)}>
+                  <option value="">-- Select SSD/HDD Size --</option>
+                  <option value="128">128</option>
+                  <option value="256">256</option>
+                  <option value="512">512</option>
+                  <option value="1024">1024</option>
+                </select>
+                <br />
+                <label htmlFor="modelyear">
+                  Model Type<span className="text-danger">*</span>
+                </label>
+                <input type="text" placeholder="Enter Modal Type" className="form-control" value={modalyear} onChange={(e) => setModalYear(e.target.value)} required />
                 <br />
                 <br />
                 <button className="btn btn-success">
