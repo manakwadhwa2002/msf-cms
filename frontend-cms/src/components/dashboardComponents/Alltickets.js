@@ -108,20 +108,19 @@ function Alltickets() {
         <table className="table table-bordered">
           <thead>
             <tr>
-              <th scope="col">ticket id</th>
-              <th scope="col">ticket status</th>
-              <th scope="col">created by</th>
-              <th scope="col">createdby name</th>
-              <th scope="col">department</th>
-              <th scope="col">device id</th>
-              <th scope="col">device assigned on</th>
-              <th scope="col">assigned to person</th>
-              <th scope="col">user comments</th>
-              <th scope="col">creadted on date</th>
-              <th scope="col">closed on date</th>
-              <th scope="col">support comments</th>
-              <th scope="col">antivirus</th>
-              <th scope="col">vnc</th>
+              <th scope="col">Creadted on date</th>
+              <th scope="col">Ticket id</th>
+              <th scope="col">Ticket status</th>
+              <th scope="col">Username</th>
+              <th scope="col">Department</th>
+              <th scope="col">Hardware/Software/Networking</th>
+              <th scope="col">Issue Sub Category</th>
+              <th scope="col">Device id</th>
+              <th scope="col">Device type</th>
+              <th scope="col">Problem</th>
+              <th scope="col">Action Taken</th>
+              <th scope="col">Engineer Name</th>
+              <th scope="col">Closed on date</th>
             </tr>
           </thead>
           <tbody>
@@ -141,22 +140,21 @@ function Alltickets() {
                 })
                 .map((data) => (
                   <tr key={data._id}>
-                    <td>{data._id}</td>
-                    <td>{data.ticketstatus}</td>
-                    <td>{data.createdby}</td>
-                    <td>{data.createdbyname}</td>
-                    <td>{data.department}</td>
-                    <td>{data.deviceid}</td>
-                    <td>{data.assignedon}</td>
-                    <td>{data.assigntoperson}</td>
-                    <td>{data.comments}</td>
                     <td>
                       {data.createdondate[8] + data.createdondate[9]}-{data.createdondate[5] + data.createdondate[6]}-{data.createdondate[2] + data.createdondate[3]}
                     </td>
-                    <td>{data.closedon}</td>
+                    <td>{data._id}</td>
+                    <td>{data.ticketstatus}</td>
+                    <td>{data.createdbyname}</td>
+                    <td>{data.department}</td>
+                    <td>{data.issuecategory}</td>
+                    <td>{data.issuesubcategory}</td>
+                    <td>{data.deviceid}</td>
+                    <td>{data.devicetype}</td>
+                    <td>{data.comments}</td>
                     <td>{data.supportcomments}</td>
-                    <td>{data.antivirus}</td>
-                    <td>{data.vnc}</td>
+                    <td>{data.assigntoperson}</td>
+                    <td>{data.closedon}</td>
                   </tr>
                 ))
             ) : (

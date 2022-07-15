@@ -31,4 +31,13 @@ router.post("/specialnotification", async (req, res) => {
   }
 });
 
+router.delete("/specialnotification/:notifid", async (req, res) => {
+  try {
+    const deleteSpecialNotification = await snotification.deleteOne({ _id: req.params.notifid });
+    res.json(deleteSpecialNotification);
+  } catch (err) {
+    res.json(err);
+  }
+});
+
 module.exports = router;

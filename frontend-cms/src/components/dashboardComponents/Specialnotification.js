@@ -8,7 +8,9 @@ function Specialnotification(props) {
   const [errormessage, setErrorMessage] = useState("");
   const fetchNotification = () => {
     api.get(`/specialnotification?department=${props.usrdepartment}`).then((res) => {
-      setNotificationText(res.data[0].notificationtext);
+      if (res.data.length > 0) {
+        setNotificationText(res.data[0].notificationtext);
+      }
     });
   };
   useEffect(() => {
@@ -35,12 +37,19 @@ function Specialnotification(props) {
         if (res.data._id !== "") {
           setErrorMessage(`Everyone from your department - ${notificationdepartment} can now see this notification !`);
         }
+        fetchNotification();
       });
   };
 
   function loadData(dep, text) {
     setNotificationDepartment(dep);
     setNotificationText(text);
+  }
+
+  function deleteSpecialNotification(notfid) {
+    api.delete("/specialnotification/" + notfid).then((res) => {
+      fetchNotification();
+    });
   }
   return (
     <>
@@ -154,12 +163,12 @@ function Specialnotification(props) {
                       <th scope="col">Department</th>
                       <th scope="col">Current Notification</th>
                       <th scope="col">Edit</th>
-                      {/* <th scope="col">Delete</th> */}
+                      <th scope="col">Delete</th>
                     </tr>
                   </thead>
                   <tbody>
                     {allnotifications.map((data) => (
-                      <tr>
+                      <tr key={data._id}>
                         <td>{data.department}</td>
                         <td>{data.notificationtext}</td>
                         <td>
@@ -167,11 +176,11 @@ function Specialnotification(props) {
                             <i className="fas fa-pen"></i>
                           </button>
                         </td>
-                        {/* <td>
-                        <button className="btn btn-danger">
-                          <i className="fas fa-trash"></i>
-                        </button>
-                      </td> */}
+                        <td>
+                          <button className="btn btn-danger" onClick={() => deleteSpecialNotification(`${data._id}`)}>
+                            <i className="fas fa-trash"></i>
+                          </button>
+                        </td>
                       </tr>
                     ))}
                   </tbody>

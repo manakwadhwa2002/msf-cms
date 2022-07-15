@@ -331,6 +331,7 @@ router.get("/alltickets", async (req, res) => {
           createdondate: allticket[i].createdon,
           department: memberdetails.department,
           deviceid: assigneddeviceid,
+          devicetype: devicedetails.devicetype,
           os: devicedetails.os,
           deviceip: assigneddevicedetails.deviceip,
           assignedon: assigneddevicedetails.assignedon,
@@ -339,6 +340,8 @@ router.get("/alltickets", async (req, res) => {
           ticketstatus: allticket[i].ticketstatus,
           comments: allticket[i].comments,
           assigntoperson: supportmemberdetails[0].name,
+          issuecategory: allticket[i].issuecategory,
+          issuesubcategory: allticket[i].issuesubcategory,
           closedon: allticket[i].closedon,
           supportcomments: allticket[i].supportcomments,
         });
@@ -350,6 +353,7 @@ router.get("/alltickets", async (req, res) => {
           createdondate: allticket[i].createdon,
           department: memberdetails.department,
           deviceid: assigneddeviceid,
+          devicetype: devicedetails.devicetype,
           os: devicedetails.os,
           deviceip: assigneddevicedetails.deviceip,
           assignedon: assigneddevicedetails.assignedon,
@@ -358,6 +362,8 @@ router.get("/alltickets", async (req, res) => {
           ticketstatus: allticket[i].ticketstatus,
           comments: allticket[i].comments,
           assigntoperson: "N/A",
+          issuecategory: allticket[i].issuecategory,
+          issuesubcategory: allticket[i].issuesubcategory,
           closedon: allticket[i].closedon,
           supportcomments: allticket[i].supportcomments,
         });

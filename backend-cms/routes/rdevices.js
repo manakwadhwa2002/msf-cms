@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const device = require("../modals/Newdevice");
+const assigndevice = require("../modals/Assigndevice");
 
 router.get("/devices", async (req, res) => {
   let limit = Number(req.query.limit);
@@ -92,6 +93,7 @@ router.patch("/devices/:deviceId", async (req, res) => {
 router.delete("/devices/:deviceId", async (req, res) => {
   try {
     const deleteDevice = await device.deleteOne({ _id: req.params.deviceId });
+    const deleteassigns = await assigndevice.updateMany({ deviceid: req.params.deviceId }, { $set: { assignstatus: "NO" } });
     res.json(deleteDevice);
   } catch (err) {
     res.json(err);

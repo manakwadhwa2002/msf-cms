@@ -21,6 +21,7 @@ import crmlogo from "./Dashboard Link Images/CRM.jpeg";
 import timetracklogo from "./Dashboard Link Images/Timetrack.png";
 import erplogo from "./Dashboard Link Images/ERP.png";
 import ftmlogo from "./Dashboard Link Images/werardtlogo.jpeg";
+import BgImage from "./Dashboard Link Images/msfl3.jpg";
 
 import api from "../apiConfig";
 import Alltickets from "./dashboardComponents/Alltickets";
@@ -28,7 +29,7 @@ import Specialnotification from "./dashboardComponents/Specialnotification";
 
 function openNav() {
   document.getElementById("mySidenav").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "270px";
+  document.getElementById("main").style.marginLeft = "250px";
 }
 
 function closeNav() {
@@ -119,9 +120,9 @@ function Dashboard() {
               <Link to="assign-device-data">
                 <i className="fas fa-database"></i> Assigned Data
               </Link>
-              <Link to="monthly-tracking">
+              {/* <Link to="monthly-tracking">
                 <i className="fas fa-calendar"></i> Monthly Tracking
-              </Link>
+              </Link> */}
               <Link to="track-device-history">
                 <i className="fas fa-history"></i> Track Device History
               </Link>
@@ -293,7 +294,6 @@ function Guidelines() {
       }
     });
   }
-  // console.log(usrdepartment);
   function getNoTicketData() {
     api.get(`/opentickets?from=&to=`).then((res) => {
       setNoOpenTickets(res.data.length);
@@ -322,36 +322,55 @@ function Guidelines() {
     fetchNotificationForAll();
   }, []);
   return (
-    <>
-      {usrrole === "ADMIN" ? (
-        <>
-          <div className="row">
-            <div className="col-lg-6 text-center">
-              <h2>{noopentickets}</h2>
-              <span>Open Tickets</span>
-            </div>
-            <div className="col-lg-6 text-center">
-              <h2>{noclosedtickets}</h2>
-              <span>Closed Tickets</span>
-            </div>
-          </div>
-          <br />
-          <br />
-        </>
-      ) : null}
+    <div style={{ backgroundImage: `url(${BgImage})` }}>
       <div className="specialnotification mb-5">
         <marquee>{notificationforall ? notificationforall : null}</marquee>
         <marquee>{notificationtext ? notificationtext : null}</marquee>
       </div>
+      <div className="dashboard-links">
+        <div className="row">
+          <div className="ml-5"></div>
+          <div className="col-sm-6 col-lg-2 ml-5 link-tab">
+            <a href="https://disha2.darwinbox.in/" target="_blank">
+              <img src={dishalogo} alt="" />
+              <h6>HRMS (Disha 2)</h6>
+            </a>
+          </div>
+          <div className="col-lg-2 link-tab">
+            <a href="http://172.16.0.39/timetrack/" target="_blank">
+              <img src={timetracklogo} alt="" />
+              <h6>Time Track</h6>
+            </a>
+          </div>
+          <div className="col-lg-2 link-tab">
+            <a href="http://172.16.1.30/FTM/Login.aspx" target="_blank">
+              <img src={ftmlogo} alt="" />
+              <h6>FTM</h6>
+            </a>
+          </div>
+          <div className="col-lg-2 link-tab">
+            <a href="https://prodapp.msfl.in:4542/OA_HTML/AppsLocalLogin.jsp" target="_blank">
+              <img src={erplogo} alt="" />
+              <h6>ERP</h6>
+            </a>
+          </div>
+          <div className="col-lg-2 link-tab">
+            <a href="https://cask.login.ap1.oraclecloud.com/" target="_blank">
+              <img src={crmlogo} alt="" />
+              <h6>CRM</h6>
+            </a>
+          </div>
+        </div>
+      </div>
       <div className="row">
-        <div className="col-lg-6">
+        <div className="col-lg-8">
           <div className="slide-right">
             <h2>Hey ✋, We have got some guidelines for you !!!</h2>
             <br />
             <h3>🦺 Safety Guidelines:</h3>
             As we know that Data is the electronic asset of company and we all have a responsibility to protect and safeguard company assets from loss, theft and misuse. MSFL- IT is regularly monitoring and safeguard users' data. It is strongly recommended to all users. <br />
             <br /> Please follow the given points to make IT asset more secure:
-            <table className="table">
+            <table className="table text-white">
               <thead>
                 <th>S. No.</th>
                 <th>Recommendations</th>
@@ -384,73 +403,48 @@ function Guidelines() {
             </table>
             <h3>👨‍💻 Sitting Guidelines:</h3>
             <ol>
-              <li className="text-primary">Maintain good posture when working at the keyboard. Utilize a chair with back support.</li>
-              <li className="text-secondary">Keep your feet supported on the floor or on a footrest when you work to reduce pressure on your lower back.</li>
-              <li className="text-success">Avoid twisting or bending your trunk or neck. Frequently used items should be positioned directly in front of you and angled upward on a copyholder when working.</li>
-              <li className="text-danger">Keep your shoulders relaxed with your elbows close to your sides.</li>
-              <li className="text-warning">Avoid resting your elbows on the hard surface or edge of your table. Pads can be used to protect your elbows if necessary.</li>
-              <li className="text-info">
+              <li className="">Maintain good posture when working at the keyboard. Utilize a chair with back support.</li>
+              <li className="">Keep your feet supported on the floor or on a footrest when you work to reduce pressure on your lower back.</li>
+              <li className="">Avoid twisting or bending your trunk or neck. Frequently used items should be positioned directly in front of you and angled upward on a copyholder when working.</li>
+              <li className="">Keep your shoulders relaxed with your elbows close to your sides.</li>
+              <li className="">Avoid resting your elbows on the hard surface or edge of your table. Pads can be used to protect your elbows if necessary.</li>
+              <li className="">
                 Elbows should be positioned at 100 to 110 degrees when working in order to keep a relaxed position at the keyboard. This could require a slight negative tilt (front of keyboard higher than back) when working in upright positions. If reclined in your chair, the keyboard could be at a
                 positive angle to maintain this relaxed position.
               </li>
-              <li className="text-primary">
+              <li className="">
                 Your wrists should be in a neutral or straight position when keying or using a pointing device or calculator. Wrist rests can assist you in maintaining a neutral position when used properly during pauses. Float your arms above the keyboard and wrist rest when keying. Avoid planting
                 your wrists on the table or wrist rest. This can result in bending the wrists either up and down or side to side.
               </li>
-              <li className="text-secondary">
-                Take breaks. These breaks can be brief and should include stretches for optimal results. If possible, take a one or two-minute break every 15 to 20 minutes, or a five-minute break every hour. Every few hours, get up, move around, and do an alternative activity.
-              </li>
+              <li className="">Take breaks. These breaks can be brief and should include stretches for optimal results. If possible, take a one or two-minute break every 15 to 20 minutes, or a five-minute break every hour. Every few hours, get up, move around, and do an alternative activity.</li>
             </ol>
           </div>
         </div>
-        <div className="col-lg-1"></div>
-        <div className="col-lg-4 dashboard-links">
-          <div className="row">
-            <div className="col-sm-6 col-lg-12 link-tab">
-              <a href="https://disha2.darwinbox.in/" target="_blank">
-                <img src={dishalogo} alt="" />
-                <h6>HRMS (Disha 2)</h6>
-              </a>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-12 link-tab">
-              <a href="http://172.16.0.39/timetrack/" target="_blank">
-                <img src={timetracklogo} alt="" />
-                <h6>Time Track</h6>
-              </a>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-12 link-tab">
-              <a href="http://172.16.1.30/FTM/Login.aspx" target="_blank">
-                <img src={ftmlogo} alt="" />
-                <h6>FTM</h6>
-              </a>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-12 link-tab">
-              <a href="https://prodapp.msfl.in:4542/OA_HTML/AppsLocalLogin.jsp" target="_blank">
-                <img src={erplogo} alt="" />
-                <h6>ERP</h6>
-              </a>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-lg-12 link-tab">
-              <a href="https://cask.login.ap1.oraclecloud.com/" target="_blank">
-                <img src={crmlogo} alt="" />
-                <h6>CRM</h6>
-              </a>
-            </div>
-          </div>
+        <div className="col-lg-4">
+          {usrrole === "ADMIN" ? (
+            <>
+              <div className="row">
+                {/* <div className="col-lg-7"></div> */}
+                <div className="col-lg-5 text-center ticket-count">
+                  <h4>{noopentickets > 0 ? noopentickets : 0}</h4>
+                  <span>Open Tickets</span>
+                </div>
+                {/* <div className="col-lg-1"></div> */}
+                <div className="col-lg-5 text-center ticket-count">
+                  <h4>{noclosedtickets > 0 ? noclosedtickets : 0}</h4>
+                  <span>Closed Tickets</span>
+                </div>
+              </div>
+              <br />
+              <br />
+            </>
+          ) : null}
         </div>
       </div>
-      <div className="row">
-        <div className="col-lg-12">
+      <div className="row ml-4" style={{ color: "white" }}>
+        <div className="col-lg-12 font-weight-bold">
           <br /> If there is no response on raised tickets within <strong>12 Hours</strong>. Then you can write us on IT_Helpdesk@maxmsp.com <br /> OR <br /> Contact on the mentioned numbers 01881462030, 01881462008 <br /> Mr. Vikas (For Networking) - 7696769500 <br />
-          Mr. Sarbjit Singh (For Hardware) - +91-9855360944 <br />
+          Mr. Sarbjit Singh (For Hardware) - +91-9855360494 <br />
           Mr Gurmukh (For Backup) - +91-9914986171 <br />
           Mr. Parveen (For any IT Related information) - +91-8427914428 <br />
           Mr. Yogender Sharma (For ERP Related issues/requirements) - +91-9878690404
@@ -458,7 +452,7 @@ function Guidelines() {
           <br />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

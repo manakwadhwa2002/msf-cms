@@ -58,27 +58,22 @@ function Closedtickets() {
                 </div>
                 <div className="col-sm-9 brdr">
                   <div className="row">
-                    <div className="col-sm-4">Created By: {data.createdby}</div>
-                    <div className="col-sm-4">Created On Date: {data.createdondate}</div>
-                    <div className="col-sm-4">Department: {data.department}</div>
+                    <div className="col-sm-6">Created By: {data.createdby}</div>
+                    <div className="col-sm-6">Device ID: {data.deviceid}</div>
                   </div>
                   <br />
                   <div className="row">
-                    <div className="col-sm-4">Device ID: {data.deviceid}</div>
-                    <div className="col-sm-4">OS: {data.os}</div>
+                    <div className="col-sm-6">Department: {data.department}</div>
                     <div className="col-sm-4">Device IP: {data.deviceip}</div>
                   </div>
                   <br />
                   <div className="row">
-                    <div className="col-sm-4">Device Assigned On: {data.assignedon}</div>
-                    <div className="col-sm-4">Anti-Virus: {data.antivirus}</div>
-                    <div className="col-sm-4">VNC: {data.vnc}</div>
+                    <div className="col-sm-6">Comments: {data.comments}</div>
+                    <div className="col-sm-6">Support Comments: {data.supportcomments}</div>
                   </div>
                   <br />
                   <div className="row">
-                    <div className="col-sm-4">Comments: {data.comments}</div>
-                    <div className="col-sm-4">Support Comments: {data.supportcomments}</div>
-                    <div className="col-sm-4">Assigned To: {data.assigntoperson}</div>
+                    <div className="col-sm-6">Assigned To: {data.assigntoperson}</div>
                   </div>
                 </div>
               </div>

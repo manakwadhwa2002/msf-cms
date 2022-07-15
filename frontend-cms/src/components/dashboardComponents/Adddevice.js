@@ -111,16 +111,17 @@ function Adddevice() {
             </label>
             <select id="deviceType" className="form-control" value={devicetype} onChange={(e) => setDeviceType(e.target.value)}>
               <option value="">-- Select Device Type --</option>
-              <option value="Laptop">Laptop</option>
-              <option value="Desktop">Desktop</option>
-              <option value="Printer">Printer</option>
               <option value="Access Point">Access Point</option>
+              <option value="Desktop">Desktop</option>
+              <option value="Keyboard">Keyboard</option>
+              <option value="Laptop">Laptop</option>
+              <option value="Laptop Stand">Laptop Stand</option>
+              <option value="Mouse">Mouse</option>
+              <option value="Printer">Printer</option>
+              <option value="Pendrive">Pendrive</option>
               <option value="QA Desktop">QA Desktop</option>
               <option value="Scada Desktop">Scada Desktop</option>
-              <option value="Mouse">Mouse</option>
-              <option value="Pendrive">Pendrive</option>
-              <option value="Keyboard">Keyboard</option>
-              <option value="Laptop Stand">Laptop Stand</option>
+              <option value="Switch">Switch</option>
             </select>
             <br />
             {devicetype === "Laptop" ? (
@@ -543,7 +544,7 @@ function Adddevice() {
                 </button>
               </>
             ) : null}
-            {devicetype === "Mouse" || devicetype === "Keyboard" || devicetype === "Laptop Stand" ? (
+            {devicetype === "Mouse" || devicetype === "Keyboard" || devicetype === "Laptop Stand" || devicetype === "Access Point" || devicetype === "Switch" ? (
               <>
                 <label htmlFor="modelyear">
                   Model Type<span className="text-danger">*</span>
