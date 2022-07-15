@@ -137,8 +137,8 @@
   /* border: 4px dashed #f47921; */
   border-radius: 10px;
   padding: 20px;
-  /* background-color: #02afa6; */
-  color: white;
+  background-color: #02afa6;
+  color: #003862;
 }
 
 .dashboard-links img {
@@ -155,14 +155,14 @@
 }
 
 .link-tab {
-  padding: 10px 0px;
-  /* border-radius: 10px; */
+  padding: 20px 0px;
+  border-radius: 10px;
   text-align: center;
   /* box-shadow: 0px -1px 22px 6px rgb(127, 127, 127); */
   margin-bottom: 40px;
-  /* margin-right: 30px; */
-  border-left: 1px solid #016964;
-  border-right: 1px solid #016964;
+  margin-right: 20px;
+  /* border-left: 1px solid #016964;
+  border-right: 1px solid #016964; */
   background-color: #02afa6;
 }
 
@@ -188,13 +188,14 @@
 }
 
 .ticket-count {
-  padding: 10px 0px;
+  padding-top: 4px;
   border-radius: 10px;
   text-align: center;
   box-shadow: 0px -1px 22px 6px rgb(119, 204, 199);
   margin-bottom: 40px;
   margin-right: 30px;
-  background-color: #3ec2bb;
+  background-color: #02afa6;
+  /* 3ec2bb */
   color: white;
 }
 
@@ -203,8 +204,13 @@
   transition: 0.5s ease-in;
 }
 
+.ticket-count h4 {
+  line-height: 18px;
+}
+
 .ticket-count span {
   font-size: 12px;
+  line-height: 14px;
 }
 
 .specialnotification marquee {

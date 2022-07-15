@@ -322,18 +322,26 @@ function Guidelines() {
     fetchNotificationForAll();
   }, []);
   return (
-    <div style={{ backgroundImage: `url(${BgImage})` }}>
+    <div style={{ backgroundImage: `url(${BgImage})`, backgroundSize: "100%" }}>
       <div className="specialnotification mb-5">
         <marquee>{notificationforall ? notificationforall : null}</marquee>
         <marquee>{notificationtext ? notificationtext : null}</marquee>
       </div>
       <div className="dashboard-links">
         <div className="row">
-          <div className="ml-5"></div>
-          <div className="col-sm-6 col-lg-2 ml-5 link-tab">
+          <div className="ml-3"></div>
+          <div className="col-lg-2 ml-5 link-tab">
+            <a href="https://prodapp.msfl.in:4542/OA_HTML/AppsLocalLogin.jsp" target="_blank">
+              <img src={erplogo} alt="" />
+              <h6>ERP</h6>
+            </a>
+          </div>
+          <div className="col-sm-6 col-lg-2 link-tab">
             <a href="https://disha2.darwinbox.in/" target="_blank">
               <img src={dishalogo} alt="" />
-              <h6>HRMS (Disha 2)</h6>
+              <h6>
+                HRMS <sub>(Disha 2)</sub>
+              </h6>
             </a>
           </div>
           <div className="col-lg-2 link-tab">
@@ -346,12 +354,6 @@ function Guidelines() {
             <a href="http://172.16.1.30/FTM/Login.aspx" target="_blank">
               <img src={ftmlogo} alt="" />
               <h6>FTM</h6>
-            </a>
-          </div>
-          <div className="col-lg-2 link-tab">
-            <a href="https://prodapp.msfl.in:4542/OA_HTML/AppsLocalLogin.jsp" target="_blank">
-              <img src={erplogo} alt="" />
-              <h6>ERP</h6>
             </a>
           </div>
           <div className="col-lg-2 link-tab">
@@ -370,9 +372,11 @@ function Guidelines() {
             <h3>🦺 Safety Guidelines:</h3>
             As we know that Data is the electronic asset of company and we all have a responsibility to protect and safeguard company assets from loss, theft and misuse. MSFL- IT is regularly monitoring and safeguard users' data. It is strongly recommended to all users. <br />
             <br /> Please follow the given points to make IT asset more secure:
-            <table className="table text-white">
+            <br />
+            <br />
+            <table className="table text-white table-bordered">
               <thead>
-                <th>S. No.</th>
+                <th style={{ width: "11%" }}>S. No.</th>
                 <th>Recommendations</th>
                 <th>Remarks</th>
               </thead>
@@ -386,7 +390,9 @@ function Guidelines() {
                   <td>2</td>
                   <td>Change desktop & e-mail password frequently</td>
                   <td>
-                    <a href="https://support.office.com/en-us/article/video-change-your-office-365-for-business-password-df48c24e-d036-4d72-987f-b6197f618619">https://support.office.com/en-us/article/video-change-your-office-365-for-business-password-df48c24e-d036-4d72-987f-b6197f618619</a>{" "}
+                    <a href="https://support.office.com/en-us/article/video-change-your-office-365-for-business-password-df48c24e-d036-4d72-987f-b6197f618619" target="_blank">
+                      https://support.office.com/en-us/article/video-change-your-office-365-for-business-password-df48c24e-d036-4d72-987f-b6197f618619
+                    </a>
                   </td>
                 </tr>
                 <tr>
@@ -420,17 +426,17 @@ function Guidelines() {
             </ol>
           </div>
         </div>
-        <div className="col-lg-4">
+        <div className="col-lg-3">
           {usrrole === "ADMIN" ? (
             <>
               <div className="row">
                 {/* <div className="col-lg-7"></div> */}
-                <div className="col-lg-5 text-center ticket-count">
+                <div className="col-lg-4 text-center ticket-count">
                   <h4>{noopentickets > 0 ? noopentickets : 0}</h4>
                   <span>Open Tickets</span>
                 </div>
                 {/* <div className="col-lg-1"></div> */}
-                <div className="col-lg-5 text-center ticket-count">
+                <div className="col-lg-4 text-center ticket-count">
                   <h4>{noclosedtickets > 0 ? noclosedtickets : 0}</h4>
                   <span>Closed Tickets</span>
                 </div>
